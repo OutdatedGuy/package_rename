@@ -72,14 +72,14 @@ Map<String, dynamic>? _getConfig() {
   final yamlString = yamlFile.readAsStringSync();
   final parsedYaml = yaml.loadYaml(yamlString);
 
-  if (parsedYaml['package_rename_config'] == null) {
+  if (parsedYaml[_configKey] == null) {
     return null;
-  } else if (parsedYaml['package_rename_config'] is! Map) {
+  } else if (parsedYaml[_configKey] is! Map) {
     throw _PackageRenameErrors.invalidConfig;
   }
 
   final configMap = Map<String, dynamic>.from(
-    parsedYaml['package_rename_config'],
+    parsedYaml[_configKey],
   );
   return configMap;
 }
