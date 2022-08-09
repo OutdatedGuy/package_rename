@@ -6,6 +6,7 @@ import 'package:yaml/yaml.dart' as yaml;
 
 part 'constants.dart';
 part 'exceptions.dart';
+part 'messages.dart';
 
 final _logger = Logger(
   filter: ProductionFilter(),
@@ -37,20 +38,16 @@ final _logger = Logger(
 void set(List<String> args) {
   try {
     if (!_configFileExists()) {
-      throw _InvalidConfigException(
-        'Neither `pubspec.yaml` nor `package_rename_config.yaml` found!!!',
-        1,
-      );
+      throw _PackageRenameErrors.filesNotFound;
     }
 
     final config = _getConfig();
     if (config == null) {
-      throw _InvalidConfigException(
-        '`package_rename_config` key not found or NULL!!!',
-        2,
-      );
+      throw _PackageRenameErrors.configNotFound;
     }
-  } on _InvalidConfigException catch (e) {
+
+    _logger.i(_successMessage);
+  } on _PackageRenameException catch (e) {
     _logger.wtf(e.message);
     exit(e.code);
   } catch (e) {
@@ -78,7 +75,7 @@ Map<String, dynamic>? _getConfig() {
   if (parsedYaml['package_rename_config'] == null) {
     return null;
   } else if (parsedYaml['package_rename_config'] is! Map) {
-    throw _InvalidConfigException('Invalid Configuration!!!', 3);
+    throw _PackageRenameErrors.invalidConfig;
   }
 
   final configMap = Map<String, dynamic>.from(
