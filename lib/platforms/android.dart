@@ -51,7 +51,7 @@ void _setAndroidAppName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('Android App Name change failed!!!');
   } finally {
-    _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
 

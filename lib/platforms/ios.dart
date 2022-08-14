@@ -53,7 +53,7 @@ void _setIOSDisplayName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('iOS Display Name change failed!!!');
   } finally {
-    _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
 
@@ -94,7 +94,7 @@ void _setIOSBundleName(dynamic bundleName) {
     _logger.e('ERR Code: 255');
     _logger.e('iOS Bundle Name change failed!!!');
   } finally {
-    _logger.i(_minorStepDoneLineBreak);
+    if (bundleName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
 
