@@ -97,3 +97,8 @@ package_rename_config:
   ios:
     app_name: Package Rename Demo
     bundle_name: renamedemo
+    package_name: rocks.outdatedguy.packagerenamedemo
+
+  web:
+    app_name: Package Rename Demo
+    description: Package to change project configurations.

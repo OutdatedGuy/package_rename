@@ -72,4 +72,9 @@ class _PackageRenameErrors {
     _webIndexNotFoundMessage,
     13,
   );
+
+  static const invalidDescription = _PackageRenameException(
+    _invalidDescriptionMessage,
+    14,
+  );
 }

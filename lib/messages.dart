@@ -83,3 +83,9 @@ const _webIndexNotFoundMessage = '''
 ║   index.html not found in `web/`.   ║
 ╚═════════════════════════════════════╝
 ''';
+
+const _invalidDescriptionMessage = '''
+╔═════════════════════════════════════════════════╗
+║   description (Description) must be a String.   ║
+╚═════════════════════════════════════════════════╝
+''';

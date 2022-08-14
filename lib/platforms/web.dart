@@ -9,6 +9,8 @@ void _setWebConfigurations(dynamic webConfig) {
 
     _setWebTitle(webConfigMap[_appNameKey]);
     _setPWAAppName(webConfigMap[_appNameKey]);
+    _setWebDescription(webConfigMap[_descriptionKey]);
+    _setPWADescription(webConfigMap[_descriptionKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping Web configuration!!!');
@@ -84,5 +86,66 @@ void _setPWAAppName(dynamic appName) {
     _logger.e('PWA name change failed!!!');
   } finally {
     if (appName != null) _logger.i(_minorStepDoneLineBreak);
+  }
+}
+
+void _setWebDescription(dynamic description) {
+  try {
+    if (description == null) return;
+    if (description is! String) throw _PackageRenameErrors.invalidDescription;
+
+    final webIndexFile = File(_webIndexFilePath);
+    if (!webIndexFile.existsSync()) {
+      throw _PackageRenameErrors.webIndexNotFound;
+    }
+
+    final webIndexString = webIndexFile.readAsStringSync();
+    final webIndexStringWithNewDescription = webIndexString.replaceAll(
+      RegExp(r'<meta name="description" content="(.*?)"(.*?)>'),
+      '<meta name="description" content="$description">',
+    );
+
+    webIndexFile.writeAsStringSync(webIndexStringWithNewDescription);
+
+    _logger.i('Web description set to: $description (index.html)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Web Description change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Web Description change failed!!!');
+  } finally {
+    if (description != null) _logger.i(_minorStepDoneLineBreak);
+  }
+}
+
+void _setPWADescription(dynamic description) {
+  try {
+    if (description == null) return;
+    if (description is! String) throw _PackageRenameErrors.invalidDescription;
+
+    final webManifestJsonFile = File(_webManifestJsonFilePath);
+    if (!webManifestJsonFile.existsSync()) {
+      _logger.w('Web manifest.json not found!!!');
+      return;
+    }
+
+    final webManifestJsonString = webManifestJsonFile.readAsStringSync();
+    final webManifestJsonStringWithNewDescription =
+        webManifestJsonString.replaceAll(
+            RegExp(r'"description": "(.*?)"'), '"description": "$description"');
+
+    webManifestJsonFile.writeAsStringSync(
+      webManifestJsonStringWithNewDescription,
+    );
+
+    _logger.i('PWA description set to: $description (manifest.json)');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('PWA Description change failed!!!');
+  } finally {
+    if (description != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
