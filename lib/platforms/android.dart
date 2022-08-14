@@ -14,6 +14,8 @@ void _setAndroidConfigurations(dynamic androidConfig) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Skipping Android configuration!!!');
+  } finally {
+    _logger.i(_majorStepDoneLineBreak);
   }
 }
 
@@ -47,5 +49,7 @@ void _setAndroidAppName(dynamic appName) {
     _logger.e(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Android App Name change failed!!!');
+  } finally {
+    _logger.i(_minorStepDoneLineBreak);
   }
 }

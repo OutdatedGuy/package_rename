@@ -18,3 +18,8 @@ const _androidMainDirName = 'main';
 // File Paths
 const _androidMainManifestFilePath =
     '$_androidSrcDirPath/$_androidMainDirName/$_androidManifestFileName';
+
+// Decorations
+const _outputLength = 80;
+final _minorStepDoneLineBreak = '┈' * _outputLength;
+final _majorStepDoneLineBreak = '━' * _outputLength;
