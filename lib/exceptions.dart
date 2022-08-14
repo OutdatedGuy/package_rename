@@ -57,4 +57,9 @@ class _PackageRenameErrors {
     _invalidBundleNameMessage,
     10,
   );
+
+  static const iosProjectFileNotFound = _PackageRenameException(
+    _iosProjectFileNotFoundMessage,
+    11,
+  );
 }

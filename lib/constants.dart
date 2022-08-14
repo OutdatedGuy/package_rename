@@ -11,6 +11,7 @@ const _buildGradleFileName = 'build.gradle';
 
 // ? iOS
 const _infoPlistFileName = 'Info.plist';
+const _projectFileName = 'project.pbxproj';
 
 // ! Keys
 const _configKey = 'package_rename_config';
@@ -25,15 +26,14 @@ const _androidSrcDirPath = '$_androidAppDirPath/src';
 
 // ? iOS
 const _iosDirPath = 'ios';
+const _iosRunnerDirPath = '$_iosDirPath/Runner';
+const _iosProjectDirPath = '$_iosDirPath/Runner.xcodeproj';
 
 // ! Directory Names
 // ? Android
 const _androidMainDirName = 'main';
 const _androidDebugDirName = 'debug';
 const _androidProfileDirName = 'profile';
-
-// ? iOS
-const _iosRunnerDirName = 'Runner';
 
 // ! File Paths
 // ? Android
@@ -47,8 +47,8 @@ const _androidAppLevelBuildGradleFilePath =
     '$_androidAppDirPath/$_buildGradleFileName';
 
 // ? iOS
-const _iosInfoPlistFilePath =
-    '$_iosDirPath/$_iosRunnerDirName/$_infoPlistFileName';
+const _iosInfoPlistFilePath = '$_iosRunnerDirPath/$_infoPlistFileName';
+const _iosProjectFilePath = '$_iosProjectDirPath/$_projectFileName';
 
 // ! Decorations
 const _outputLength = 80;

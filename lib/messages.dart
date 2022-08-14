@@ -65,3 +65,9 @@ const _invalidBundleNameMessage = '''
 ║   bundle_name (Bundle Name) must be a String.   ║
 ╚═════════════════════════════════════════════════╝
 ''';
+
+const _iosProjectFileNotFoundMessage = '''
+╔═══════════════════════════════════════════════════════════╗
+║   project.pbxproj not found in `ios/Runner.xcodeproj/`.   ║
+╚═══════════════════════════════════════════════════════════╝
+''';
