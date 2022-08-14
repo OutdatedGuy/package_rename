@@ -8,6 +8,8 @@ part 'constants.dart';
 part 'exceptions.dart';
 part 'messages.dart';
 
+part 'platforms/android.dart';
+
 final _logger = Logger(
   filter: ProductionFilter(),
   printer: PrettyPrinter(
@@ -37,14 +39,12 @@ final _logger = Logger(
 /// ```
 void set(List<String> args) {
   try {
-    if (!_configFileExists()) {
-      throw _PackageRenameErrors.filesNotFound;
-    }
+    if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 
     final config = _getConfig();
-    if (config == null) {
-      throw _PackageRenameErrors.configNotFound;
-    }
+    if (config == null) throw _PackageRenameErrors.configNotFound;
+
+    _setAndroidConfigurations(config['android']);
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {
@@ -70,7 +70,7 @@ Map<String, dynamic>? _getConfig() {
       : File(_pubspecFileName);
 
   final yamlString = yamlFile.readAsStringSync();
-  final parsedYaml = yaml.loadYaml(yamlString);
+  final parsedYaml = yaml.loadYaml(yamlString) as Map;
 
   if (parsedYaml[_configKey] == null) {
     return null;
@@ -79,7 +79,7 @@ Map<String, dynamic>? _getConfig() {
   }
 
   final configMap = Map<String, dynamic>.from(
-    parsedYaml[_configKey],
+    parsedYaml[_configKey] as Map,
   );
   return configMap;
 }

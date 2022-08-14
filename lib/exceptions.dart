@@ -1,9 +1,10 @@
 part of package_rename;
 
 class _PackageRenameException implements Exception {
+  const _PackageRenameException(this.message, this.code);
+
   final String message;
   final int code;
-  const _PackageRenameException(this.message, this.code);
 }
 
 class _PackageRenameErrors {
@@ -20,5 +21,20 @@ class _PackageRenameErrors {
   static const invalidConfig = _PackageRenameException(
     _invalidConfigMessage,
     3,
+  );
+
+  static const invalidAndroidConfig = _PackageRenameException(
+    _invalidAndroidConfigMessage,
+    4,
+  );
+
+  static const invalidAppName = _PackageRenameException(
+    _invalidAppNameMessage,
+    5,
+  );
+
+  static const androidMainManifestNotFound = _PackageRenameException(
+    _androidMainManifestNotFoundMessage,
+    6,
   );
 }

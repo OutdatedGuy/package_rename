@@ -23,3 +23,21 @@ const _invalidConfigMessage = '''
 ║   Invalid Configuration!!!   ║
 ╚══════════════════════════════╝
 ''';
+
+const _invalidAndroidConfigMessage = '''
+╔══════════════════════════════════════╗
+║   Invalid Android Configuration!!!   ║
+╚══════════════════════════════════════╝
+''';
+
+const _invalidAppNameMessage = '''
+╔═══════════════════════════════════════════╗
+║   app_name (App Name) must be a String.   ║
+╚═══════════════════════════════════════════╝
+''';
+
+const _androidMainManifestNotFoundMessage = '''
+╔═══════════════════════════════════════════════════════════════╗
+║   AndroidManifest.xml not found in `android/app/src/main/`.   ║
+╚═══════════════════════════════════════════════════════════════╝
+''';
