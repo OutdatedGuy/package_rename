@@ -47,3 +47,15 @@ const _invalidPackageNameMessage = '''
 ║   package_name (Package Name) must be a String.   ║
 ╚═══════════════════════════════════════════════════╝
 ''';
+
+const _invalidIOSConfigMessage = '''
+╔═══════════════════════════════════╗
+║   Invalid iOS Configuration!!!.   ║
+╚═══════════════════════════════════╝
+''';
+
+const _iosInfoPlistNotFoundMessage = '''
+╔════════════════════════════════════════════╗
+║   Info.plist not found in `ios/Runner/`.   ║
+╚════════════════════════════════════════════╝
+''';

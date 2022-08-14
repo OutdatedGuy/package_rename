@@ -9,6 +9,9 @@ const _pubspecFileName = 'pubspec.yaml';
 const _androidManifestFileName = 'AndroidManifest.xml';
 const _buildGradleFileName = 'build.gradle';
 
+// ? iOS
+const _infoPlistFileName = 'Info.plist';
+
 // ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
@@ -19,11 +22,17 @@ const _packageNameKey = 'package_name';
 const _androidAppDirPath = 'android/app';
 const _androidSrcDirPath = '$_androidAppDirPath/src';
 
+// ? iOS
+const _iosDirPath = 'ios';
+
 // ! Directory Names
 // ? Android
 const _androidMainDirName = 'main';
 const _androidDebugDirName = 'debug';
 const _androidProfileDirName = 'profile';
+
+// ? iOS
+const _iosRunnerDirName = 'Runner';
 
 // ! File Paths
 // ? Android
@@ -35,6 +44,10 @@ const _androidProfileManifestFilePath =
     '$_androidSrcDirPath/$_androidProfileDirName/$_androidManifestFileName';
 const _androidAppLevelBuildGradleFilePath =
     '$_androidAppDirPath/$_buildGradleFileName';
+
+// ? iOS
+const _iosInfoPlistFilePath =
+    '$_iosDirPath/$_iosRunnerDirName/$_infoPlistFileName';
 
 // ! Decorations
 const _outputLength = 80;

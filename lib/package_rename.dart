@@ -9,6 +9,7 @@ part 'exceptions.dart';
 part 'messages.dart';
 
 part 'platforms/android.dart';
+part 'platforms/ios.dart';
 
 final _logger = Logger(
   filter: ProductionFilter(),
@@ -45,6 +46,7 @@ void set(List<String> args) {
     if (config == null) throw _PackageRenameErrors.configNotFound;
 
     _setAndroidConfigurations(config['android']);
+    _setIOSConfigurations(config['ios']);
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {

@@ -42,4 +42,14 @@ class _PackageRenameErrors {
     _invalidPackageNameMessage,
     7,
   );
+
+  static const invalidIOSConfig = _PackageRenameException(
+    _invalidIOSConfigMessage,
+    8,
+  );
+
+  static const iosInfoPlistNotFound = _PackageRenameException(
+    _iosInfoPlistNotFoundMessage,
+    9,
+  );
 }
