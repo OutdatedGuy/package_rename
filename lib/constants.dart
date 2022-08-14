@@ -1,26 +1,32 @@
 part of package_rename;
 
-// File Names
+// ! File Names
+// ? Root
 const _packageRenameConfigFileName = 'package_rename_config.yaml';
 const _pubspecFileName = 'pubspec.yaml';
+
+// ? Android
 const _androidManifestFileName = 'AndroidManifest.xml';
 const _buildGradleFileName = 'build.gradle';
 
-// Keys
+// ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
 const _packageNameKey = 'package_name';
 
-// Directory Paths
+// ! Directory Paths
+// ? Android
 const _androidAppDirPath = 'android/app';
 const _androidSrcDirPath = '$_androidAppDirPath/src';
 
-// Directory Names
+// ! Directory Names
+// ? Android
 const _androidMainDirName = 'main';
 const _androidDebugDirName = 'debug';
 const _androidProfileDirName = 'profile';
 
-// File Paths
+// ! File Paths
+// ? Android
 const _androidMainManifestFilePath =
     '$_androidSrcDirPath/$_androidMainDirName/$_androidManifestFileName';
 const _androidDebugManifestFilePath =
@@ -30,7 +36,7 @@ const _androidProfileManifestFilePath =
 const _androidAppLevelBuildGradleFilePath =
     '$_androidAppDirPath/$_buildGradleFileName';
 
-// Decorations
+// ! Decorations
 const _outputLength = 80;
 final _minorStepDoneLineBreak = '┈' * _outputLength;
 final _majorStepDoneLineBreak = '━' * _outputLength;
