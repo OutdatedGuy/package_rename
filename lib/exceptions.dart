@@ -52,4 +52,9 @@ class _PackageRenameErrors {
     _iosInfoPlistNotFoundMessage,
     9,
   );
+
+  static const invalidBundleName = _PackageRenameException(
+    _invalidBundleNameMessage,
+    10,
+  );
 }

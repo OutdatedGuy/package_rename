@@ -16,6 +16,7 @@ const _infoPlistFileName = 'Info.plist';
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
 const _packageNameKey = 'package_name';
+const _bundleNameKey = 'bundle_name';
 
 // ! Directory Paths
 // ? Android

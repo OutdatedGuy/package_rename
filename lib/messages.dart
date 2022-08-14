@@ -59,3 +59,9 @@ const _iosInfoPlistNotFoundMessage = '''
 ║   Info.plist not found in `ios/Runner/`.   ║
 ╚════════════════════════════════════════════╝
 ''';
+
+const _invalidBundleNameMessage = '''
+╔═════════════════════════════════════════════════╗
+║   bundle_name (Bundle Name) must be a String.   ║
+╚═════════════════════════════════════════════════╝
+''';
