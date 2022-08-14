@@ -8,16 +8,23 @@ const _androidManifestFileName = 'AndroidManifest.xml';
 // Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
+const _packageNameKey = 'package_name';
 
 // Directory Paths
 const _androidSrcDirPath = 'android/app/src';
 
 // Directory Names
 const _androidMainDirName = 'main';
+const _androidDebugDirName = 'debug';
+const _androidProfileDirName = 'profile';
 
 // File Paths
 const _androidMainManifestFilePath =
     '$_androidSrcDirPath/$_androidMainDirName/$_androidManifestFileName';
+const _androidDebugManifestFilePath =
+    '$_androidSrcDirPath/$_androidDebugDirName/$_androidManifestFileName';
+const _androidProfileManifestFilePath =
+    '$_androidSrcDirPath/$_androidProfileDirName/$_androidManifestFileName';
 
 // Decorations
 const _outputLength = 80;

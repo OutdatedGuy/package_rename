@@ -92,4 +92,5 @@ flutter:
 
 package_rename_config:
   android:
-    app_name: Tom and Jerry
+    app_name: Package Rename Demo
+    package_name: rocks.outdatedguy .packagerenamedemo

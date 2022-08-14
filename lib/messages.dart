@@ -41,3 +41,9 @@ const _androidMainManifestNotFoundMessage = '''
 ║   AndroidManifest.xml not found in `android/app/src/main/`.   ║
 ╚═══════════════════════════════════════════════════════════════╝
 ''';
+
+const _invalidPackageNameMessage = '''
+╔═══════════════════════════════════════════════════╗
+║   package_name (Package Name) must be a String.   ║
+╚═══════════════════════════════════════════════════╝
+''';

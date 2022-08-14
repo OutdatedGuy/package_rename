@@ -37,4 +37,9 @@ class _PackageRenameErrors {
     _androidMainManifestNotFoundMessage,
     6,
   );
+
+  static const invalidPackageName = _PackageRenameException(
+    _invalidPackageNameMessage,
+    7,
+  );
 }
