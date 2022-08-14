@@ -70,6 +70,11 @@ void _setAndroidPackageName(dynamic packageName) {
       manifestFilePaths: androidManifestFilePaths,
       packageName: packageName,
     );
+
+    _setBuildGradlePackageName(
+      buildGradleFilePath: _androidAppLevelBuildGradleFilePath,
+      packageName: packageName,
+    );
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Android Package Name change failed!!!');
@@ -84,6 +89,9 @@ void _setManifestPackageName({
   required List<String> manifestFilePaths,
   required String packageName,
 }) {
+  RegExp regExp = RegExp(r'package="(.*?)"');
+  final packageNameString = 'package="$packageName"';
+
   for (String androidManifestFilePath in manifestFilePaths) {
     final androidManifestFile = File(androidManifestFilePath);
     if (!androidManifestFile.existsSync()) {
@@ -92,9 +100,6 @@ void _setManifestPackageName({
       );
       continue;
     }
-
-    RegExp regExp = RegExp(r'package="(.*?)"');
-    final packageNameString = 'package="$packageName"';
 
     final androidManifestString = androidManifestFile.readAsStringSync();
     final androidManifestStringWithNewPackageName =
@@ -108,4 +113,26 @@ void _setManifestPackageName({
       'Android package name set to: `$packageName` at: `$androidManifestFilePath`',
     );
   }
+}
+
+void _setBuildGradlePackageName({
+  required String buildGradleFilePath,
+  required String packageName,
+}) {
+  final buildGradleFile = File(buildGradleFilePath);
+  if (!buildGradleFile.existsSync()) {
+    _logger.w(
+      'build.gradle file not found at: $buildGradleFilePath',
+    );
+    return;
+  }
+  final buildGradleString = buildGradleFile.readAsStringSync();
+  final buildGradleStringWithNewPackageName = buildGradleString.replaceAll(
+    RegExp(r'applicationId "(.*?)"'),
+    'applicationId "$packageName"',
+  );
+  buildGradleFile.writeAsStringSync(buildGradleStringWithNewPackageName);
+  _logger.i(
+    'Android package name set to: `$packageName` at: `$buildGradleFilePath`',
+  );
 }

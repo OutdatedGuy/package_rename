@@ -93,4 +93,4 @@ flutter:
 package_rename_config:
   android:
     app_name: Package Rename Demo
-    package_name: rocks.outdatedguy .packagerenamedemo
+    package_name: rocks.outdatedguy.packagerenamedemo
