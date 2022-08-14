@@ -44,7 +44,7 @@ void _setIOSDisplayName(dynamic appName) {
 
     iosInfoPlistFile.writeAsStringSync(iosInfoPlistStringWithNewAppName);
 
-    _logger.i('iOS display name set to: `$appName`');
+    _logger.i('iOS display name set to: `$appName` (Info.plist)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('iOS Display Name change failed!!!');
@@ -85,7 +85,7 @@ void _setIOSBundleName(dynamic bundleName) {
 
     iosInfoPlistFile.writeAsStringSync(iosInfoPlistStringWithNewBundleName);
 
-    _logger.i('iOS bundle name set to: `$bundleName`');
+    _logger.i('iOS bundle name set to: `$bundleName` (Info.plist)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('iOS Bundle Name change failed!!!');
@@ -117,7 +117,7 @@ void _setIOSPackageName(dynamic packageName) {
 
     iosProjectFile.writeAsStringSync(iosProjectStringWithNewPackageName);
 
-    _logger.i('iOS package name set to: `$packageName`');
+    _logger.i('iOS package name set to: `$packageName` (project.pbxproj)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('iOS Package Name change failed!!!');

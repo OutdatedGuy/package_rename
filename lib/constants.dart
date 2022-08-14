@@ -51,6 +51,6 @@ const _iosInfoPlistFilePath = '$_iosRunnerDirPath/$_infoPlistFileName';
 const _iosProjectFilePath = '$_iosProjectDirPath/$_projectFileName';
 
 // ! Decorations
-const _outputLength = 80;
+const _outputLength = 100;
 final _minorStepDoneLineBreak = '┈' * _outputLength;
 final _majorStepDoneLineBreak = '━' * _outputLength;

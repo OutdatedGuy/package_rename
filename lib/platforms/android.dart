@@ -42,7 +42,7 @@ void _setAndroidAppName(dynamic appName) {
       androidMainManifestStringWithNewAppName,
     );
 
-    _logger.i('Android app name set to: `$appName`');
+    _logger.i('Android app name set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Android App Name change failed!!!');
@@ -109,8 +109,11 @@ void _setManifestPackageName({
       androidManifestStringWithNewPackageName,
     );
 
+    // Get folder name from path
+    final folderName = androidManifestFilePath.split('/').reversed.toList()[1];
+
     _logger.i(
-      'Android package name set to: `$packageName` at: `$androidManifestFilePath`',
+      'Android package name set to: `$packageName` ($folderName AndroidManifest.xml)',
     );
   }
 }
@@ -133,6 +136,6 @@ void _setBuildGradlePackageName({
   );
   buildGradleFile.writeAsStringSync(buildGradleStringWithNewPackageName);
   _logger.i(
-    'Android package name set to: `$packageName` at: `$buildGradleFilePath`',
+    'Android package name set to: `$packageName` (build.gradle)',
   );
 }
