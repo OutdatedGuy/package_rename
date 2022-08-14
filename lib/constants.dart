@@ -13,6 +13,10 @@ const _buildGradleFileName = 'build.gradle';
 const _infoPlistFileName = 'Info.plist';
 const _projectFileName = 'project.pbxproj';
 
+// ? Web
+const _indexHtmlFileName = 'index.html';
+const _manifestJsonFileName = 'manifest.json';
+
 // ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
@@ -28,6 +32,9 @@ const _androidSrcDirPath = '$_androidAppDirPath/src';
 const _iosDirPath = 'ios';
 const _iosRunnerDirPath = '$_iosDirPath/Runner';
 const _iosProjectDirPath = '$_iosDirPath/Runner.xcodeproj';
+
+// ? Web
+const _webDirPath = 'web';
 
 // ! Directory Names
 // ? Android
@@ -49,6 +56,10 @@ const _androidAppLevelBuildGradleFilePath =
 // ? iOS
 const _iosInfoPlistFilePath = '$_iosRunnerDirPath/$_infoPlistFileName';
 const _iosProjectFilePath = '$_iosProjectDirPath/$_projectFileName';
+
+// ? Web
+const _webIndexFilePath = '$_webDirPath/$_indexHtmlFileName';
+const _webManifestJsonFilePath = '$_webDirPath/$_manifestJsonFileName';
 
 // ! Decorations
 const _outputLength = 100;

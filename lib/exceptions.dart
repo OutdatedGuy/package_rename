@@ -62,4 +62,14 @@ class _PackageRenameErrors {
     _iosProjectFileNotFoundMessage,
     11,
   );
+
+  static const invalidWebConfig = _PackageRenameException(
+    _invalidWebConfigMessage,
+    12,
+  );
+
+  static const webIndexNotFound = _PackageRenameException(
+    _webIndexNotFoundMessage,
+    13,
+  );
 }

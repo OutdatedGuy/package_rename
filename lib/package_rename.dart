@@ -10,6 +10,7 @@ part 'messages.dart';
 
 part 'platforms/android.dart';
 part 'platforms/ios.dart';
+part 'platforms/web.dart';
 
 final _logger = Logger(
   filter: ProductionFilter(),
@@ -47,6 +48,7 @@ void set(List<String> args) {
 
     _setAndroidConfigurations(config['android']);
     _setIOSConfigurations(config['ios']);
+    _setWebConfigurations(config['web']);
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {

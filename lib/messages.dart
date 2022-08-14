@@ -71,3 +71,15 @@ const _iosProjectFileNotFoundMessage = '''
 ║   project.pbxproj not found in `ios/Runner.xcodeproj/`.   ║
 ╚═══════════════════════════════════════════════════════════╝
 ''';
+
+const _invalidWebConfigMessage = '''
+╔═══════════════════════════════════╗
+║   Invalid Web Configuration!!!.   ║
+╚═══════════════════════════════════╝
+''';
+
+const _webIndexNotFoundMessage = '''
+╔═════════════════════════════════════╗
+║   index.html not found in `web/`.   ║
+╚═════════════════════════════════════╝
+''';
