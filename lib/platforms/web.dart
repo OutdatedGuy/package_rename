@@ -67,14 +67,12 @@ void _setPWAAppName(dynamic appName) {
     }
 
     final webManifestString = webManifestFile.readAsStringSync();
-    final newAppNameWebManifestString = webManifestString
-        .replaceAll(RegExp(r'"name": "(.*?)"'), '"name": "$appName"')
-        .replaceAll(
-          RegExp(r'"short_name": "(.*?)"'),
-          '"short_name": "$appName"',
-        );
+    final webManifestJson = json.decode(webManifestString);
+    webManifestJson['name'] = appName;
+    webManifestJson['short_name'] = appName;
 
-    webManifestFile.writeAsStringSync(newAppNameWebManifestString);
+    final encoder = JsonEncoder.withIndent('    ');
+    webManifestFile.writeAsStringSync(encoder.convert(webManifestJson));
 
     _logger.i('PWA name set to: $appName (manifest.json)');
   } catch (e) {
@@ -129,12 +127,11 @@ void _setPWADescription(dynamic description) {
     }
 
     final webManifestString = webManifestFile.readAsStringSync();
-    final newDescWebManifestString = webManifestString.replaceAll(
-      RegExp(r'"description": "(.*?)"'),
-      '"description": "$description"',
-    );
+    final webManifestJson = json.decode(webManifestString);
+    webManifestJson['description'] = description;
 
-    webManifestFile.writeAsStringSync(newDescWebManifestString);
+    final encoder = JsonEncoder.withIndent('    ');
+    webManifestFile.writeAsStringSync(encoder.convert(webManifestJson));
 
     _logger.i('PWA description set to: $description (manifest.json)');
   } catch (e) {

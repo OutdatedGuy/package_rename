@@ -1,5 +1,7 @@
 library package_rename;
 
+import 'dart:convert';
+
 import 'package:html/parser.dart' as html;
 import 'package:logger/logger.dart';
 import 'package:universal_io/io.dart';
