@@ -112,7 +112,7 @@ void _setIOSPackageName(dynamic packageName) {
       throw _PackageRenameErrors.iosProjectFileNotFound;
     }
 
-    RegExp regExp = RegExp(r'PRODUCT_BUNDLE_IDENTIFIER =(.*?);');
+    RegExp regExp = RegExp(r'PRODUCT_BUNDLE_IDENTIFIER = (.*?);');
     final packageNameString = 'PRODUCT_BUNDLE_IDENTIFIER = $packageName;';
 
     final iosProjectString = iosProjectFile.readAsStringSync();
