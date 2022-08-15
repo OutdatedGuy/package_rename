@@ -42,7 +42,7 @@ void _setWebTitle(dynamic appName) {
 
     webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
-    _logger.i('Web title set to: $appName (index.html)');
+    _logger.i('Web title set to: `$appName` (index.html)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Web Title change failed!!!');
@@ -74,7 +74,7 @@ void _setPWAAppName(dynamic appName) {
     final encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
-    _logger.i('PWA name set to: $appName (manifest.json)');
+    _logger.i('PWA name set to: `$appName` (manifest.json)');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
@@ -102,7 +102,7 @@ void _setWebDescription(dynamic description) {
 
     webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
-    _logger.i('Web description set to: $description (index.html)');
+    _logger.i('Web description set to: `$description` (index.html)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Web Description change failed!!!');
@@ -133,7 +133,7 @@ void _setPWADescription(dynamic description) {
     final encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
-    _logger.i('PWA description set to: $description (manifest.json)');
+    _logger.i('PWA description set to: `$description` (manifest.json)');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
