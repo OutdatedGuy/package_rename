@@ -40,7 +40,7 @@ void _setWebTitle(dynamic appName) {
         .querySelector('meta[name="apple-mobile-web-app-title"]')
         ?.attributes['content'] = appName;
 
-    webIndexFile.writeAsStringSync(webIndexDocument.outerHtml);
+    webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
     _logger.i('Web title set to: $appName (index.html)');
   } on _PackageRenameException catch (e) {
@@ -72,7 +72,7 @@ void _setPWAAppName(dynamic appName) {
     webManifestJson['short_name'] = appName;
 
     final encoder = JsonEncoder.withIndent('    ');
-    webManifestFile.writeAsStringSync(encoder.convert(webManifestJson));
+    webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA name set to: $appName (manifest.json)');
   } catch (e) {
@@ -100,7 +100,7 @@ void _setWebDescription(dynamic description) {
         .querySelector('meta[name="description"]')
         ?.attributes['content'] = description;
 
-    webIndexFile.writeAsStringSync(webIndexDocument.outerHtml);
+    webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
     _logger.i('Web description set to: $description (index.html)');
   } on _PackageRenameException catch (e) {
@@ -131,7 +131,7 @@ void _setPWADescription(dynamic description) {
     webManifestJson['description'] = description;
 
     final encoder = JsonEncoder.withIndent('    ');
-    webManifestFile.writeAsStringSync(encoder.convert(webManifestJson));
+    webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA description set to: $description (manifest.json)');
   } catch (e) {
