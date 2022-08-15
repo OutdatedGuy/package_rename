@@ -102,3 +102,6 @@ package_rename_config:
   web:
     app_name: Package Rename Demo
     description: Package to change project configurations.
+
+  linux:
+    app_name: Package Rename Demo

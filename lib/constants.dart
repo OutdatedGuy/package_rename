@@ -17,6 +17,10 @@ const _projectFileName = 'project.pbxproj';
 const _indexHtmlFileName = 'index.html';
 const _manifestJsonFileName = 'manifest.json';
 
+// ? Linux
+const _cMakeListsFileName = 'CMakeLists.txt';
+const _myApplicationFileName = 'my_application.cc';
+
 // ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
@@ -36,6 +40,9 @@ const _iosProjectDirPath = '$_iosDirPath/Runner.xcodeproj';
 
 // ? Web
 const _webDirPath = 'web';
+
+// ? Linux
+const _linuxDirPath = 'linux';
 
 // ! Directory Names
 // ? Android
@@ -61,6 +68,10 @@ const _iosProjectFilePath = '$_iosProjectDirPath/$_projectFileName';
 // ? Web
 const _webIndexFilePath = '$_webDirPath/$_indexHtmlFileName';
 const _webManifestFilePath = '$_webDirPath/$_manifestJsonFileName';
+
+// ? Linux
+const _linuxCMakeListsFilePath = '$_linuxDirPath/$_cMakeListsFileName';
+const _linuxMyApplicationFilePath = '$_linuxDirPath/$_myApplicationFileName';
 
 // ! Decorations
 const _outputLength = 100;

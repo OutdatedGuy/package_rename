@@ -77,4 +77,19 @@ class _PackageRenameErrors {
     _invalidDescriptionMessage,
     14,
   );
+
+  static const invalidLinuxConfig = _PackageRenameException(
+    _invalidLinuxConfigMessage,
+    15,
+  );
+
+  static const linuxCMakeListsNotFound = _PackageRenameException(
+    _linuxCMakeListsNotFoundMessage,
+    16,
+  );
+
+  static const linuxMyApplicationNotFound = _PackageRenameException(
+    _linuxMyApplicationNotFoundMessage,
+    17,
+  );
 }

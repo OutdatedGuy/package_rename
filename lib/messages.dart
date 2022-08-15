@@ -89,3 +89,21 @@ const _invalidDescriptionMessage = '''
 ║   description (Description) must be a String.   ║
 ╚═════════════════════════════════════════════════╝
 ''';
+
+const _invalidLinuxConfigMessage = '''
+╔═════════════════════════════════════╗
+║   Invalid Linux Configuration!!!.   ║
+╚═════════════════════════════════════╝
+''';
+
+const _linuxCMakeListsNotFoundMessage = '''
+╔═══════════════════════════════════════════╗
+║   CMakeLists.txt not found in `linux/`.   ║
+╚═══════════════════════════════════════════╝
+''';
+
+const _linuxMyApplicationNotFoundMessage = '''
+╔══════════════════════════════════════════════╗
+║   my_application.cc not found in `linux/`.   ║
+╚══════════════════════════════════════════════╝
+''';
