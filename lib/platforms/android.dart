@@ -42,14 +42,14 @@ void _setAndroidAppName(dynamic appName) {
       androidMainManifestStringWithNewAppName,
     );
 
-    _logger.i('Android app name set to: `$appName` (main AndroidManifest.xml)');
+    _logger.i('Android label set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Android App Name change failed!!!');
+    _logger.e('Android Label change failed!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
-    _logger.e('Android App Name change failed!!!');
+    _logger.e('Android Label change failed!!!');
   } finally {
     if (appName != null) _logger.i(_minorStepDoneLineBreak);
   }
@@ -77,11 +77,11 @@ void _setAndroidPackageName(dynamic packageName) {
     );
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Android Package Name change failed!!!');
+    _logger.e('Android Package change failed!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
-    _logger.e('Android Package Name change failed!!!');
+    _logger.e('Android Package change failed!!!');
   }
 }
 
@@ -113,7 +113,7 @@ void _setManifestPackageName({
     final folderName = androidManifestFilePath.split('/').reversed.toList()[1];
 
     _logger.i(
-      'Android package name set to: `$packageName` ($folderName AndroidManifest.xml)',
+      'Android package set to: `$packageName` ($folderName AndroidManifest.xml)',
     );
   }
 }
@@ -136,6 +136,6 @@ void _setBuildGradlePackageName({
   );
   buildGradleFile.writeAsStringSync(buildGradleStringWithNewPackageName);
   _logger.i(
-    'Android package name set to: `$packageName` (build.gradle)',
+    'Android applicationId set to: `$packageName` (build.gradle)',
   );
 }
