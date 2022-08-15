@@ -25,22 +25,21 @@ void _setAndroidAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    final androidMainManifestFile = File(_androidMainManifestFilePath);
-    if (!androidMainManifestFile.existsSync()) {
+    final androidManifestFile = File(_androidMainManifestFilePath);
+    if (!androidManifestFile.existsSync()) {
       throw _PackageRenameErrors.androidMainManifestNotFound;
     }
 
     final regExp = RegExp(r'android:label="(.*?)"');
     final appNameString = 'android:label="$appName"';
 
-    final androidMainManifestString =
-        androidMainManifestFile.readAsStringSync();
-    final androidMainManifestStringWithNewAppName =
-        androidMainManifestString.replaceAll(regExp, appNameString);
-
-    androidMainManifestFile.writeAsStringSync(
-      androidMainManifestStringWithNewAppName,
+    final androidManifestString = androidManifestFile.readAsStringSync();
+    final newLabelAndroidManifestString = androidManifestString.replaceAll(
+      regExp,
+      appNameString,
     );
+
+    androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
 
     _logger.i('Android label set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
@@ -102,12 +101,12 @@ void _setManifestPackageName({
     }
 
     final androidManifestString = androidManifestFile.readAsStringSync();
-    final androidManifestStringWithNewPackageName =
-        androidManifestString.replaceAll(regExp, packageNameString);
-
-    androidManifestFile.writeAsStringSync(
-      androidManifestStringWithNewPackageName,
+    final newPackageAndroidManifestString = androidManifestString.replaceAll(
+      regExp,
+      packageNameString,
     );
+
+    androidManifestFile.writeAsStringSync(newPackageAndroidManifestString);
 
     // Get folder name from path
     final folderName = androidManifestFilePath.split('/').reversed.toList()[1];
@@ -129,12 +128,15 @@ void _setBuildGradlePackageName({
     );
     return;
   }
+
   final buildGradleString = buildGradleFile.readAsStringSync();
-  final buildGradleStringWithNewPackageName = buildGradleString.replaceAll(
+  final newAppIDBuildGradleString = buildGradleString.replaceAll(
     RegExp(r'applicationId "(.*?)"'),
     'applicationId "$packageName"',
   );
-  buildGradleFile.writeAsStringSync(buildGradleStringWithNewPackageName);
+
+  buildGradleFile.writeAsStringSync(newAppIDBuildGradleString);
+
   _logger.i(
     'Android applicationId set to: `$packageName` (build.gradle)',
   );
