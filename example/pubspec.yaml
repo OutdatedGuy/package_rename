@@ -105,3 +105,4 @@ package_rename_config:
 
   linux:
     app_name: Package Rename Demo
+    package_name: rocks.outdatedguy.packagerenamedemo

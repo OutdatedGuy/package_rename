@@ -8,6 +8,7 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
     final linuxConfigMap = Map<String, dynamic>.from(linuxConfig);
 
     _setLinuxAppName(linuxConfigMap[_appNameKey]);
+    _setLinuxPackageName(linuxConfigMap[_packageNameKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping Linux configuration!!!');
@@ -93,5 +94,34 @@ void _setMyApplicationTitle(String appName) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Linux App Title change failed!!!');
+  }
+}
+
+void _setLinuxPackageName(dynamic packageName) {
+  try {
+    if (packageName == null) return;
+    if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
+
+    final cmakeListsFile = File(_linuxCMakeListsFilePath);
+    if (!cmakeListsFile.existsSync()) {
+      throw _PackageRenameErrors.linuxCMakeListsNotFound;
+    }
+
+    final cmakeListsString = cmakeListsFile.readAsStringSync();
+    final newAppIDCmakeListsString = cmakeListsString.replaceAll(
+      RegExp(r'set\(APPLICATION_ID "(.*?)"\)'),
+      'set(APPLICATION_ID "$packageName")',
+    );
+
+    cmakeListsFile.writeAsStringSync(newAppIDCmakeListsString);
+
+    _logger.i('Linux application id set to: `$packageName` (CMakeLists.txt)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Linux Application ID change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Linux Application ID change failed!!!');
   }
 }
