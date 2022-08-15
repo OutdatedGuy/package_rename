@@ -39,10 +39,12 @@ void _setIOSDisplayName(dynamic appName) {
         '<key>CFBundleDisplayName</key>\n\t<string>$appName</string>';
 
     final iosInfoPlistString = iosInfoPlistFile.readAsStringSync();
-    final iosInfoPlistStringWithNewAppName =
-        iosInfoPlistString.replaceAll(regExp, appNameString);
+    final newDisplayNameIOSInfoPlistString = iosInfoPlistString.replaceAll(
+      regExp,
+      appNameString,
+    );
 
-    iosInfoPlistFile.writeAsStringSync(iosInfoPlistStringWithNewAppName);
+    iosInfoPlistFile.writeAsStringSync(newDisplayNameIOSInfoPlistString);
 
     _logger.i('iOS display name set to: `$appName` (Info.plist)');
   } on _PackageRenameException catch (e) {
@@ -80,10 +82,12 @@ void _setIOSBundleName(dynamic bundleName) {
         '<key>CFBundleName</key>\n\t<string>$bundleName</string>';
 
     final iosInfoPlistString = iosInfoPlistFile.readAsStringSync();
-    final iosInfoPlistStringWithNewBundleName =
-        iosInfoPlistString.replaceAll(regExp, bundleNameString);
+    final newBundleNameIOSInfoPlistString = iosInfoPlistString.replaceAll(
+      regExp,
+      bundleNameString,
+    );
 
-    iosInfoPlistFile.writeAsStringSync(iosInfoPlistStringWithNewBundleName);
+    iosInfoPlistFile.writeAsStringSync(newBundleNameIOSInfoPlistString);
 
     _logger.i('iOS bundle name set to: `$bundleName` (Info.plist)');
   } on _PackageRenameException catch (e) {
@@ -112,10 +116,12 @@ void _setIOSPackageName(dynamic packageName) {
     final packageNameString = 'PRODUCT_BUNDLE_IDENTIFIER = $packageName;';
 
     final iosProjectString = iosProjectFile.readAsStringSync();
-    final iosProjectStringWithNewPackageName =
-        iosProjectString.replaceAll(regExp, packageNameString);
+    final newBundleIDIOSProjectString = iosProjectString.replaceAll(
+      regExp,
+      packageNameString,
+    );
 
-    iosProjectFile.writeAsStringSync(iosProjectStringWithNewPackageName);
+    iosProjectFile.writeAsStringSync(newBundleIDIOSProjectString);
 
     _logger.i('iOS bundle identifier set to: `$packageName` (project.pbxproj)');
   } on _PackageRenameException catch (e) {
