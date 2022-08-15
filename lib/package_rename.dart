@@ -1,5 +1,6 @@
 library package_rename;
 
+import 'package:html/parser.dart' as html;
 import 'package:logger/logger.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart' as yaml;

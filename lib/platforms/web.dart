@@ -34,16 +34,13 @@ void _setWebTitle(dynamic appName) {
     }
 
     final webIndexString = webIndexFile.readAsStringSync();
-    final webIndexStringWithNewAppName = webIndexString
-        .replaceAll(RegExp(r'<title>(.*?)</title>'), '<title>$appName</title>')
-        .replaceAll(
-          RegExp(
-            r'<meta name="apple-mobile-web-app-title" content="(.*?)"(.*?)>',
-          ),
-          '<meta name="apple-mobile-web-app-title" content="$appName">',
-        );
+    final webIndexDocument = html.parse(webIndexString);
+    webIndexDocument.querySelector('title')?.text = appName;
+    webIndexDocument
+        .querySelector('meta[name="apple-mobile-web-app-title"]')
+        ?.attributes['content'] = appName;
 
-    webIndexFile.writeAsStringSync(webIndexStringWithNewAppName);
+    webIndexFile.writeAsStringSync(webIndexDocument.outerHtml);
 
     _logger.i('Web title set to: $appName (index.html)');
   } on _PackageRenameException catch (e) {
@@ -63,21 +60,21 @@ void _setPWAAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    final webManifestJsonFile = File(_webManifestJsonFilePath);
-    if (!webManifestJsonFile.existsSync()) {
+    final webManifestFile = File(_webManifestFilePath);
+    if (!webManifestFile.existsSync()) {
       _logger.w('Web manifest.json not found!!!');
       return;
     }
 
-    final webManifestJsonString = webManifestJsonFile.readAsStringSync();
-    final webManifestJsonStringWithNewAppName = webManifestJsonString
+    final webManifestString = webManifestFile.readAsStringSync();
+    final newAppNameWebManifestString = webManifestString
         .replaceAll(RegExp(r'"name": "(.*?)"'), '"name": "$appName"')
         .replaceAll(
           RegExp(r'"short_name": "(.*?)"'),
           '"short_name": "$appName"',
         );
 
-    webManifestJsonFile.writeAsStringSync(webManifestJsonStringWithNewAppName);
+    webManifestFile.writeAsStringSync(newAppNameWebManifestString);
 
     _logger.i('PWA name set to: $appName (manifest.json)');
   } catch (e) {
@@ -100,12 +97,12 @@ void _setWebDescription(dynamic description) {
     }
 
     final webIndexString = webIndexFile.readAsStringSync();
-    final webIndexStringWithNewDescription = webIndexString.replaceAll(
-      RegExp(r'<meta name="description" content="(.*?)"(.*?)>'),
-      '<meta name="description" content="$description">',
-    );
+    final webIndexDocument = html.parse(webIndexString);
+    webIndexDocument
+        .querySelector('meta[name="description"]')
+        ?.attributes['content'] = description;
 
-    webIndexFile.writeAsStringSync(webIndexStringWithNewDescription);
+    webIndexFile.writeAsStringSync(webIndexDocument.outerHtml);
 
     _logger.i('Web description set to: $description (index.html)');
   } on _PackageRenameException catch (e) {
@@ -125,20 +122,19 @@ void _setPWADescription(dynamic description) {
     if (description == null) return;
     if (description is! String) throw _PackageRenameErrors.invalidDescription;
 
-    final webManifestJsonFile = File(_webManifestJsonFilePath);
-    if (!webManifestJsonFile.existsSync()) {
+    final webManifestFile = File(_webManifestFilePath);
+    if (!webManifestFile.existsSync()) {
       _logger.w('Web manifest.json not found!!!');
       return;
     }
 
-    final webManifestJsonString = webManifestJsonFile.readAsStringSync();
-    final webManifestJsonStringWithNewDescription =
-        webManifestJsonString.replaceAll(
-            RegExp(r'"description": "(.*?)"'), '"description": "$description"');
-
-    webManifestJsonFile.writeAsStringSync(
-      webManifestJsonStringWithNewDescription,
+    final webManifestString = webManifestFile.readAsStringSync();
+    final newDescWebManifestString = webManifestString.replaceAll(
+      RegExp(r'"description": "(.*?)"'),
+      '"description": "$description"',
     );
+
+    webManifestFile.writeAsStringSync(newDescWebManifestString);
 
     _logger.i('PWA description set to: $description (manifest.json)');
   } catch (e) {

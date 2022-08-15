@@ -60,7 +60,7 @@ const _iosProjectFilePath = '$_iosProjectDirPath/$_projectFileName';
 
 // ? Web
 const _webIndexFilePath = '$_webDirPath/$_indexHtmlFileName';
-const _webManifestJsonFilePath = '$_webDirPath/$_manifestJsonFileName';
+const _webManifestFilePath = '$_webDirPath/$_manifestJsonFileName';
 
 // ! Decorations
 const _outputLength = 100;
