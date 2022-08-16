@@ -137,3 +137,9 @@ const _invalidOrganizationMessage = '''
 ║   organization (Organization) must be a String.   ║
 ╚═══════════════════════════════════════════════════╝
 ''';
+
+const _invalidCopyrightNoticeMessage = '''
+╔═══════════════════════════════════════════════════════════╗
+║   copyright_notice (Copyright Notice) must be a String.   ║
+╚═══════════════════════════════════════════════════════════╝
+''';

@@ -117,4 +117,9 @@ class _PackageRenameErrors {
     _invalidOrganizationMessage,
     22,
   );
+
+  static const invalidCopyrightNotice = _PackageRenameException(
+    _invalidCopyrightNoticeMessage,
+    23,
+  );
 }

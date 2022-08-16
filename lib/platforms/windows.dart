@@ -9,6 +9,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
 
     _setWindowsAppName(windowsConfigMap[_appNameKey]);
     _setWindowsOrganization(windowsConfigMap[_organizationKey]);
+    _setWindowsCopyrightNotice(windowsConfigMap[_copyrightKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
   } catch (e) {
@@ -160,5 +161,34 @@ void _setWindowsOrganization(dynamic organization) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Windows Organization change failed!!!');
+  }
+}
+
+void _setWindowsCopyrightNotice(dynamic notice) {
+  try {
+    if (notice == null) return;
+    if (notice is! String) throw _PackageRenameErrors.invalidCopyrightNotice;
+
+    final runnerFile = File(_windowsRunnerFilePath);
+    if (!runnerFile.existsSync()) {
+      throw _PackageRenameErrors.windowsRunnerNotFound;
+    }
+
+    final runnerString = runnerFile.readAsStringSync();
+    final newCopyrightNoticeRunnerString = runnerString.replaceAll(
+      RegExp(r'VALUE "LegalCopyright", "(.*?)"'),
+      'VALUE "LegalCopyright", "$notice"',
+    );
+
+    runnerFile.writeAsStringSync(newCopyrightNoticeRunnerString);
+
+    _logger.i('Windows legal copyright set to: `$notice` (Runner.rc)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Windows Copyright Notice change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Windows Copyright Notice change failed!!!');
   }
 }

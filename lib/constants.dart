@@ -34,6 +34,7 @@ const _packageNameKey = 'package_name';
 const _bundleNameKey = 'bundle_name';
 const _descriptionKey = 'description';
 const _organizationKey = 'organization';
+const _copyrightKey = 'copyright_notice';
 
 // ! Directory Paths
 // ? Android
