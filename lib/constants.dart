@@ -18,8 +18,14 @@ const _indexHtmlFileName = 'index.html';
 const _manifestJsonFileName = 'manifest.json';
 
 // ? Linux
-const _cMakeListsFileName = 'CMakeLists.txt';
 const _myApplicationFileName = 'my_application.cc';
+
+// ? Windows
+const _mainCppFileName = 'main.cpp';
+const _runnerFileName = 'Runner.rc';
+
+// ? Linux & Windows
+const _cMakeListsFileName = 'CMakeLists.txt';
 
 // ! Keys
 const _configKey = 'package_rename_config';
@@ -43,6 +49,10 @@ const _webDirPath = 'web';
 
 // ? Linux
 const _linuxDirPath = 'linux';
+
+// ? Windows
+const _windowsDirPath = 'windows';
+const _windowsRunnerDirPath = '$_windowsDirPath/runner';
 
 // ! Directory Names
 // ? Android
@@ -72,6 +82,11 @@ const _webManifestFilePath = '$_webDirPath/$_manifestJsonFileName';
 // ? Linux
 const _linuxCMakeListsFilePath = '$_linuxDirPath/$_cMakeListsFileName';
 const _linuxMyApplicationFilePath = '$_linuxDirPath/$_myApplicationFileName';
+
+// ? Windows
+const _windowsCMakeListsFilePath = '$_windowsDirPath/$_cMakeListsFileName';
+const _windowsMainCppFilePath = '$_windowsRunnerDirPath/$_mainCppFileName';
+const _windowsRunnerFilePath = '$_windowsRunnerDirPath/$_runnerFileName';
 
 // ! Decorations
 const _outputLength = 100;

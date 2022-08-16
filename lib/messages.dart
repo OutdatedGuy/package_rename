@@ -107,3 +107,27 @@ const _linuxMyApplicationNotFoundMessage = '''
 ║   my_application.cc not found in `linux/`.   ║
 ╚══════════════════════════════════════════════╝
 ''';
+
+const _invalidWindowsConfigMessage = '''
+╔═══════════════════════════════════════╗
+║   Invalid Windows Configuration!!!.   ║
+╚═══════════════════════════════════════╝
+''';
+
+const _windowsCMakeListsNotFoundMessage = '''
+╔═════════════════════════════════════════════╗
+║   CMakeLists.txt not found in `windows/`.   ║
+╚═════════════════════════════════════════════╝
+''';
+
+const _windowsMainCppNotFoundMessage = '''
+╔══════════════════════════════════════════════╗
+║   main.cpp not found in `windows/runner/`.   ║
+╚══════════════════════════════════════════════╝
+''';
+
+const _windowsRunnerNotFoundMessage = '''
+╔═══════════════════════════════════════════════╗
+║   Runner.rc not found in `windows/runner/`.   ║
+╚═══════════════════════════════════════════════╝
+''';

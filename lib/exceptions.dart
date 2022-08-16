@@ -92,4 +92,24 @@ class _PackageRenameErrors {
     _linuxMyApplicationNotFoundMessage,
     17,
   );
+
+  static const invalidWindowsConfig = _PackageRenameException(
+    _invalidWindowsConfigMessage,
+    18,
+  );
+
+  static const windowsCMakeListsNotFound = _PackageRenameException(
+    _windowsCMakeListsNotFoundMessage,
+    19,
+  );
+
+  static const windowsMainCppNotFound = _PackageRenameException(
+    _windowsMainCppNotFoundMessage,
+    20,
+  );
+
+  static const windowsRunnerNotFound = _PackageRenameException(
+    _windowsRunnerNotFoundMessage,
+    21,
+  );
 }
