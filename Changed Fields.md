@@ -35,7 +35,7 @@
 
 #### macOS
 
-- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_COPYRIGHT ✅
+- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_COPYRIGHT ✅✅
 
 #### Windows
 

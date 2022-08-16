@@ -9,6 +9,7 @@ void _setMacOSConfigurations(dynamic macOSConfig) {
 
     _setMacOSAppName(macOSConfigMap[_appNameKey]);
     _setMacOSPackageName(macOSConfigMap[_packageNameKey]);
+    _setMacOSCopyright(macOSConfigMap[_copyrightKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping MacOS configuration!!!');
@@ -80,5 +81,36 @@ void _setMacOSPackageName(dynamic packageName) {
     _logger.e('MacOS Bundle ID change failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
+  }
+}
+
+void _setMacOSCopyright(dynamic notice) {
+  try {
+    if (notice == null) return;
+    if (notice is! String) throw _PackageRenameErrors.invalidCopyrightNotice;
+
+    final appInfoFile = File(_macOSAppInfoFilePath);
+    if (!appInfoFile.existsSync()) {
+      throw _PackageRenameErrors.macOSAppInfoNotFound;
+    }
+
+    final appInfoString = appInfoFile.readAsStringSync();
+    final newCopyrightAppInfoString = appInfoString.replaceAll(
+      RegExp(r'PRODUCT_COPYRIGHT = (.*)'),
+      'PRODUCT_COPYRIGHT = $notice',
+    );
+
+    appInfoFile.writeAsStringSync(newCopyrightAppInfoString);
+
+    _logger.i('MacOS product copyright set to: `$notice` (AppInfo.xcconfig)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('MacOS Product Copyright change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('MacOS Product Copyright change failed!!!');
+  } finally {
+    if (notice != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
