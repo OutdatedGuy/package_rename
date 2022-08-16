@@ -75,10 +75,13 @@ void _setPWAAppName(dynamic appName) {
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA name set to: `$appName` (manifest.json)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('PWA Name change failed!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
-    _logger.e('PWA name change failed!!!');
+    _logger.e('PWA Name change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -134,6 +137,9 @@ void _setPWADescription(dynamic description) {
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA description set to: `$description` (manifest.json)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('PWA Description change failed!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
