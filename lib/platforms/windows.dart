@@ -12,6 +12,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     _setWindowsCopyrightNotice(windowsConfigMap[_copyrightKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Skipping Windows configuration!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
@@ -161,6 +162,8 @@ void _setWindowsOrganization(dynamic organization) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Windows Organization change failed!!!');
+  } finally {
+    if (organization != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
 

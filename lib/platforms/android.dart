@@ -11,6 +11,7 @@ void _setAndroidConfigurations(dynamic androidConfig) {
     _setAndroidPackageName(androidConfigMap[_packageNameKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Skipping Android configuration!!!');
   } catch (e) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
