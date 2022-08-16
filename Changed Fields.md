@@ -1,6 +1,7 @@
 # Symbol Meanings
 
 - ❌ = Don't know if this should be renamed
+- ❌❌ = This definitely shouldn't be renamed
 - ✅ = This should be renamed
 - ✅✅ = Renaming this is implemented
 
@@ -73,13 +74,18 @@
 
 #### Windows
 
-- `windows\CMakeLists.txt` > project ❌
-- `windows\CMakeLists.txt` > BINARY_NAME ✅✅
+- `windows\CMakeLists.txt` > project ❌❌
 - `windows\runner\main.cpp` > CreateAndShow ✅✅
 - `windows\runner\Runner.rc` > FileDescription ✅✅
 - `windows\runner\Runner.rc` > InternalName ✅✅
-- `windows\runner\Runner.rc` > OriginalFilename ✅✅
 - `windows\runner\Runner.rc` > ProductName ✅✅
+
+## Executable Name
+
+#### Windows
+
+- `windows\CMakeLists.txt` > BINARY_NAME ✅✅
+- `windows\runner\Runner.rc` > OriginalFilename ✅✅
 
 ## New
 

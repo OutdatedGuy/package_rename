@@ -142,4 +142,14 @@ class _PackageRenameErrors {
     _invalidAndroidLangValueMessage,
     27,
   );
+
+  static const invalidExecutableName = _PackageRenameException(
+    _invalidExecutableNameMessage,
+    28,
+  );
+
+  static const invalidExecutableNameValue = _PackageRenameException(
+    _invalidExecutableNameValueMessage,
+    29,
+  );
 }

@@ -39,6 +39,7 @@ const _descriptionKey = 'description';
 const _organizationKey = 'organization';
 const _copyrightKey = 'copyright_notice';
 const _languageKey = 'lang';
+const _executableKey = 'exe_name';
 
 // ! Directory Paths
 // ? Android

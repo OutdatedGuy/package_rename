@@ -167,3 +167,15 @@ const _invalidAndroidLangValueMessage = '''
 ║   lang (Language) must be either 'kotlin' or 'java'.   ║
 ╚════════════════════════════════════════════════════════╝
 ''';
+
+const _invalidExecutableNameMessage = '''
+╔══════════════════════════════════════════════════╗
+║   exe_name (Executable Name) must be a String.   ║
+╚══════════════════════════════════════════════════╝
+''';
+
+const _invalidExecutableNameValueMessage = '''
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║   exe_name (Executable Name) must only contain (A-Z), (a-z), (0-9) and (_).   ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+''';

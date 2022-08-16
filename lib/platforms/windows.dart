@@ -10,6 +10,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     _setWindowsAppName(windowsConfigMap[_appNameKey]);
     _setWindowsOrganization(windowsConfigMap[_organizationKey]);
     _setWindowsCopyrightNotice(windowsConfigMap[_copyrightKey]);
+    _setWindowsExecutableName(windowsConfigMap[_executableKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping Windows configuration!!!');
@@ -27,7 +28,6 @@ void _setWindowsAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    _setWindowsCMakeListsAppName(appName);
     _setWindowsAppTitle(appName);
     _setWindowsProductDetails(appName);
   } on _PackageRenameException catch (e) {
@@ -39,32 +39,6 @@ void _setWindowsAppName(dynamic appName) {
     _logger.e('Windows App Name change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
-  }
-}
-
-void _setWindowsCMakeListsAppName(String appName) {
-  try {
-    final cmakeListsFile = File(_windowsCMakeListsFilePath);
-    if (!cmakeListsFile.existsSync()) {
-      throw _PackageRenameErrors.windowsCMakeListsNotFound;
-    }
-
-    final cmakeListsString = cmakeListsFile.readAsStringSync();
-    final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
-      RegExp(r'set\(BINARY_NAME "(.*?)"\)'),
-      'set(BINARY_NAME "$appName")',
-    );
-
-    cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
-
-    _logger.i('Windows binary name set to: `$appName` (CMakeLists.txt)');
-  } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Windows Binary Name change failed!!!');
-  } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Windows Binary Name change failed!!!');
   }
 }
 
@@ -112,10 +86,6 @@ void _setWindowsProductDetails(String appName) {
           'VALUE "InternalName", "$appName"',
         )
         .replaceAll(
-          RegExp(r'VALUE "OriginalFilename", "(.*?).exe"'),
-          'VALUE "OriginalFilename", "$appName.exe"',
-        )
-        .replaceAll(
           RegExp(r'VALUE "ProductName", "(.*?)"'),
           'VALUE "ProductName", "$appName"',
         );
@@ -124,7 +94,6 @@ void _setWindowsProductDetails(String appName) {
 
     _logger.i('Windows file description set to: `$appName` (Runner.rc)');
     _logger.i('Windows internal name set to: `$appName` (Runner.rc)');
-    _logger.i('Windows original filename set to: `$appName.exe` (Runner.rc)');
     _logger.i('Windows product name set to: `$appName` (Runner.rc)');
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
@@ -195,5 +164,81 @@ void _setWindowsCopyrightNotice(dynamic notice) {
     _logger.e('Windows Copyright Notice change failed!!!');
   } finally {
     if (notice != null) _logger.wtf(_minorStepDoneLineBreak);
+  }
+}
+
+void _setWindowsExecutableName(dynamic exeName) {
+  try {
+    if (exeName == null) return;
+    if (exeName is! String) throw _PackageRenameErrors.invalidExecutableName;
+
+    final validExeNameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (!validExeNameRegExp.hasMatch(exeName)) {
+      throw _PackageRenameErrors.invalidExecutableNameValue;
+    }
+
+    _setWindowsCMakeListsBinaryName(exeName);
+    _setWindowsOriginalFilename(exeName);
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Windows Executable Name change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Windows Executable Name change failed!!!');
+  } finally {
+    if (exeName != null) _logger.wtf(_minorStepDoneLineBreak);
+  }
+}
+
+void _setWindowsCMakeListsBinaryName(String exeName) {
+  try {
+    final cmakeListsFile = File(_windowsCMakeListsFilePath);
+    if (!cmakeListsFile.existsSync()) {
+      throw _PackageRenameErrors.windowsCMakeListsNotFound;
+    }
+
+    final cmakeListsString = cmakeListsFile.readAsStringSync();
+    final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
+      RegExp(r'set\(BINARY_NAME "(.*?)"'),
+      'set(BINARY_NAME "$exeName"',
+    );
+
+    cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
+
+    _logger.i('Windows binary name set to: `$exeName` (CMakeLists.txt)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Windows Binary Name change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Windows Binary Name change failed!!!');
+  }
+}
+
+void _setWindowsOriginalFilename(String exeName) {
+  try {
+    final runnerFile = File(_windowsRunnerFilePath);
+    if (!runnerFile.existsSync()) {
+      throw _PackageRenameErrors.windowsRunnerNotFound;
+    }
+
+    final runnerString = runnerFile.readAsStringSync();
+    final newOriginalFilenameRunnerString = runnerString.replaceAll(
+      RegExp(r'VALUE "OriginalFilename", "(.*?)"'),
+      'VALUE "OriginalFilename", "$exeName.exe"',
+    );
+
+    runnerFile.writeAsStringSync(newOriginalFilenameRunnerString);
+
+    _logger.i('Windows original filename set to: `$exeName.exe` (Runner.rc)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Windows Original Filename change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Windows Original Filename change failed!!!');
   }
 }
