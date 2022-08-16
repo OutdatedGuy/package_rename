@@ -23,7 +23,7 @@
 
 #### macOS
 
-- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_BUNDLE_IDENTIFIER ✅
+- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_BUNDLE_IDENTIFIER ✅✅
 
 ## Organization
 

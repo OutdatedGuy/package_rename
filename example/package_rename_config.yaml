@@ -23,3 +23,4 @@ package_rename_config:
 
   macos:
     app_name: Package Rename Demo
+    package_name: rocks.outdatedguy.packagerenamedemo

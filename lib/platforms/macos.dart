@@ -8,6 +8,7 @@ void _setMacOSConfigurations(dynamic macOSConfig) {
     final macOSConfigMap = Map<String, dynamic>.from(macOSConfig);
 
     _setMacOSAppName(macOSConfigMap[_appNameKey]);
+    _setMacOSPackageName(macOSConfigMap[_packageNameKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping MacOS configuration!!!');
@@ -47,6 +48,37 @@ void _setMacOSAppName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('MacOS Product Name change failed!!!');
   } finally {
-    if (appName != null) _logger.w(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
+  }
+}
+
+void _setMacOSPackageName(dynamic packageName) {
+  try {
+    if (packageName == null) return;
+    if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
+
+    final appInfoFile = File(_macOSAppInfoFilePath);
+    if (!appInfoFile.existsSync()) {
+      throw _PackageRenameErrors.macOSAppInfoNotFound;
+    }
+
+    final appInfoString = appInfoFile.readAsStringSync();
+    final newPackageNameAppInfoString = appInfoString.replaceAll(
+      RegExp(r'PRODUCT_BUNDLE_IDENTIFIER = (.*)'),
+      'PRODUCT_BUNDLE_IDENTIFIER = $packageName',
+    );
+
+    appInfoFile.writeAsStringSync(newPackageNameAppInfoString);
+
+    _logger.i('MacOS bundle id set to: `$packageName` (AppInfo.xcconfig)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('MacOS Bundle ID change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('MacOS Bundle ID change failed!!!');
+  } finally {
+    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
