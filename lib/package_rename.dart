@@ -16,6 +16,7 @@ part 'platforms/ios.dart';
 part 'platforms/web.dart';
 part 'platforms/linux.dart';
 part 'platforms/windows.dart';
+part 'platforms/macos.dart';
 
 final _logger = Logger(
   filter: ProductionFilter(),
@@ -58,6 +59,7 @@ void set(List<String> args) {
     _setWebConfigurations(config['web']);
     _setLinuxConfigurations(config['linux']);
     _setWindowsConfigurations(config['windows']);
+    _setMacOSConfigurations(config['macos']);
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {

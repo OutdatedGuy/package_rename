@@ -25,9 +25,9 @@ const _invalidConfigMessage = '''
 ''';
 
 const _invalidAndroidConfigMessage = '''
-╔══════════════════════════════════════╗
-║   Invalid Android Configuration!!!   ║
-╚══════════════════════════════════════╝
+╔═══════════════════════════════════════╗
+║   Invalid Android Configuration!!!.   ║
+╚═══════════════════════════════════════╝
 ''';
 
 const _invalidAppNameMessage = '''
@@ -142,4 +142,16 @@ const _invalidCopyrightNoticeMessage = '''
 ╔═══════════════════════════════════════════════════════════╗
 ║   copyright_notice (Copyright Notice) must be a String.   ║
 ╚═══════════════════════════════════════════════════════════╝
+''';
+
+const _invalidMacOSConfigMessage = '''
+╔═════════════════════════════════════╗
+║   Invalid MacOS Configuration!!!.   ║
+╚═════════════════════════════════════╝
+''';
+
+const _macOSAppInfoNotFoundMessage = '''
+╔════════════════════════════════════════════════════════════╗
+║   AppInfo.xcconfig not found in `macos/Runner/Configs/`.   ║
+╚════════════════════════════════════════════════════════════╝
 ''';

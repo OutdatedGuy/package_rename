@@ -122,4 +122,14 @@ class _PackageRenameErrors {
     _invalidCopyrightNoticeMessage,
     23,
   );
+
+  static const invalidMacOSConfig = _PackageRenameException(
+    _invalidMacOSConfigMessage,
+    24,
+  );
+
+  static const macOSAppInfoNotFound = _PackageRenameException(
+    _macOSAppInfoNotFoundMessage,
+    25,
+  );
 }

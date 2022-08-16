@@ -60,7 +60,7 @@
 
 #### macOS
 
-- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_NAME ✅
+- `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_NAME ✅✅
 - `macos\Runner.xcodeproj\project.pbxproj` > 33CC10ED2044A3C60003C045 \* 4 ❌
 - `macos\Runner.xcodeproj\xcshareddata\xcschemes\Runner.xcscheme` > BuildableName \* 4 ❌
 

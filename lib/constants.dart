@@ -27,6 +27,9 @@ const _runnerFileName = 'Runner.rc';
 // ? Linux & Windows
 const _cMakeListsFileName = 'CMakeLists.txt';
 
+// ? MacOS
+const _appInfoFileName = 'AppInfo.xcconfig';
+
 // ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
@@ -55,6 +58,10 @@ const _linuxDirPath = 'linux';
 // ? Windows
 const _windowsDirPath = 'windows';
 const _windowsRunnerDirPath = '$_windowsDirPath/runner';
+
+// ? MacOS
+const _macOSDirPath = 'macos';
+const _macOSConfigDirPath = '$_macOSDirPath/Runner/Configs';
 
 // ! Directory Names
 // ? Android
@@ -89,6 +96,9 @@ const _linuxMyApplicationFilePath = '$_linuxDirPath/$_myApplicationFileName';
 const _windowsCMakeListsFilePath = '$_windowsDirPath/$_cMakeListsFileName';
 const _windowsMainCppFilePath = '$_windowsRunnerDirPath/$_mainCppFileName';
 const _windowsRunnerFilePath = '$_windowsRunnerDirPath/$_runnerFileName';
+
+// ? MacOS
+const _macOSAppInfoFilePath = '$_macOSConfigDirPath/$_appInfoFileName';
 
 // ! Decorations
 const _outputLength = 100;
