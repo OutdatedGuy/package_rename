@@ -155,3 +155,15 @@ const _macOSAppInfoNotFoundMessage = '''
 ║   AppInfo.xcconfig not found in `macos/Runner/Configs/`.   ║
 ╚════════════════════════════════════════════════════════════╝
 ''';
+
+const _invalidLanguageTypeMessage = '''
+╔═══════════════════════════════════════╗
+║   lang (Language) must be a String.   ║
+╚═══════════════════════════════════════╝
+''';
+
+const _invalidAndroidLangValueMessage = '''
+╔════════════════════════════════════════════════════════╗
+║   lang (Language) must be either 'kotlin' or 'java'.   ║
+╚════════════════════════════════════════════════════════╝
+''';

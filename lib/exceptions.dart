@@ -132,4 +132,14 @@ class _PackageRenameErrors {
     _macOSAppInfoNotFoundMessage,
     25,
   );
+
+  static const invalidLanguageType = _PackageRenameException(
+    _invalidLanguageTypeMessage,
+    26,
+  );
+
+  static const invalidAndroidLanguageValue = _PackageRenameException(
+    _invalidAndroidLangValueMessage,
+    27,
+  );
 }

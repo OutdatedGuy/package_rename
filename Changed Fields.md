@@ -85,4 +85,4 @@
 
 #### Android
 
-- `android\app\src\main` > lang used > New Folder Structure > MainActivity File ✅
+- `android\app\src\main` > lang used > New Folder Structure > MainActivity File ✅✅

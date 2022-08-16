@@ -9,6 +9,10 @@ void _setAndroidConfigurations(dynamic androidConfig) {
 
     _setAndroidAppName(androidConfigMap[_appNameKey]);
     _setAndroidPackageName(androidConfigMap[_packageNameKey]);
+    _createNewMainActivity(
+      lang: androidConfigMap[_languageKey],
+      packageName: androidConfigMap[_packageNameKey],
+    );
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
     _logger.e('Skipping Android configuration!!!');
@@ -143,4 +147,58 @@ void _setBuildGradlePackageName({
   _logger.i(
     'Android applicationId set to: `$packageName` (build.gradle)',
   );
+}
+
+void _createNewMainActivity({
+  required dynamic lang,
+  required dynamic packageName,
+}) {
+  try {
+    if (packageName == null) return;
+    if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
+
+    lang ??= 'kotlin';
+    if (lang is! String) throw _PackageRenameErrors.invalidLanguageType;
+
+    String fileExtension;
+    switch (lang) {
+      case 'kotlin':
+        fileExtension = 'kt';
+        break;
+      case 'java':
+        fileExtension = 'java';
+        break;
+      default:
+        throw _PackageRenameErrors.invalidAndroidLanguageValue;
+    }
+
+    final packageDirs = packageName.replaceAll('.', '/');
+    final langDir = '$_androidMainDirPath/$lang';
+
+    final mainActivityFile = File(
+      '$langDir/$packageDirs/MainActivity.$fileExtension',
+    );
+    mainActivityFile.createSync(recursive: true);
+
+    String fileContent = lang == 'kotlin'
+        ? _androidKotlinMainActivityContent
+        : _androidJavaMainActivityContent;
+    fileContent = fileContent.replaceAll(
+      RegExp(r'{{packageName}}'),
+      packageName,
+    );
+
+    mainActivityFile.writeAsStringSync(fileContent);
+
+    _logger.i('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('New MainActivity creation failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('New MainActivity creation failed!!!');
+  } finally {
+    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
+  }
 }

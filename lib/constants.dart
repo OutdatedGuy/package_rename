@@ -38,11 +38,13 @@ const _bundleNameKey = 'bundle_name';
 const _descriptionKey = 'description';
 const _organizationKey = 'organization';
 const _copyrightKey = 'copyright_notice';
+const _languageKey = 'lang';
 
 // ! Directory Paths
 // ? Android
 const _androidAppDirPath = 'android/app';
 const _androidSrcDirPath = '$_androidAppDirPath/src';
+const _androidMainDirPath = '$_androidSrcDirPath/$_androidMainDirName';
 
 // ? iOS
 const _iosDirPath = 'ios';
@@ -104,3 +106,22 @@ const _macOSAppInfoFilePath = '$_macOSConfigDirPath/$_appInfoFileName';
 const _outputLength = 100;
 final _minorStepDoneLineBreak = '┈' * _outputLength;
 final _majorStepDoneLineBreak = '━' * _outputLength;
+
+// ! File Contents
+const _androidKotlinMainActivityContent = '''
+package {{packageName}}
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
+''';
+
+const _androidJavaMainActivityContent = '''
+package {{packageName}};
+
+import io.flutter.embedding.android.FlutterActivity;
+
+public class MainActivity extends FlutterActivity {
+}
+''';
