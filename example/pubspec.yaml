@@ -110,3 +110,4 @@ package_rename_config:
   windows:
     app_name: Package Rename Demo
     organization: OutdatedGuy
+    copyright_notice: Copyright ©️ 2022 OutdatedGuy. All rights reserved.
