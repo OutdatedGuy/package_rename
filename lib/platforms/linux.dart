@@ -26,7 +26,7 @@ void _setLinuxAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    _setCMakeListsAppName(appName);
+    _setLinuxCMakeListsAppName(appName);
     _setMyApplicationTitle(appName);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
@@ -40,7 +40,7 @@ void _setLinuxAppName(dynamic appName) {
   }
 }
 
-void _setCMakeListsAppName(String appName) {
+void _setLinuxCMakeListsAppName(String appName) {
   try {
     final cmakeListsFile = File(_linuxCMakeListsFilePath);
     if (!cmakeListsFile.existsSync()) {
