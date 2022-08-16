@@ -17,7 +17,7 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
     _logger.e('ERR Code: 255');
     _logger.e('Skipping Linux configuration!!!');
   } finally {
-    if (linuxConfig != null) _logger.i(_majorStepDoneLineBreak);
+    if (linuxConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
 }
 
@@ -123,5 +123,7 @@ void _setLinuxPackageName(dynamic packageName) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Linux Application ID change failed!!!');
+  } finally {
+    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }

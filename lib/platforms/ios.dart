@@ -18,7 +18,7 @@ void _setIOSConfigurations(dynamic iosConfig) {
     _logger.e('ERR Code: 255');
     _logger.e('Skipping iOS configuration!!!');
   } finally {
-    if (iosConfig != null) _logger.i(_majorStepDoneLineBreak);
+    if (iosConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
 }
 
@@ -131,5 +131,7 @@ void _setIOSPackageName(dynamic packageName) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('iOS Bundle Identifier change failed!!!');
+  } finally {
+    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }

@@ -19,7 +19,7 @@ void _setWebConfigurations(dynamic webConfig) {
     _logger.e('ERR Code: 255');
     _logger.e('Skipping Web configuration!!!');
   } finally {
-    if (webConfig != null) _logger.i(_majorStepDoneLineBreak);
+    if (webConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
 }
 

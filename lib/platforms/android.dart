@@ -17,7 +17,7 @@ void _setAndroidConfigurations(dynamic androidConfig) {
     _logger.e('ERR Code: 255');
     _logger.e('Skipping Android configuration!!!');
   } finally {
-    if (androidConfig != null) _logger.i(_majorStepDoneLineBreak);
+    if (androidConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
 }
 
@@ -82,6 +82,8 @@ void _setAndroidPackageName(dynamic packageName) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Android Package change failed!!!');
+  } finally {
+    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
 

@@ -46,6 +46,8 @@ final _logger = Logger(
 /// ```
 void set(List<String> args) {
   try {
+    _logger.w(_majorStepDoneLineBreak);
+
     if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 
     final config = _getConfig();

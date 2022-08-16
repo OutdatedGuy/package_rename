@@ -18,7 +18,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     _logger.e('ERR Code: 255');
     _logger.e('Skipping Windows configuration!!!');
   } finally {
-    if (windowsConfig != null) _logger.i(_majorStepDoneLineBreak);
+    if (windowsConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
 }
 
@@ -193,5 +193,7 @@ void _setWindowsCopyrightNotice(dynamic notice) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Windows Copyright Notice change failed!!!');
+  } finally {
+    if (notice != null) _logger.i(_minorStepDoneLineBreak);
   }
 }
