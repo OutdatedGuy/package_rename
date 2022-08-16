@@ -36,7 +36,7 @@ void _setLinuxAppName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('Linux App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -124,6 +124,6 @@ void _setLinuxPackageName(dynamic packageName) {
     _logger.e('ERR Code: 255');
     _logger.e('Linux Application ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }

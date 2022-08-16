@@ -55,7 +55,7 @@ void _setIOSDisplayName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('iOS Display Name change failed!!!');
   } finally {
-    if (appName != null) _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -98,7 +98,7 @@ void _setIOSBundleName(dynamic bundleName) {
     _logger.e('ERR Code: 255');
     _logger.e('iOS Bundle Name change failed!!!');
   } finally {
-    if (bundleName != null) _logger.i(_minorStepDoneLineBreak);
+    if (bundleName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -132,6 +132,6 @@ void _setIOSPackageName(dynamic packageName) {
     _logger.e('ERR Code: 255');
     _logger.e('iOS Bundle Identifier change failed!!!');
   } finally {
-    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }

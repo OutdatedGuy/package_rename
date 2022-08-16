@@ -51,7 +51,7 @@ void _setAndroidAppName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('Android Label change failed!!!');
   } finally {
-    if (appName != null) _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -83,7 +83,7 @@ void _setAndroidPackageName(dynamic packageName) {
     _logger.e('ERR Code: 255');
     _logger.e('Android Package change failed!!!');
   } finally {
-    if (packageName != null) _logger.i(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 

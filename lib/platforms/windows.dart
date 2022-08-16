@@ -38,7 +38,7 @@ void _setWindowsAppName(dynamic appName) {
     _logger.e('ERR Code: 255');
     _logger.e('Windows App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.i(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -163,7 +163,7 @@ void _setWindowsOrganization(dynamic organization) {
     _logger.e('ERR Code: 255');
     _logger.e('Windows Organization change failed!!!');
   } finally {
-    if (organization != null) _logger.i(_minorStepDoneLineBreak);
+    if (organization != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
 
@@ -194,6 +194,6 @@ void _setWindowsCopyrightNotice(dynamic notice) {
     _logger.e('ERR Code: 255');
     _logger.e('Windows Copyright Notice change failed!!!');
   } finally {
-    if (notice != null) _logger.i(_minorStepDoneLineBreak);
+    if (notice != null) _logger.wtf(_minorStepDoneLineBreak);
   }
 }
