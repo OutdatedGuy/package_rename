@@ -33,6 +33,7 @@ const _appNameKey = 'app_name';
 const _packageNameKey = 'package_name';
 const _bundleNameKey = 'bundle_name';
 const _descriptionKey = 'description';
+const _organizationKey = 'organization';
 
 // ! Directory Paths
 // ? Android

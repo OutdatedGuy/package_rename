@@ -131,3 +131,9 @@ const _windowsRunnerNotFoundMessage = '''
 ║   Runner.rc not found in `windows/runner/`.   ║
 ╚═══════════════════════════════════════════════╝
 ''';
+
+const _invalidOrganizationMessage = '''
+╔═══════════════════════════════════════════════════╗
+║   organization (Organization) must be a String.   ║
+╚═══════════════════════════════════════════════════╝
+''';

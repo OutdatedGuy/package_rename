@@ -112,4 +112,9 @@ class _PackageRenameErrors {
     _windowsRunnerNotFoundMessage,
     21,
   );
+
+  static const invalidOrganization = _PackageRenameException(
+    _invalidOrganizationMessage,
+    22,
+  );
 }

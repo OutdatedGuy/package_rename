@@ -8,6 +8,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     final windowsConfigMap = Map<String, dynamic>.from(windowsConfig);
 
     _setWindowsAppName(windowsConfigMap[_appNameKey]);
+    _setWindowsOrganization(windowsConfigMap[_organizationKey]);
   } on _PackageRenameException catch (e) {
     _logger.e('${e.message}ERR Code: ${e.code}');
   } catch (e) {
@@ -130,5 +131,34 @@ void _setWindowsProductDetails(String appName) {
     _logger.w(e.toString());
     _logger.e('ERR Code: 255');
     _logger.e('Windows Product Details change failed!!!');
+  }
+}
+
+void _setWindowsOrganization(dynamic organization) {
+  try {
+    if (organization == null) return;
+    if (organization is! String) throw _PackageRenameErrors.invalidOrganization;
+
+    final runnerFile = File(_windowsRunnerFilePath);
+    if (!runnerFile.existsSync()) {
+      throw _PackageRenameErrors.windowsRunnerNotFound;
+    }
+
+    final runnerString = runnerFile.readAsStringSync();
+    final newOrganizationRunnerString = runnerString.replaceAll(
+      RegExp(r'VALUE "CompanyName", "(.*?)"'),
+      'VALUE "CompanyName", "$organization"',
+    );
+
+    runnerFile.writeAsStringSync(newOrganizationRunnerString);
+
+    _logger.i('Windows company name set to: `$organization` (Runner.rc)');
+  } on _PackageRenameException catch (e) {
+    _logger.e('${e.message}ERR Code: ${e.code}');
+    _logger.e('Windows Organization change failed!!!');
+  } catch (e) {
+    _logger.w(e.toString());
+    _logger.e('ERR Code: 255');
+    _logger.e('Windows Organization change failed!!!');
   }
 }
