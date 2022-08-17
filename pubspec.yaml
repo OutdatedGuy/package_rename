@@ -2,6 +2,7 @@ name: package_rename
 description: A Blazingly Fast way to configure your awesome flutter project to be production ready.
 version: 1.0.0
 homepage: https://outdatedguy.rocks
+repository: https://github.com/OutdatedGuy/package_rename
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
