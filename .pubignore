@@ -1,0 +1,3 @@
+# Ignore all files in example folder except example.md
+example/*
+!example/example.md
