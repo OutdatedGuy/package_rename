@@ -70,10 +70,10 @@ void set(List<String> args) {
 
     _setAndroidConfigurations(config['android']);
     _setIOSConfigurations(config['ios']);
-    _setWebConfigurations(config['web']);
     _setLinuxConfigurations(config['linux']);
-    _setWindowsConfigurations(config['windows']);
     _setMacOSConfigurations(config['macos']);
+    _setWebConfigurations(config['web']);
+    _setWindowsConfigurations(config['windows']);
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {
