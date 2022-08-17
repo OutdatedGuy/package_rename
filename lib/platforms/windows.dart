@@ -185,7 +185,7 @@ void _setWindowsExecutableName(dynamic exeName) {
     if (exeName == null) return;
     if (exeName is! String) throw _PackageRenameErrors.invalidExecutableName;
 
-    final validExeNameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    final validExeNameRegExp = RegExp(_desktopBinaryNameTemplate);
     if (!validExeNameRegExp.hasMatch(exeName)) {
       throw _PackageRenameErrors.invalidExecutableNameValue;
     }

@@ -126,3 +126,5 @@ import io.flutter.embedding.android.FlutterActivity;
 public class MainActivity extends FlutterActivity {
 }
 ''';
+
+const _desktopBinaryNameTemplate = r'^[a-zA-Z0-9_-]+$';
