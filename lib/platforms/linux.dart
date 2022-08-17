@@ -9,6 +9,7 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
 
     _setLinuxAppName(linuxConfigMap[_appNameKey]);
     _setLinuxPackageName(linuxConfigMap[_packageNameKey]);
+    _setLinuxExecutableName(linuxConfigMap[_executableKey]);
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -28,52 +29,6 @@ void _setLinuxAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    _setLinuxCMakeListsAppName(appName);
-    _setMyApplicationTitle(appName);
-  } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux App Name change failed!!!');
-  } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Linux App Name change failed!!!');
-  } finally {
-    if (appName != null) _logger.wtf(_minorTaskDoneLine);
-  }
-}
-
-void _setLinuxCMakeListsAppName(String appName) {
-  try {
-    final cmakeListsFile = File(_linuxCMakeListsFilePath);
-    if (!cmakeListsFile.existsSync()) {
-      throw _PackageRenameErrors.linuxCMakeListsNotFound;
-    }
-
-    final cmakeListsString = cmakeListsFile.readAsStringSync();
-    final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
-      RegExp(r'set\(BINARY_NAME\s+"(.*?)"\)'),
-      'set(BINARY_NAME "$appName")',
-    );
-
-    cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
-
-    _logger.i('Linux binary name set to: `$appName` (CMakeLists.txt)');
-  } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux Binary Name change failed!!!');
-  } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Linux Binary Name change failed!!!');
-  }
-}
-
-void _setMyApplicationTitle(String appName) {
-  try {
     final myAppFile = File(_linuxMyApplicationFilePath);
     if (!myAppFile.existsSync()) {
       throw _PackageRenameErrors.linuxMyApplicationNotFound;
@@ -96,12 +51,14 @@ void _setMyApplicationTitle(String appName) {
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux App Title change failed!!!');
+      ..e('Linux App Name change failed!!!');
   } catch (e) {
     _logger
       ..w(e.toString())
       ..e('ERR Code: 255')
-      ..e('Linux App Title change failed!!!');
+      ..e('Linux App Name change failed!!!');
+  } finally {
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -135,5 +92,43 @@ void _setLinuxPackageName(dynamic packageName) {
       ..e('Linux Application ID change failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+  }
+}
+
+void _setLinuxExecutableName(dynamic exeName) {
+  try {
+    if (exeName == null) return;
+    if (exeName is! String) throw _PackageRenameErrors.invalidExecutableName;
+
+    final validExeNameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (!validExeNameRegExp.hasMatch(exeName)) {
+      throw _PackageRenameErrors.invalidExecutableNameValue;
+    }
+
+    final cmakeListsFile = File(_linuxCMakeListsFilePath);
+    if (!cmakeListsFile.existsSync()) {
+      throw _PackageRenameErrors.linuxCMakeListsNotFound;
+    }
+
+    final cmakeListsString = cmakeListsFile.readAsStringSync();
+    final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
+      RegExp(r'set\(BINARY_NAME\s+"(.*?)"'),
+      'set(BINARY_NAME "$exeName"',
+    );
+
+    cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
+
+    _logger.i('Linux binary name set to: `$exeName` (CMakeLists.txt)');
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Linux Executable Name change failed!!!');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Linux Executable Name change failed!!!');
+  } finally {
+    if (exeName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }

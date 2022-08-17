@@ -54,7 +54,6 @@
 
 #### Linux
 
-- `linux\CMakeLists.txt` > BINARY_NAME ✅✅
 - `linux\my_application.cc` > gtk_header_bar_set_title ✅✅
 - `linux\my_application.cc` > gtk_window_set_title ✅✅
 
@@ -80,6 +79,10 @@
 - `windows\runner\Runner.rc` > ProductName ✅✅
 
 ## Executable Name
+
+#### Linux
+
+- `linux\CMakeLists.txt` > BINARY_NAME ✅✅
 
 #### Windows
 
