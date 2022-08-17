@@ -1,3 +1,17 @@
+/// A *blazingly fast* way to configure your project to be production ready.
+///
+/// You can customize configurations it in the following way:
+/// 1. `package_rename_config` key in `pubspec.yaml`:
+/// ```yaml
+/// package_rename_config:
+///   ...
+/// ```
+///
+/// 2. `package_rename_config.yaml` file at the root of the project:
+/// ```yaml
+/// package_rename_config:
+///   ...
+/// ```
 library package_rename;
 
 import 'dart:convert';
