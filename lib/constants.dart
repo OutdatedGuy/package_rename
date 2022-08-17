@@ -108,8 +108,8 @@ const _outputLength = 100;
 final _minorTaskDoneLine = '┈' * _outputLength;
 final _majorTaskDoneLine = '━' * _outputLength;
 
-// ! File Contents
-const _androidKotlinMainActivityContent = '''
+// ! Templates
+const _androidKotlinMainActivityTemplate = '''
 package {{packageName}}
 
 import io.flutter.embedding.android.FlutterActivity
@@ -118,7 +118,7 @@ class MainActivity: FlutterActivity() {
 }
 ''';
 
-const _androidJavaMainActivityContent = '''
+const _androidJavaMainActivityTemplate = '''
 package {{packageName}};
 
 import io.flutter.embedding.android.FlutterActivity;

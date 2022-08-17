@@ -186,8 +186,8 @@ void _createNewMainActivity({
     )..createSync(recursive: true);
 
     var fileContent = lang == 'kotlin'
-        ? _androidKotlinMainActivityContent
-        : _androidJavaMainActivityContent;
+        ? _androidKotlinMainActivityTemplate
+        : _androidJavaMainActivityTemplate;
     fileContent = fileContent.replaceAll(
       RegExp('{{packageName}}'),
       packageName,
