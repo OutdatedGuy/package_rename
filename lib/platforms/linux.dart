@@ -10,12 +10,14 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
     _setLinuxAppName(linuxConfigMap[_appNameKey]);
     _setLinuxPackageName(linuxConfigMap[_packageNameKey]);
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Skipping Linux configuration!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Skipping Linux configuration!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Skipping Linux configuration!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Skipping Linux configuration!!!');
   } finally {
     if (linuxConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
@@ -29,12 +31,14 @@ void _setLinuxAppName(dynamic appName) {
     _setLinuxCMakeListsAppName(appName);
     _setMyApplicationTitle(appName);
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Linux App Name change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Linux App Name change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Linux App Name change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Linux App Name change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -57,12 +61,14 @@ void _setLinuxCMakeListsAppName(String appName) {
 
     _logger.i('Linux binary name set to: `$appName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Linux Binary Name change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Linux Binary Name change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Linux Binary Name change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Linux Binary Name change failed!!!');
   }
 }
 
@@ -88,12 +94,14 @@ void _setMyApplicationTitle(String appName) {
 
     _logger.i('Linux app title set to: `$appName` (my_application.cc)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Linux App Title change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Linux App Title change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Linux App Title change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Linux App Title change failed!!!');
   }
 }
 
@@ -117,12 +125,14 @@ void _setLinuxPackageName(dynamic packageName) {
 
     _logger.i('Linux application id set to: `$packageName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Linux Application ID change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Linux Application ID change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Linux Application ID change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Linux Application ID change failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }

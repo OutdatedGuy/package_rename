@@ -12,12 +12,14 @@ void _setWebConfigurations(dynamic webConfig) {
     _setWebDescription(webConfigMap[_descriptionKey]);
     _setPWADescription(webConfigMap[_descriptionKey]);
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Skipping Web configuration!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Skipping Web configuration!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Skipping Web configuration!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Skipping Web configuration!!!');
   } finally {
     if (webConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
@@ -44,12 +46,14 @@ void _setWebTitle(dynamic appName) {
 
     _logger.i('Web title set to: `$appName` (index.html)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Web Title change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Web Title change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Web Title change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Web Title change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -67,21 +71,26 @@ void _setPWAAppName(dynamic appName) {
     }
 
     final webManifestString = webManifestFile.readAsStringSync();
-    final webManifestJson = json.decode(webManifestString);
+    final webManifestJson = json.decode(
+      webManifestString,
+    ) as Map<String, dynamic>;
+
     webManifestJson['name'] = appName;
     webManifestJson['short_name'] = appName;
 
-    final encoder = JsonEncoder.withIndent('    ');
+    const encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA name set to: `$appName` (manifest.json)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('PWA Name change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('PWA Name change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('PWA Name change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('PWA Name change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -107,12 +116,14 @@ void _setWebDescription(dynamic description) {
 
     _logger.i('Web description set to: `$description` (index.html)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Web Description change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Web Description change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Web Description change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Web Description change failed!!!');
   } finally {
     if (description != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -130,20 +141,25 @@ void _setPWADescription(dynamic description) {
     }
 
     final webManifestString = webManifestFile.readAsStringSync();
-    final webManifestJson = json.decode(webManifestString);
+    final webManifestJson = json.decode(
+      webManifestString,
+    ) as Map<String, dynamic>;
+
     webManifestJson['description'] = description;
 
-    final encoder = JsonEncoder.withIndent('    ');
+    const encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA description set to: `$description` (manifest.json)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('PWA Description change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('PWA Description change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('PWA Description change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('PWA Description change failed!!!');
   } finally {
     if (description != null) _logger.wtf(_minorStepDoneLineBreak);
   }

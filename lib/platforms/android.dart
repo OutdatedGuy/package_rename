@@ -14,12 +14,14 @@ void _setAndroidConfigurations(dynamic androidConfig) {
       packageName: androidConfigMap[_packageNameKey],
     );
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Skipping Android configuration!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Skipping Android configuration!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Skipping Android configuration!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Skipping Android configuration!!!');
   } finally {
     if (androidConfig != null) _logger.w(_majorStepDoneLineBreak);
   }
@@ -35,7 +37,7 @@ void _setAndroidAppName(dynamic appName) {
       throw _PackageRenameErrors.androidMainManifestNotFound;
     }
 
-    final regExp = RegExp(r'android:label="(.*?)"');
+    final regExp = RegExp('android:label="(.*?)"');
     final appNameString = 'android:label="$appName"';
 
     final androidManifestString = androidManifestFile.readAsStringSync();
@@ -48,12 +50,14 @@ void _setAndroidAppName(dynamic appName) {
 
     _logger.i('Android label set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Android Label change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Android Label change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Android Label change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Android Label change failed!!!');
   } finally {
     if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -64,7 +68,7 @@ void _setAndroidPackageName(dynamic packageName) {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
 
-    List<String> androidManifestFilePaths = [
+    final androidManifestFilePaths = [
       _androidMainManifestFilePath,
       _androidDebugManifestFilePath,
       _androidProfileManifestFilePath,
@@ -80,12 +84,14 @@ void _setAndroidPackageName(dynamic packageName) {
       packageName: packageName,
     );
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('Android Package change failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('Android Package change failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('Android Package change failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('Android Package change failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
@@ -95,10 +101,10 @@ void _setManifestPackageName({
   required List<String> manifestFilePaths,
   required String packageName,
 }) {
-  final regExp = RegExp(r'package="(.*?)"');
+  final regExp = RegExp('package="(.*?)"');
   final packageNameString = 'package="$packageName"';
 
-  for (String androidManifestFilePath in manifestFilePaths) {
+  for (final androidManifestFilePath in manifestFilePaths) {
     final androidManifestFile = File(androidManifestFilePath);
     if (!androidManifestFile.existsSync()) {
       _logger.w(
@@ -115,11 +121,11 @@ void _setManifestPackageName({
 
     androidManifestFile.writeAsStringSync(newPackageAndroidManifestString);
 
-    // Get folder name from path
-    final folderName = androidManifestFilePath.split('/').reversed.toList()[1];
+    // Get directory name from path
+    final dirName = androidManifestFilePath.split('/').reversed.toList()[1];
 
     _logger.i(
-      'Android package set to: `$packageName` ($folderName AndroidManifest.xml)',
+      'Android package set to: `$packageName` ($dirName AndroidManifest.xml)',
     );
   }
 }
@@ -138,7 +144,7 @@ void _setBuildGradlePackageName({
 
   final buildGradleString = buildGradleFile.readAsStringSync();
   final newAppIDBuildGradleString = buildGradleString.replaceAll(
-    RegExp(r'applicationId "(.*?)"'),
+    RegExp('applicationId "(.*?)"'),
     'applicationId "$packageName"',
   );
 
@@ -177,14 +183,13 @@ void _createNewMainActivity({
 
     final mainActivityFile = File(
       '$langDir/$packageDirs/MainActivity.$fileExtension',
-    );
-    mainActivityFile.createSync(recursive: true);
+    )..createSync(recursive: true);
 
-    String fileContent = lang == 'kotlin'
+    var fileContent = lang == 'kotlin'
         ? _androidKotlinMainActivityContent
         : _androidJavaMainActivityContent;
     fileContent = fileContent.replaceAll(
-      RegExp(r'{{packageName}}'),
+      RegExp('{{packageName}}'),
       packageName,
     );
 
@@ -192,12 +197,14 @@ void _createNewMainActivity({
 
     _logger.i('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
   } on _PackageRenameException catch (e) {
-    _logger.e('${e.message}ERR Code: ${e.code}');
-    _logger.e('New MainActivity creation failed!!!');
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('New MainActivity creation failed!!!');
   } catch (e) {
-    _logger.w(e.toString());
-    _logger.e('ERR Code: 255');
-    _logger.e('New MainActivity creation failed!!!');
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('New MainActivity creation failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
   }
