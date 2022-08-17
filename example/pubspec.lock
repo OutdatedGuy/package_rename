@@ -131,7 +131,7 @@ packages:
     source: hosted
     version: "1.7.0"
   package_rename:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       path: ".."
       relative: true
