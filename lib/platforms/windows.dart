@@ -21,7 +21,7 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
       ..e('ERR Code: 255')
       ..e('Skipping Windows configuration!!!');
   } finally {
-    if (windowsConfig != null) _logger.w(_majorStepDoneLineBreak);
+    if (windowsConfig != null) _logger.w(_majorTaskDoneLine);
   }
 }
 
@@ -42,7 +42,7 @@ void _setWindowsAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('Windows App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -143,7 +143,7 @@ void _setWindowsOrganization(dynamic organization) {
       ..e('ERR Code: 255')
       ..e('Windows Organization change failed!!!');
   } finally {
-    if (organization != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (organization != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -176,7 +176,7 @@ void _setWindowsCopyrightNotice(dynamic notice) {
       ..e('ERR Code: 255')
       ..e('Windows Copyright Notice change failed!!!');
   } finally {
-    if (notice != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (notice != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -202,7 +202,7 @@ void _setWindowsExecutableName(dynamic exeName) {
       ..e('ERR Code: 255')
       ..e('Windows Executable Name change failed!!!');
   } finally {
-    if (exeName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (exeName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 

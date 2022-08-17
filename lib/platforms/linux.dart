@@ -19,7 +19,7 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
       ..e('ERR Code: 255')
       ..e('Skipping Linux configuration!!!');
   } finally {
-    if (linuxConfig != null) _logger.w(_majorStepDoneLineBreak);
+    if (linuxConfig != null) _logger.w(_majorTaskDoneLine);
   }
 }
 
@@ -40,7 +40,7 @@ void _setLinuxAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('Linux App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -134,6 +134,6 @@ void _setLinuxPackageName(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('Linux Application ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }

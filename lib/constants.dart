@@ -105,8 +105,8 @@ const _macOSAppInfoFilePath = '$_macOSConfigDirPath/$_appInfoFileName';
 
 // ! Decorations
 const _outputLength = 100;
-final _minorStepDoneLineBreak = '┈' * _outputLength;
-final _majorStepDoneLineBreak = '━' * _outputLength;
+final _minorTaskDoneLine = '┈' * _outputLength;
+final _majorTaskDoneLine = '━' * _outputLength;
 
 // ! File Contents
 const _androidKotlinMainActivityContent = '''

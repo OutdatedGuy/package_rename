@@ -61,7 +61,7 @@ final _logger = Logger(
 /// ```
 void set(List<String> args) {
   try {
-    _logger.w(_majorStepDoneLineBreak);
+    _logger.w(_majorTaskDoneLine);
 
     if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 

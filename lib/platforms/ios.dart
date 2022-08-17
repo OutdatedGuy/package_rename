@@ -20,7 +20,7 @@ void _setIOSConfigurations(dynamic iosConfig) {
       ..e('ERR Code: 255')
       ..e('Skipping iOS configuration!!!');
   } finally {
-    if (iosConfig != null) _logger.w(_majorStepDoneLineBreak);
+    if (iosConfig != null) _logger.w(_majorTaskDoneLine);
   }
 }
 
@@ -59,7 +59,7 @@ void _setIOSDisplayName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('iOS Display Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -104,7 +104,7 @@ void _setIOSBundleName(dynamic bundleName) {
       ..e('ERR Code: 255')
       ..e('iOS Bundle Name change failed!!!');
   } finally {
-    if (bundleName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (bundleName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -140,6 +140,6 @@ void _setIOSPackageName(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('iOS Bundle Identifier change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }

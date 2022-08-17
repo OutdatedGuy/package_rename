@@ -20,7 +20,7 @@ void _setMacOSConfigurations(dynamic macOSConfig) {
       ..e('ERR Code: 255')
       ..e('Skipping MacOS configuration!!!');
   } finally {
-    if (macOSConfig != null) _logger.w(_majorStepDoneLineBreak);
+    if (macOSConfig != null) _logger.w(_majorTaskDoneLine);
   }
 }
 
@@ -53,7 +53,7 @@ void _setMacOSAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('MacOS Product Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -86,7 +86,7 @@ void _setMacOSPackageName(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('MacOS Bundle ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
 
@@ -119,6 +119,6 @@ void _setMacOSCopyright(dynamic notice) {
       ..e('ERR Code: 255')
       ..e('MacOS Product Copyright change failed!!!');
   } finally {
-    if (notice != null) _logger.wtf(_minorStepDoneLineBreak);
+    if (notice != null) _logger.wtf(_minorTaskDoneLine);
   }
 }
