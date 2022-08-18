@@ -7,7 +7,7 @@ A Blazingly Fast way to configure your Bleeding Edge flutter project to be produ
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
 [![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/package_rename/issues)
-[![GitHub issues][pr_svg]](https://github.com/OutdatedGuy/package_rename/pulls)
+[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed)
 
 <hr />
 
@@ -77,7 +77,7 @@ Execute the follow command at the root of your project:
 flutter pub run package_rename:set
 ```
 
-### And that's it! 🎉
+## And that's it! 🎉
 
 Now you can deploy your production ready app to change the _WORLD!_
 
@@ -87,4 +87,4 @@ Now you can deploy your production ready app to change the _WORLD!_
 [license_svg]: https://img.shields.io/github/license/OutdatedGuy/package_rename.svg?color=purple
 [lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/package_rename.svg
-[pr_svg]: https://img.shields.io/github/issues-pr/OutdatedGuy/package_rename.svg
+[issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/package_rename.svg?color=green
