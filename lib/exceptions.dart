@@ -152,4 +152,9 @@ class _PackageRenameErrors {
     _invalidExecutableNameValueMessage,
     29,
   );
+
+  static const androidOldDirectoryNotFound = _PackageRenameException(
+    _androidOldDirectoryNotFoundMessage,
+    30,
+  );
 }

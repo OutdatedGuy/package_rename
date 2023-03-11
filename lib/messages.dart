@@ -179,3 +179,9 @@ const _invalidExecutableNameValueMessage = '''
 ║   exe_name (Executable Name) must only contain (A-Z), (a-z), (0-9) and (_).   ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ''';
+
+const _androidOldDirectoryNotFoundMessage = '''
+╔═════════════════════════════════════════════════╗
+║   Old directory for MainActivity not found!!!   ║
+╚═════════════════════════════════════════════════╝
+''';
