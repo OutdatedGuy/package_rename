@@ -40,6 +40,7 @@ const _organizationKey = 'organization';
 const _copyrightKey = 'copyright_notice';
 const _languageKey = 'lang';
 const _executableKey = 'exe_name';
+const _overrideOldPackageKey = 'override_old_package';
 
 // ! Directory Paths
 // ? Android

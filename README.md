@@ -40,6 +40,8 @@ package_rename_config:
   android:
     app_name: # (String) The display name of the android app
     package_name: # (String) The package name of the android app
+    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+    lang: # (Optional) (String) The android development language {kotlin(default) or java}
 
   ios:
     app_name: # (String) The display name of the ios app
