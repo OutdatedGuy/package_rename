@@ -157,4 +157,17 @@ class _PackageRenameErrors {
     _androidOldDirectoryNotFoundMessage,
     30,
   );
+
+  static _PackageRenameException flavourNotFound(String flavor) {
+    final flavorNotFoundMessage = _configNotFoundMessage
+        .replaceFirst('package_rename_config', 'package_rename_config-$flavor')
+        .replaceRange(1, 1, '═' * (flavor.length + 1))
+        .replaceRange(
+          _configNotFoundMessage.length - 2,
+          _configNotFoundMessage.length - 2,
+          '═' * (flavor.length + 1),
+        );
+
+    return _PackageRenameException(flavorNotFoundMessage, 31);
+  }
 }

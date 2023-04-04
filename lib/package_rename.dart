@@ -115,7 +115,9 @@ Map<String, dynamic> _getConfig({required String? flavour}) {
   final rawConfig =
       parsedYaml[_configKey + (flavour != null ? '-$flavour' : '')];
   if (rawConfig == null) {
-    throw _PackageRenameErrors.configNotFound;
+    throw flavour == null
+        ? _PackageRenameErrors.configNotFound
+        : _PackageRenameErrors.flavourNotFound(flavour);
   } else if (rawConfig is! Map) {
     throw _PackageRenameErrors.invalidConfig;
   }
