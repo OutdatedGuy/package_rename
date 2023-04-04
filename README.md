@@ -69,7 +69,7 @@ package_rename_config:
     exe_name: # (String) The executable name (binary name) of the windows app
 ```
 
-> For full example click [here](example/example.md)
+> For full example click [here](example/example.md#default-configuration)
 
 #### Running Package Rename
 
@@ -78,6 +78,24 @@ Execute the follow command at the root of your project:
 ```bash
 flutter pub run package_rename:set
 ```
+
+## Flavour Support
+
+Package Rename supports flavours. You can add flavour specific configurations by adding `flavour_name` in configuration key.
+
+```yaml
+package_rename_config-flavour_name:
+  ...
+```
+
+> For full example click [here](example/example.md#flavour-configuration)
+
+And then run the following command:
+
+```bash
+flutter pub run package_rename:set --flavour=flavour_name
+```
+
 
 ## And that's it! 🎉
 

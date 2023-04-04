@@ -16,6 +16,7 @@ library package_rename;
 
 import 'dart:convert';
 
+import 'package:args/args.dart';
 import 'package:html/parser.dart' as html;
 import 'package:logger/logger.dart';
 import 'package:universal_io/io.dart';
@@ -65,8 +66,18 @@ void set(List<String> args) {
 
     if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 
-    final config = _getConfig();
-    if (config == null) throw _PackageRenameErrors.configNotFound;
+    // Create args parser to get flavour flag and its value
+    final parser = ArgParser()
+      ..addOption(
+        'flavour',
+        abbr: 'f',
+        help: 'The flavour of the configuration to be used.',
+        aliases: ['flavor'],
+      );
+    final results = parser.parse(args);
+    final flavour = results['flavour'] as String?;
+
+    final config = _getConfig(flavour: flavour);
 
     _setAndroidConfigurations(config['android']);
     _setIOSConfigurations(config['ios']);
@@ -93,7 +104,7 @@ bool _configFileExists() {
   return configFile.existsSync() || pubspecFile.existsSync();
 }
 
-Map<String, dynamic>? _getConfig() {
+Map<String, dynamic> _getConfig({required String? flavour}) {
   final yamlFile = File(_packageRenameConfigFileName).existsSync()
       ? File(_packageRenameConfigFileName)
       : File(_pubspecFileName);
@@ -101,14 +112,15 @@ Map<String, dynamic>? _getConfig() {
   final yamlString = yamlFile.readAsStringSync();
   final parsedYaml = yaml.loadYaml(yamlString) as Map;
 
-  if (parsedYaml[_configKey] == null) {
-    return null;
-  } else if (parsedYaml[_configKey] is! Map) {
+  final rawConfig =
+      parsedYaml[_configKey + (flavour != null ? '-$flavour' : '')];
+  if (rawConfig == null) {
+    throw flavour == null
+        ? _PackageRenameErrors.configNotFound
+        : _PackageRenameErrors.flavourNotFound(flavour);
+  } else if (rawConfig is! Map) {
     throw _PackageRenameErrors.invalidConfig;
   }
 
-  final configMap = Map<String, dynamic>.from(
-    parsedYaml[_configKey] as Map,
-  );
-  return configMap;
+  return Map<String, dynamic>.from(rawConfig);
 }
