@@ -1,3 +1,7 @@
+## 1.2.0
+
+- feat: added support to choose flavour for configuration in [1be85de](https://github.com/OutdatedGuy/package_rename/commit/1be85deb2c47936b1c999b52e700dfff1d74bdf8)
+
 ## 1.1.0
 
 - chore: migrated to Flutter 3.7 in [6ccb378](https://github.com/OutdatedGuy/package_rename/commit/6ccb378a0e721853ed8045f658af1cdf9c7ae53b)
