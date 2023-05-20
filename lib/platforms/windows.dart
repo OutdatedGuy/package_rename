@@ -54,9 +54,21 @@ void _setWindowsAppTitle(String appName) {
     }
 
     final mainCppString = mainCppFile.readAsStringSync();
-    final newAppTitleMainCppString = mainCppString.replaceAll(
+
+    var newAppTitleMainCppString = mainCppString.replaceAll(
       RegExp(r'window.CreateAndShow\(L"(.*?)"'),
       'window.CreateAndShow(L"$appName"',
+    );
+
+    // Flutter version 3.7.7 changed the way how a window is created
+    // to the following code in main.cpp:
+    //
+    // if (!window.Create(L"my_old_app_name", origin, size)) {
+    //   return EXIT_FAILURE;
+    // }
+    newAppTitleMainCppString = newAppTitleMainCppString.replaceAll(
+      RegExp(r'window.Create\(L"(.*?)"'),
+      'window.Create(L"$appName"',
     );
 
     mainCppFile.writeAsStringSync(newAppTitleMainCppString);

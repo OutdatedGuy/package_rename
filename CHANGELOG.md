@@ -1,3 +1,8 @@
+## 1.2.1
+
+- Added support for windows projects on [Flutter 3.7.7](https://github.com/flutter/flutter/releases/tag/3.7.7)
+- Added pubspec.lock to .gitigore, [see](https://dart.dev/guides/libraries/private-files#pubspeclock) 
+
 ## 1.2.0
 
 - feat: added support to choose flavour for configuration in [1be85de](https://github.com/OutdatedGuy/package_rename/commit/1be85deb2c47936b1c999b52e700dfff1d74bdf8)
