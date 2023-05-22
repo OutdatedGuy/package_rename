@@ -74,6 +74,7 @@
 
 - `windows\CMakeLists.txt` > project ❌
 - `windows\runner\main.cpp` > CreateAndShow ✅✅
+- `windows\runner\main.cpp` > Create ✅✅
 - `windows\runner\Runner.rc` > FileDescription ✅✅
 - `windows\runner\Runner.rc` > InternalName ✅✅
 - `windows\runner\Runner.rc` > ProductName ✅✅

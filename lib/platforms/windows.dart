@@ -54,10 +54,17 @@ void _setWindowsAppTitle(String appName) {
     }
 
     final mainCppString = mainCppFile.readAsStringSync();
-    final newAppTitleMainCppString = mainCppString.replaceAll(
-      RegExp(r'window.CreateAndShow\(L"(.*?)"'),
-      'window.CreateAndShow(L"$appName"',
-    );
+
+    final newAppTitleMainCppString = mainCppString
+        .replaceAll(
+          RegExp(r'window.CreateAndShow\(L"(.*?)"'),
+          'window.CreateAndShow(L"$appName"',
+        )
+        // Implemented from Flutter 3.7 onwards
+        .replaceAll(
+          RegExp(r'window.Create\(L"(.*?)"'),
+          'window.Create(L"$appName"',
+        );
 
     mainCppFile.writeAsStringSync(newAppTitleMainCppString);
 
