@@ -144,12 +144,17 @@ void _setBuildGradlePackageName({
   }
 
   final buildGradleString = buildGradleFile.readAsStringSync();
-  final newAppIDBuildGradleString = buildGradleString.replaceAll(
-    RegExp('applicationId "(.*?)"'),
-    'applicationId "$packageName"',
-  );
+  final newPackageIDBuildGradleString = buildGradleString
+      .replaceAll(
+        RegExp('applicationId "(.*?)"'),
+        'applicationId "$packageName"',
+      )
+      .replaceAll(
+        RegExp('namespace "(.*?)"'),
+        'namespace "$packageName"',
+      );
 
-  buildGradleFile.writeAsStringSync(newAppIDBuildGradleString);
+  buildGradleFile.writeAsStringSync(newPackageIDBuildGradleString);
 
   _logger.i(
     'Android applicationId set to: `$packageName` (build.gradle)',
