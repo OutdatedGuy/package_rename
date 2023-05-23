@@ -29,6 +29,7 @@ const _cMakeListsFileName = 'CMakeLists.txt';
 
 // ? MacOS
 const _appInfoFileName = 'AppInfo.xcconfig';
+const _runnerXCSchemeFileName = 'Runner.xcscheme';
 
 // ! Keys
 const _configKey = 'package_rename_config';
@@ -66,6 +67,8 @@ const _windowsRunnerDirPath = '$_windowsDirPath/runner';
 // ? MacOS
 const _macOSDirPath = 'macos';
 const _macOSConfigDirPath = '$_macOSDirPath/Runner/Configs';
+const _macOSProjectDirPath = '$_macOSDirPath/Runner.xcodeproj';
+const _macOSXCSchemesDirPath = '$_macOSProjectDirPath/xcshareddata/xcschemes';
 
 // ! Directory Names
 // ? Android
@@ -103,6 +106,8 @@ const _windowsRunnerFilePath = '$_windowsRunnerDirPath/$_runnerFileName';
 
 // ? MacOS
 const _macOSAppInfoFilePath = '$_macOSConfigDirPath/$_appInfoFileName';
+const _macOSRunnerXCSchemeFilePath =
+    '$_macOSXCSchemesDirPath/$_runnerXCSchemeFileName';
 
 // ! Decorations
 const _outputLength = 100;

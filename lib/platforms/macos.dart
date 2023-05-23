@@ -29,20 +29,38 @@ void _setMacOSAppName(dynamic appName) {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
+    _setMacOSProductName(appName);
+    _setMacOSBuildableName(appName);
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('MacOS App Name change failed!!!');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('MacOS App Name change failed!!!');
+  } finally {
+    if (appName != null) _logger.wtf(_minorTaskDoneLine);
+  }
+}
+
+void _setMacOSProductName(String productName) {
+  try {
     final appInfoFile = File(_macOSAppInfoFilePath);
     if (!appInfoFile.existsSync()) {
       throw _PackageRenameErrors.macOSAppInfoNotFound;
     }
 
     final appInfoString = appInfoFile.readAsStringSync();
-    final newAppNameAppInfoString = appInfoString.replaceAll(
+    final newProductNameAppInfoString = appInfoString.replaceAll(
       RegExp('PRODUCT_NAME = (.*)'),
-      'PRODUCT_NAME = $appName',
+      'PRODUCT_NAME = $productName',
     );
 
-    appInfoFile.writeAsStringSync(newAppNameAppInfoString);
+    appInfoFile.writeAsStringSync(newProductNameAppInfoString);
 
-    _logger.i('MacOS product name set to: `$appName` (AppInfo.xcconfig)');
+    _logger.i('MacOS product name set to: `$productName` (AppInfo.xcconfig)');
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -52,8 +70,36 @@ void _setMacOSAppName(dynamic appName) {
       ..w(e.toString())
       ..e('ERR Code: 255')
       ..e('MacOS Product Name change failed!!!');
-  } finally {
-    if (appName != null) _logger.wtf(_minorTaskDoneLine);
+  }
+}
+
+void _setMacOSBuildableName(String buildableName) {
+  try {
+    final runnerXCSchemeFile = File(_macOSRunnerXCSchemeFilePath);
+    if (!runnerXCSchemeFile.existsSync()) {
+      throw _PackageRenameErrors.macOSRunnerXCSchemeNotFound;
+    }
+
+    final runnerXCSchemeString = runnerXCSchemeFile.readAsStringSync();
+    final newBuildableNameAppInfoString = runnerXCSchemeString.replaceAll(
+      RegExp('BuildableName = "(.*?).app"'),
+      'BuildableName = "$buildableName.app"',
+    );
+
+    runnerXCSchemeFile.writeAsStringSync(newBuildableNameAppInfoString);
+
+    _logger.i(
+      'MacOS buildable name set to: `$buildableName` (Runner.xcscheme)',
+    );
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('MacOS Buildable Name change failed!!!');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('MacOS Buildable Name change failed!!!');
   }
 }
 

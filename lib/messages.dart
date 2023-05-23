@@ -185,3 +185,9 @@ const _androidOldDirectoryNotFoundMessage = '''
 ║   Old directory for MainActivity not found!!!   ║
 ╚═════════════════════════════════════════════════╝
 ''';
+
+const _macOSRunnerXCSchemeNotFoundMessage = '''
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║   Runner.xcscheme not found in `macos/Runner.xcodeproj/xcshareddata/xcschemes/`.   ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+''';
