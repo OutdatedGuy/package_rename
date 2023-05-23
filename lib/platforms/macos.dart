@@ -31,6 +31,7 @@ void _setMacOSAppName(dynamic appName) {
 
     _setMacOSProductName(appName);
     _setMacOSBuildableName(appName);
+    _setMacOSAppNameInProjectFile(appName);
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -81,12 +82,12 @@ void _setMacOSBuildableName(String buildableName) {
     }
 
     final runnerXCSchemeString = runnerXCSchemeFile.readAsStringSync();
-    final newBuildableNameAppInfoString = runnerXCSchemeString.replaceAll(
+    final newBuildableNameXCSchemeString = runnerXCSchemeString.replaceAll(
       RegExp('BuildableName = "(.*?).app"'),
       'BuildableName = "$buildableName.app"',
     );
 
-    runnerXCSchemeFile.writeAsStringSync(newBuildableNameAppInfoString);
+    runnerXCSchemeFile.writeAsStringSync(newBuildableNameXCSchemeString);
 
     _logger.i(
       'MacOS buildable name set to: `$buildableName` (Runner.xcscheme)',
@@ -100,6 +101,51 @@ void _setMacOSBuildableName(String buildableName) {
       ..w(e.toString())
       ..e('ERR Code: 255')
       ..e('MacOS Buildable Name change failed!!!');
+  }
+}
+
+void _setMacOSAppNameInProjectFile(String appName) {
+  try {
+    final projectFile = File(_macOSProjectFilePath);
+    if (!projectFile.existsSync()) {
+      throw _PackageRenameErrors.macOSProjectFileNotFound;
+    }
+
+    final projectString = projectFile.readAsStringSync();
+    final newDotAppProjectString = projectString
+        .replaceAll(
+          RegExp(r'/\* (.*?).app \*/'),
+          '/* $appName.app */',
+        )
+        .replaceAll(
+          RegExp('path = (.*?).app;'),
+          'path = $appName.app;',
+        )
+        .replaceAll(
+          RegExp('path = "(.*?).app";'),
+          'path = "$appName.app";',
+        )
+        .replaceAll(
+          RegExp(
+            r'TEST_HOST = "\$\(BUILT_PRODUCTS_DIR\)/'
+            r'(.*?).app/\$\(BUNDLE_EXECUTABLE_FOLDER_PATH\)/(.*?)"',
+          ),
+          r'TEST_HOST = "$(BUILT_PRODUCTS_DIR)/'
+          '$appName.app/\$(BUNDLE_EXECUTABLE_FOLDER_PATH)/$appName"',
+        );
+
+    projectFile.writeAsStringSync(newDotAppProjectString);
+
+    _logger.i('MacOS .app name set to: `$appName.app` (project.pbxproj)');
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('MacOS .app Name change failed!!!');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('MacOS .app Name change failed!!!');
   }
 }
 

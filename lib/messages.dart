@@ -191,3 +191,9 @@ const _macOSRunnerXCSchemeNotFoundMessage = '''
 ║   Runner.xcscheme not found in `macos/Runner.xcodeproj/xcshareddata/xcschemes/`.   ║
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 ''';
+
+const _macOSProjectFileNotFoundMessage = '''
+╔═════════════════════════════════════════════════════════════╗
+║   project.pbxproj not found in `macos/Runner.xcodeproj/`.   ║
+╚═════════════════════════════════════════════════════════════╝
+''';

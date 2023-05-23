@@ -175,4 +175,9 @@ class _PackageRenameErrors {
     _macOSRunnerXCSchemeNotFoundMessage,
     32,
   );
+
+  static const macOSProjectFileNotFound = _PackageRenameException(
+    _macOSProjectFileNotFoundMessage,
+    33,
+  );
 }
