@@ -16,7 +16,7 @@
 
 #### iOS
 
-- `ios\Runner.xcodeproj\project.pbxproj` > PRODUCT_BUNDLE_IDENTIFIER \* 3 ✅✅
+- `ios\Runner.xcodeproj\project.pbxproj` > PRODUCT_BUNDLE_IDENTIFIER ✅✅
 
 #### Linux
 

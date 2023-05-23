@@ -118,13 +118,32 @@ void _setIOSPackageName(dynamic packageName) {
       throw _PackageRenameErrors.iosProjectFileNotFound;
     }
 
-    final regExp = RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?);');
-    final packageNameString = 'PRODUCT_BUNDLE_IDENTIFIER = $packageName;';
-
     final iosProjectString = iosProjectFile.readAsStringSync();
-    final newBundleIDIOSProjectString = iosProjectString.replaceAll(
-      regExp,
-      packageNameString,
+    final newBundleIDIOSProjectString = iosProjectString
+        // Replaces old bundle id from
+        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
+        .replaceAll(
+          RegExp(
+            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-]+)(?<!\.RunnerTests);',
+          ),
+          'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
+        )
+        // Replaces old bundle id from
+        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
+        .replaceAll(
+          RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?).RunnerTests;'),
+          'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
+        )
+        // Removes old bundle id from
+        // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
+        .replaceAllMapped(
+      RegExp(
+        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-]+)\.([A-Za-z0-9.-]+)";',
+      ),
+      (match) {
+        final extensionName = match.group(2);
+        return 'PRODUCT_BUNDLE_IDENTIFIER = "$packageName.$extensionName";';
+      },
     );
 
     iosProjectFile.writeAsStringSync(newBundleIDIOSProjectString);
