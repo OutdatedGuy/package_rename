@@ -11,7 +11,6 @@ const _buildGradleFileName = 'build.gradle';
 
 // ? iOS
 const _infoPlistFileName = 'Info.plist';
-const _projectFileName = 'project.pbxproj';
 
 // ? Web
 const _indexHtmlFileName = 'index.html';
@@ -29,6 +28,10 @@ const _cMakeListsFileName = 'CMakeLists.txt';
 
 // ? MacOS
 const _appInfoFileName = 'AppInfo.xcconfig';
+const _runnerXCSchemeFileName = 'Runner.xcscheme';
+
+// ? iOS & MacOS
+const _projectFileName = 'project.pbxproj';
 
 // ! Keys
 const _configKey = 'package_rename_config';
@@ -66,6 +69,8 @@ const _windowsRunnerDirPath = '$_windowsDirPath/runner';
 // ? MacOS
 const _macOSDirPath = 'macos';
 const _macOSConfigDirPath = '$_macOSDirPath/Runner/Configs';
+const _macOSProjectDirPath = '$_macOSDirPath/Runner.xcodeproj';
+const _macOSXCSchemesDirPath = '$_macOSProjectDirPath/xcshareddata/xcschemes';
 
 // ! Directory Names
 // ? Android
@@ -103,6 +108,9 @@ const _windowsRunnerFilePath = '$_windowsRunnerDirPath/$_runnerFileName';
 
 // ? MacOS
 const _macOSAppInfoFilePath = '$_macOSConfigDirPath/$_appInfoFileName';
+const _macOSRunnerXCSchemeFilePath =
+    '$_macOSXCSchemesDirPath/$_runnerXCSchemeFileName';
+const _macOSProjectFilePath = '$_macOSProjectDirPath/$_projectFileName';
 
 // ! Decorations
 const _outputLength = 100;

@@ -170,4 +170,14 @@ class _PackageRenameErrors {
 
     return _PackageRenameException(flavorNotFoundMessage, 31);
   }
+
+  static const macOSRunnerXCSchemeNotFound = _PackageRenameException(
+    _macOSRunnerXCSchemeNotFoundMessage,
+    32,
+  );
+
+  static const macOSProjectFileNotFound = _PackageRenameException(
+    _macOSProjectFileNotFoundMessage,
+    33,
+  );
 }

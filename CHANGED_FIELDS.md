@@ -9,13 +9,14 @@
 #### Android
 
 - `android\app\build.gradle` > android > defaultConfig > applicationId ✅✅
+- `android\app\build.gradle` > android > namespace ✅✅
 - `android\app\src\debug\AndroidManifest.xml` > manifest > package ✅✅
 - `android\app\src\main\AndroidManifest.xml` > manifest > package ✅✅
 - `android\app\src\profile\AndroidManifest.xml` > manifest > package ✅✅
 
 #### iOS
 
-- `ios\Runner.xcodeproj\project.pbxproj` > PRODUCT_BUNDLE_IDENTIFIER \* 3 ✅✅
+- `ios\Runner.xcodeproj\project.pbxproj` > PRODUCT_BUNDLE_IDENTIFIER ✅✅
 
 #### Linux
 
@@ -24,6 +25,7 @@
 #### macOS
 
 - `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_BUNDLE_IDENTIFIER ✅✅
+- `macos\Runner.xcodeproj\project.pbxproj` > PRODUCT_BUNDLE_IDENTIFIER ✅✅
 
 ## Organization
 
@@ -60,8 +62,8 @@
 #### macOS
 
 - `macos\Runner\Configs\AppInfo.xcconfig` > PRODUCT_NAME ✅✅
-- `macos\Runner.xcodeproj\project.pbxproj` > 33CC10ED2044A3C60003C045 \* 4 ❌
-- `macos\Runner.xcodeproj\xcshareddata\xcschemes\Runner.xcscheme` > BuildableName \* 4 ❌
+- `macos\Runner.xcodeproj\project.pbxproj` > .app ✅✅
+- `macos\Runner.xcodeproj\xcshareddata\xcschemes\Runner.xcscheme` > BuildableName ✅✅
 
 #### Web
 
