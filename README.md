@@ -11,7 +11,7 @@ A Blazingly Fast way to configure your Bleeding Edge flutter project to be produ
 
 <hr />
 
-Package Rename handles changing **_30 fields_** across **_15 files_** on **_6 platforms_** so you can focus on your awesome project.
+Package Rename handles changing **_33 fields_** across **_17 files_** on **_6 platforms_** so you can focus on your awesome project.
 
 For more info see [list of changed fields](CHANGED_FIELDS.md)
 
