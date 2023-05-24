@@ -8,7 +8,7 @@ void _setMacOSConfigurations(dynamic macOSConfig) {
     final macOSConfigMap = Map<String, dynamic>.from(macOSConfig);
 
     _setMacOSAppName(macOSConfigMap[_appNameKey]);
-    _setMacOSPackageName(macOSConfigMap[_packageNameKey]);
+    _setMacOSBundleID(macOSConfigMap[_packageNameKey]);
     _setMacOSCopyright(macOSConfigMap[_copyrightKey]);
   } on _PackageRenameException catch (e) {
     _logger
@@ -149,25 +149,13 @@ void _setMacOSAppNameInProjectFile(String appName) {
   }
 }
 
-void _setMacOSPackageName(dynamic packageName) {
+void _setMacOSBundleID(dynamic packageName) {
   try {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
 
-    final appInfoFile = File(_macOSAppInfoFilePath);
-    if (!appInfoFile.existsSync()) {
-      throw _PackageRenameErrors.macOSAppInfoNotFound;
-    }
-
-    final appInfoString = appInfoFile.readAsStringSync();
-    final newPackageNameAppInfoString = appInfoString.replaceAll(
-      RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*)'),
-      'PRODUCT_BUNDLE_IDENTIFIER = $packageName',
-    );
-
-    appInfoFile.writeAsStringSync(newPackageNameAppInfoString);
-
-    _logger.i('MacOS bundle id set to: `$packageName` (AppInfo.xcconfig)');
+    _setMacOSAppInfoBundleID(packageName);
+    _setMacOSProjectFileBundleID(packageName);
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -179,6 +167,76 @@ void _setMacOSPackageName(dynamic packageName) {
       ..e('MacOS Bundle ID change failed!!!');
   } finally {
     if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+  }
+}
+
+void _setMacOSAppInfoBundleID(String bundleID) {
+  try {
+    final appInfoFile = File(_macOSAppInfoFilePath);
+    if (!appInfoFile.existsSync()) {
+      throw _PackageRenameErrors.macOSAppInfoNotFound;
+    }
+
+    final appInfoString = appInfoFile.readAsStringSync();
+    final newPackageNameAppInfoString = appInfoString.replaceAll(
+      RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*)'),
+      'PRODUCT_BUNDLE_IDENTIFIER = $bundleID',
+    );
+
+    appInfoFile.writeAsStringSync(newPackageNameAppInfoString);
+
+    _logger.i('MacOS bundle id set to: `$bundleID` (AppInfo.xcconfig)');
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('MacOS Bundle ID change failed!!! (AppInfo.xcconfig)');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('MacOS Bundle ID change failed!!! (AppInfo.xcconfig)');
+  }
+}
+
+void _setMacOSProjectFileBundleID(String bundleID) {
+  try {
+    final macOSProjectFile = File(_macOSProjectFilePath);
+    if (!macOSProjectFile.existsSync()) {
+      throw _PackageRenameErrors.iosProjectFileNotFound;
+    }
+
+    final macOSProjectString = macOSProjectFile.readAsStringSync();
+    final newBundleIDMacOSProjectString = macOSProjectString
+        // Replaces old bundle id from
+        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
+        .replaceAll(
+      RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?).RunnerTests;'),
+      'PRODUCT_BUNDLE_IDENTIFIER = $bundleID.RunnerTests;',
+    )
+        // Removes old bundle id from
+        // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
+        .replaceAllMapped(
+      RegExp(
+        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-]+)\.([A-Za-z0-9.-]+)";',
+      ),
+      (match) {
+        final extensionName = match.group(2);
+        return 'PRODUCT_BUNDLE_IDENTIFIER = "$bundleID.$extensionName";';
+      },
+    );
+
+    macOSProjectFile.writeAsStringSync(newBundleIDMacOSProjectString);
+
+    _logger.i('MacOS bundle id set to: `$bundleID` (project.pbxproj)');
+  } on _PackageRenameException catch (e) {
+    _logger
+      ..e('${e.message}ERR Code: ${e.code}')
+      ..e('MacOS Bundle ID change failed!!! (project.pbxproj)');
+  } catch (e) {
+    _logger
+      ..w(e.toString())
+      ..e('ERR Code: 255')
+      ..e('MacOS Bundle ID change failed!!! (project.pbxproj)');
   }
 }
 
