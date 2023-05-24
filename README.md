@@ -76,7 +76,7 @@ package_rename_config:
 Execute the follow command at the root of your project:
 
 ```bash
-flutter pub run package_rename:set
+dart run package_rename
 ```
 
 ## Flavour Support
@@ -85,7 +85,7 @@ Package Rename supports flavours. You can add flavour specific configurations by
 
 ```yaml
 package_rename_config-flavour_name:
-  ...
+  # ...
 ```
 
 > For full example click [here](example/example.md#flavour-configuration)
@@ -93,9 +93,8 @@ package_rename_config-flavour_name:
 And then run the following command:
 
 ```bash
-flutter pub run package_rename:set --flavour=flavour_name
+dart run package_rename --flavour=flavour_name
 ```
-
 
 ## And that's it! 🎉
 
