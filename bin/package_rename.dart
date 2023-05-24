@@ -4,6 +4,6 @@ import 'package:package_rename/package_rename.dart' as package_rename;
 ///
 /// Execute following command to set package details:
 /// ```bash
-/// flutter pub run package_rename
+/// dart run package_rename
 /// ```
 void main(List<String> arguments) => package_rename.set(arguments);

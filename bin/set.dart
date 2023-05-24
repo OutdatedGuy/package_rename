@@ -20,8 +20,7 @@ void main(List<String> arguments) {
       printEmojis: false,
     ),
   ).w(
-    'This command is deprecated and replaced with '
-    '"flutter pub run package_rename"',
+    'This command is deprecated and replaced with "dart run package_rename"',
   );
   package_rename.main(arguments);
 }
