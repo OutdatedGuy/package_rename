@@ -150,7 +150,15 @@ void _setBuildGradlePackageName({
         'applicationId "$packageName"',
       )
       .replaceAll(
+        RegExp("applicationId '(.*?)'"),
+        'applicationId "$packageName"',
+      )
+      .replaceAll(
         RegExp('namespace "(.*?)"'),
+        'namespace "$packageName"',
+      )
+      .replaceAll(
+        RegExp("namespace '(.*?)'"),
         'namespace "$packageName"',
       );
 
