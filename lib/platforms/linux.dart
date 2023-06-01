@@ -37,12 +37,12 @@ void _setLinuxAppName(dynamic appName) {
     final myAppString = myAppFile.readAsStringSync();
     final newTitleMyAppString = myAppString
         .replaceAll(
-          RegExp(r'gtk_header_bar_set_title\(header_bar, "(.*?)"\)'),
-          'gtk_header_bar_set_title(header_bar, "$appName")',
+          RegExp(r'gtk_header_bar_set_title\(header_bar, "(.*)"\);'),
+          'gtk_header_bar_set_title(header_bar, "$appName");',
         )
         .replaceAll(
-          RegExp(r'gtk_window_set_title\(window, "(.*?)"\)'),
-          'gtk_window_set_title(window, "$appName")',
+          RegExp(r'gtk_window_set_title\(window, "(.*)"\);'),
+          'gtk_window_set_title(window, "$appName");',
         );
 
     myAppFile.writeAsStringSync(newTitleMyAppString);
@@ -112,8 +112,8 @@ void _setLinuxExecutableName(dynamic exeName) {
 
     final cmakeListsString = cmakeListsFile.readAsStringSync();
     final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
-      RegExp(r'set\(BINARY_NAME\s+"(.*?)"'),
-      'set(BINARY_NAME "$exeName"',
+      RegExp(r'set\(BINARY_NAME "(.*?)"\)'),
+      'set(BINARY_NAME "$exeName")',
     );
 
     cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);

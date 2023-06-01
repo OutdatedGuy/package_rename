@@ -83,7 +83,7 @@ void _setMacOSBuildableName(String buildableName) {
 
     final runnerXCSchemeString = runnerXCSchemeFile.readAsStringSync();
     final newBuildableNameXCSchemeString = runnerXCSchemeString.replaceAll(
-      RegExp('BuildableName = "(.*?).app"'),
+      RegExp('BuildableName = "(.*).app"'),
       'BuildableName = "$buildableName.app"',
     );
 
@@ -114,21 +114,21 @@ void _setMacOSAppNameInProjectFile(String appName) {
     final projectString = projectFile.readAsStringSync();
     final newDotAppProjectString = projectString
         .replaceAll(
-          RegExp(r'/\* (.*?).app \*/'),
+          RegExp(r'/\* (.*).app \*/'),
           '/* $appName.app */',
         )
         .replaceAll(
-          RegExp('path = (.*?).app;'),
+          RegExp('path = (.*).app;'),
           'path = $appName.app;',
         )
         .replaceAll(
-          RegExp('path = "(.*?).app";'),
+          RegExp('path = "(.*).app";'),
           'path = "$appName.app";',
         )
         .replaceAll(
           RegExp(
             r'TEST_HOST = "\$\(BUILT_PRODUCTS_DIR\)/'
-            r'(.*?).app/\$\(BUNDLE_EXECUTABLE_FOLDER_PATH\)/(.*?)"',
+            r'(.*).app/\$\(BUNDLE_EXECUTABLE_FOLDER_PATH\)/(.*)"',
           ),
           r'TEST_HOST = "$(BUILT_PRODUCTS_DIR)/'
           '$appName.app/\$(BUNDLE_EXECUTABLE_FOLDER_PATH)/$appName"',

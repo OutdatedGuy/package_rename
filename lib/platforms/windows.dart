@@ -57,13 +57,13 @@ void _setWindowsAppTitle(String appName) {
 
     final newAppTitleMainCppString = mainCppString
         .replaceAll(
-          RegExp(r'window.CreateAndShow\(L"(.*?)"'),
-          'window.CreateAndShow(L"$appName"',
+          RegExp(r'window.CreateAndShow\(L"(.*)", origin, size\)'),
+          'window.CreateAndShow(L"$appName", origin, size)',
         )
         // Implemented from Flutter 3.7 onwards
         .replaceAll(
-          RegExp(r'window.Create\(L"(.*?)"'),
-          'window.Create(L"$appName"',
+          RegExp(r'window.Create\(L"(.*)", origin, size\)'),
+          'window.Create(L"$appName", origin, size)',
         );
 
     mainCppFile.writeAsStringSync(newAppTitleMainCppString);
@@ -91,16 +91,16 @@ void _setWindowsProductDetails(String appName) {
     final runnerString = runnerFile.readAsStringSync();
     final newProductDetailsRunnerString = runnerString
         .replaceAll(
-          RegExp('VALUE "FileDescription", "(.*?)"'),
-          'VALUE "FileDescription", "$appName"',
+          RegExp(r'VALUE "FileDescription", "(.*)" "\0"'),
+          'VALUE "FileDescription", "$appName" "\\0"',
         )
         .replaceAll(
-          RegExp('VALUE "InternalName", "(.*?)"'),
-          'VALUE "InternalName", "$appName"',
+          RegExp(r'VALUE "InternalName", "(.*)" "\0"'),
+          'VALUE "InternalName", "$appName" "\\0"',
         )
         .replaceAll(
-          RegExp('VALUE "ProductName", "(.*?)"'),
-          'VALUE "ProductName", "$appName"',
+          RegExp(r'VALUE "ProductName", "(.*)" "\0"'),
+          'VALUE "ProductName", "$appName" "\\0"',
         );
 
     runnerFile.writeAsStringSync(newProductDetailsRunnerString);
@@ -133,8 +133,8 @@ void _setWindowsOrganization(dynamic organization) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newOrganizationRunnerString = runnerString.replaceAll(
-      RegExp('VALUE "CompanyName", "(.*?)"'),
-      'VALUE "CompanyName", "$organization"',
+      RegExp(r'VALUE "CompanyName", "(.*)" "\0"'),
+      'VALUE "CompanyName", "$organization" "\\0"',
     );
 
     runnerFile.writeAsStringSync(newOrganizationRunnerString);
@@ -166,8 +166,8 @@ void _setWindowsCopyrightNotice(dynamic notice) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newCopyrightNoticeRunnerString = runnerString.replaceAll(
-      RegExp('VALUE "LegalCopyright", "(.*?)"'),
-      'VALUE "LegalCopyright", "$notice"',
+      RegExp(r'VALUE "LegalCopyright", "(.*)" "\0"'),
+      'VALUE "LegalCopyright", "$notice" "\\0"',
     );
 
     runnerFile.writeAsStringSync(newCopyrightNoticeRunnerString);
@@ -222,8 +222,8 @@ void _setWindowsCMakeListsBinaryName(String exeName) {
 
     final cmakeListsString = cmakeListsFile.readAsStringSync();
     final newBinaryNameCmakeListsString = cmakeListsString.replaceAll(
-      RegExp(r'set\(BINARY_NAME "(.*?)"'),
-      'set(BINARY_NAME "$exeName"',
+      RegExp(r'set\(BINARY_NAME "(.*?)"\)'),
+      'set(BINARY_NAME "$exeName")',
     );
 
     cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
@@ -250,8 +250,8 @@ void _setWindowsOriginalFilename(String exeName) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newOriginalFilenameRunnerString = runnerString.replaceAll(
-      RegExp('VALUE "OriginalFilename", "(.*?)"'),
-      'VALUE "OriginalFilename", "$exeName.exe"',
+      RegExp(r'VALUE "OriginalFilename", "(.*?)" "\0"'),
+      'VALUE "OriginalFilename", "$exeName.exe" "\\0"',
     );
 
     runnerFile.writeAsStringSync(newOriginalFilenameRunnerString);
