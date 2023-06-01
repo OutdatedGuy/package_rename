@@ -38,13 +38,10 @@ void _setAndroidAppName(dynamic appName) {
       throw _PackageRenameErrors.androidMainManifestNotFound;
     }
 
-    final regExp = RegExp('android:label="(.*?)"');
-    final appNameString = 'android:label="$appName"';
-
     final androidManifestString = androidManifestFile.readAsStringSync();
     final newLabelAndroidManifestString = androidManifestString.replaceAll(
-      regExp,
-      appNameString,
+      RegExp('android:label="(.*)"'),
+      'android:label="$appName"',
     );
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
@@ -102,9 +99,6 @@ void _setManifestPackageName({
   required List<String> manifestFilePaths,
   required String packageName,
 }) {
-  final regExp = RegExp('package="(.*?)"');
-  final packageNameString = 'package="$packageName"';
-
   for (final androidManifestFilePath in manifestFilePaths) {
     final androidManifestFile = File(androidManifestFilePath);
     if (!androidManifestFile.existsSync()) {
@@ -116,8 +110,8 @@ void _setManifestPackageName({
 
     final androidManifestString = androidManifestFile.readAsStringSync();
     final newPackageAndroidManifestString = androidManifestString.replaceAll(
-      regExp,
-      packageNameString,
+      RegExp('package="(.*?)"'),
+      'package="$packageName"',
     );
 
     androidManifestFile.writeAsStringSync(newPackageAndroidManifestString);
