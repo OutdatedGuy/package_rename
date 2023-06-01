@@ -34,16 +34,10 @@ void _setIOSDisplayName(dynamic appName) {
       throw _PackageRenameErrors.iosInfoPlistNotFound;
     }
 
-    final regExp = RegExp(
-      r'<key>CFBundleDisplayName</key>\s*<string>(.*?)</string>',
-    );
-    final appNameString =
-        '<key>CFBundleDisplayName</key>\n\t<string>$appName</string>';
-
     final iosInfoPlistString = iosInfoPlistFile.readAsStringSync();
     final newDisplayNameIOSInfoPlistString = iosInfoPlistString.replaceAll(
-      regExp,
-      appNameString,
+      RegExp(r'<key>CFBundleDisplayName</key>\s*<string>(.*?)</string>'),
+      '<key>CFBundleDisplayName</key>\n\t<string>$appName</string>',
     );
 
     iosInfoPlistFile.writeAsStringSync(newDisplayNameIOSInfoPlistString);
@@ -79,16 +73,10 @@ void _setIOSBundleName(dynamic bundleName) {
       throw _PackageRenameErrors.iosInfoPlistNotFound;
     }
 
-    final regExp = RegExp(
-      r'<key>CFBundleName</key>\s*<string>(.*?)</string>',
-    );
-    final bundleNameString =
-        '<key>CFBundleName</key>\n\t<string>$bundleName</string>';
-
     final iosInfoPlistString = iosInfoPlistFile.readAsStringSync();
     final newBundleNameIOSInfoPlistString = iosInfoPlistString.replaceAll(
-      regExp,
-      bundleNameString,
+      RegExp(r'<key>CFBundleName</key>\s*<string>(.*?)</string>'),
+      '<key>CFBundleName</key>\n\t<string>$bundleName</string>',
     );
 
     iosInfoPlistFile.writeAsStringSync(newBundleNameIOSInfoPlistString);
