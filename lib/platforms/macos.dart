@@ -118,11 +118,11 @@ void _setMacOSAppNameInProjectFile(String appName) {
           '/* $appName.app */',
         )
         .replaceAll(
-          RegExp('path = (.*).app;'),
-          'path = $appName.app;',
+          RegExp('path = "(.*).app";'),
+          'path = "$appName.app";',
         )
         .replaceAll(
-          RegExp('path = "(.*).app";'),
+          RegExp('path = (.*).app;'),
           'path = "$appName.app";',
         )
         .replaceAll(
