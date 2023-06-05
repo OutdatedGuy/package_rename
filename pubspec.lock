@@ -93,10 +93,10 @@ packages:
     dependency: "direct main"
     description:
       name: universal_io
-      sha256: "302df7ff2b6a96960e9e447b42e1f238fa30525b92f7ddb47432f8406cd51401"
+      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1"
+    version: "2.2.2"
   very_good_analysis:
     dependency: "direct dev"
     description:
