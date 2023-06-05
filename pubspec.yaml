@@ -1,6 +1,6 @@
 name: package_rename
 description: A Blazingly Fast way to configure your awesome flutter project to be production ready.
-version: 1.3.1
+version: 1.3.2
 homepage: https://outdatedguy.rocks
 repository: https://github.com/OutdatedGuy/package_rename/tree/main
 
