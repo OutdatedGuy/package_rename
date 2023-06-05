@@ -227,7 +227,8 @@ void _createNewMainActivity({
         ..createSync(recursive: true);
       for (final element in oldDirContents) {
         element.renameSync(
-          '$langDir/$newPackageDirs/${element.path.split('/').last}',
+          '$langDir/$newPackageDirs/'
+          '${element.path.split(Platform.pathSeparator).last}',
         );
       }
 
