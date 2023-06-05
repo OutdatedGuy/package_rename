@@ -1,3 +1,7 @@
+## 1.3.2
+
+- fix: system given path mis-handled on windows in [91d8b7c](https://github.com/OutdatedGuy/package_rename/commit/91d8b7c10f7aec8f9aed86e721840d56194c5bb4)
+
 ## 1.3.1
 
 - fix(android): package id in single quotes don't change in [e136511](https://github.com/OutdatedGuy/package_rename/commit/e1365110125d4f6cf6a9aadae80dc2b14e7a6423)

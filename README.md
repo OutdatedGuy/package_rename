@@ -21,7 +21,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-  package_rename: ^1.3.1
+  package_rename: ^1.3.2
 ```
 
 #### Create configuration
