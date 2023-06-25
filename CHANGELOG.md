@@ -1,3 +1,8 @@
+## 1.3.3
+
+- fix(android): **in** domain don't work in kotlin in [20d15d6](https://github.com/OutdatedGuy/package_rename/commit/20d15d6d31e0cbdfbc7e19aa1d13f87f3da42d35)
+- chore: updated dependencies to latest in [ce92eb2](https://github.com/OutdatedGuy/package_rename/commit/ce92eb28da75a159b8c88bc9e2ba7795b588106c)
+
 ## 1.3.2
 
 - fix: system given path mis-handled on windows in [91d8b7c](https://github.com/OutdatedGuy/package_rename/commit/91d8b7c10f7aec8f9aed86e721840d56194c5bb4)
