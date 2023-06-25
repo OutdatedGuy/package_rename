@@ -175,7 +175,7 @@ void _createNewMainActivity({
     lang ??= 'kotlin';
     if (lang is! String) throw _PackageRenameErrors.invalidLanguageType;
 
-    String fileExtension;
+    late String fileExtension;
     switch (lang) {
       case 'kotlin':
         fileExtension = 'kt';
@@ -198,9 +198,20 @@ void _createNewMainActivity({
       var fileContent = lang == 'kotlin'
           ? _androidKotlinMainActivityTemplate
           : _androidJavaMainActivityTemplate;
+
+      late String newPackageName;
+      if (lang == 'kotlin') {
+        newPackageName = packageName.split('.').map((element) {
+          if (element == 'in') return '`in`';
+          return element;
+        }).join('.');
+      } else {
+        newPackageName = packageName;
+      }
+
       fileContent = fileContent.replaceAll(
         RegExp('{{packageName}}'),
-        packageName,
+        newPackageName,
       );
 
       mainActivityFile.writeAsStringSync(fileContent);
@@ -247,11 +258,21 @@ void _createNewMainActivity({
       final newMainActivityDirFiles =
           newMainActivityDir.listSync(recursive: true).whereType<File>();
 
+      late String newPackageName;
+      if (lang == 'kotlin') {
+        newPackageName = packageName.split('.').map((element) {
+          if (element == 'in') return '`in`';
+          return element;
+        }).join('.');
+      } else {
+        newPackageName = packageName;
+      }
+
       for (final file in newMainActivityDirFiles) {
         var fileContent = file.readAsStringSync();
         fileContent = fileContent.replaceAll(
           RegExp(overrideOldPackage),
-          packageName,
+          newPackageName,
         );
         file.writeAsStringSync(fileContent);
       }
