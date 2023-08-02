@@ -15,11 +15,11 @@
 library package_rename;
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:html/parser.dart' as html;
 import 'package:logger/logger.dart';
-import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart' as yaml;
 
 part 'constants.dart';
