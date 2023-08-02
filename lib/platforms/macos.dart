@@ -42,7 +42,7 @@ void _setMacOSAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('MacOS App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorTaskDoneLine);
+    if (appName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -166,7 +166,7 @@ void _setMacOSBundleID(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('MacOS Bundle ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+    if (packageName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -269,6 +269,6 @@ void _setMacOSCopyright(dynamic notice) {
       ..e('ERR Code: 255')
       ..e('MacOS Product Copyright change failed!!!');
   } finally {
-    if (notice != null) _logger.wtf(_minorTaskDoneLine);
+    if (notice != null) _logger.f(_minorTaskDoneLine);
   }
 }

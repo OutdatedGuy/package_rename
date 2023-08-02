@@ -88,10 +88,10 @@ void set(List<String> args) {
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {
-    _logger.wtf(e.message);
+    _logger.f(e.message);
     exit(e.code);
   } catch (e) {
-    _logger.wtf(e.toString());
+    _logger.f(e.toString());
     exit(255);
   } finally {
     _logger.close();
