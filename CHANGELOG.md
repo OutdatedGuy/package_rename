@@ -1,3 +1,7 @@
+## 1.4.0
+
+- chore!: updated dependencies to latest in [19a8958](https://github.com/OutdatedGuy/package_rename/commit/19a8958a8b8b7fb5ef42f2a6e12800201a13c832)
+
 ## 1.3.3
 
 - fix(android): **in** domain don't work in kotlin in [20d15d6](https://github.com/OutdatedGuy/package_rename/commit/20d15d6d31e0cbdfbc7e19aa1d13f87f3da42d35)
