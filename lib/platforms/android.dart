@@ -57,7 +57,7 @@ void _setAndroidAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('Android Label change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorTaskDoneLine);
+    if (appName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -91,7 +91,7 @@ void _setAndroidPackageName(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('Android Package change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+    if (packageName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -289,6 +289,6 @@ void _createNewMainActivity({
       ..e('ERR Code: 255')
       ..e('New MainActivity creation failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+    if (packageName != null) _logger.f(_minorTaskDoneLine);
   }
 }

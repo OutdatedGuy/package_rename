@@ -1,3 +1,4 @@
+# dart run package_rename
 package_rename_config:
   android:
     app_name: Package Rename Demo

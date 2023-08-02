@@ -58,7 +58,7 @@ void _setLinuxAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('Linux App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.wtf(_minorTaskDoneLine);
+    if (appName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -91,7 +91,7 @@ void _setLinuxPackageName(dynamic packageName) {
       ..e('ERR Code: 255')
       ..e('Linux Application ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.wtf(_minorTaskDoneLine);
+    if (packageName != null) _logger.f(_minorTaskDoneLine);
   }
 }
 
@@ -129,6 +129,6 @@ void _setLinuxExecutableName(dynamic exeName) {
       ..e('ERR Code: 255')
       ..e('Linux Executable Name change failed!!!');
   } finally {
-    if (exeName != null) _logger.wtf(_minorTaskDoneLine);
+    if (exeName != null) _logger.f(_minorTaskDoneLine);
   }
 }
