@@ -21,7 +21,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-  package_rename: ^1.4.0
+   package_rename: ^1.4.0
 ```
 
 #### Create configuration
@@ -29,7 +29,7 @@ dev_dependencies:
 You can create configurations by adding `package_rename_config` key in:
 
 1. Root `pubspec.yaml` file
-1. `package_rename_config.yaml` file at root of your project
+1. `package_rename_config.yaml` file at root of your project or a custom folder in the project
 
 ## Usage
 
@@ -37,46 +37,60 @@ You can create configurations by adding `package_rename_config` key in:
 
 ```yaml
 package_rename_config:
-  android:
-    app_name: # (String) The display name of the android app
-    package_name: # (String) The package name of the android app
-    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
-    lang: # (Optional) (String) The android development language {kotlin(default) or java}
+   android:
+      app_name: # (String) The display name of the android app
+      package_name: # (String) The package name of the android app
+      override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+      lang: # (Optional) (String) The android development language {kotlin(default) or java}
 
-  ios:
-    app_name: # (String) The display name of the ios app
-    bundle_name: # (String) The bundle name of the ios app
-    package_name: # (String) The product bundle identifier of the ios app
+   ios:
+      app_name: # (String) The display name of the ios app
+      bundle_name: # (String) The bundle name of the ios app
+      package_name: # (String) The product bundle identifier of the ios app
 
-  linux:
-    app_name: # (String) The window title of the linux app
-    package_name: # (String) The application id of the linux app
-    exe_name: # (String) The executable name (binary name) of the linux app
+   linux:
+      app_name: # (String) The window title of the linux app
+      package_name: # (String) The application id of the linux app
+      exe_name: # (String) The executable name (binary name) of the linux app
 
-  macos:
-    app_name: # (String) The product name of the macos app
-    package_name: # (String) The product bundle identifier of the macos app
-    copyright_notice: # (String) The product copyright of the macos app
+   macos:
+      app_name: # (String) The product name of the macos app
+      package_name: # (String) The product bundle identifier of the macos app
+      copyright_notice: # (String) The product copyright of the macos app
 
-  web:
-    app_name: # (String) The title and display name of the web app and PWA
-    description: # (String) The description of the web app and PWA
+   web:
+      app_name: # (String) The title and display name of the web app and PWA
+      description: # (String) The description of the web app and PWA
 
-  windows:
-    app_name: # (String) The window title & software name of the windows app
-    organization: # (String) The organization name (company name) of the windows app
-    copyright_notice: # (String) The legal copyright of the windows app
-    exe_name: # (String) The executable name (binary name) of the windows app
+   windows:
+      app_name: # (String) The window title & software name of the windows app
+      organization: # (String) The organization name (company name) of the windows app
+      copyright_notice: # (String) The legal copyright of the windows app
+      exe_name: # (String) The executable name (binary name) of the windows app
 ```
 
 > For full example click [here](example/example.md#default-configuration)
 
 #### Running Package Rename
 
-Execute the follow command at the root of your project:
+Execute the command as per your config location:
+
+if config file exists in either pubspec.yaml or root path:
 
 ```bash
 dart run package_rename
+```
+
+OR
+
+if config file exists in a custom folder:
+
+```bash
+dart run package_rename --path="path/to/package_rename_config.yaml"
+
+or
+
+dart run package_rename -p "path/to/package_rename_config.yaml"
 ```
 
 ## Flavour Support
@@ -85,7 +99,7 @@ Package Rename supports flavours. You can add flavour specific configurations by
 
 ```yaml
 package_rename_config-flavour_name:
-  # ...
+   # ...
 ```
 
 > For full example click [here](example/example.md#flavour-configuration)
@@ -94,6 +108,17 @@ And then run the following command:
 
 ```bash
 dart run package_rename --flavour=flavour_name
+
+or
+
+dart run package_rename -f flavour_name
+
+```
+
+With custom config file location:
+
+```bash
+dart run package_rename --flavour=flavour_name --path="path/to/package_rename_config.yaml"
 ```
 
 ## And that's it! 🎉
