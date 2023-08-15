@@ -69,6 +69,11 @@ void set(List<String> args) {
     // Create args parser to get flavour flag and its value
     final parser = ArgParser()
       ..addOption(
+        'path',
+        abbr: 'p',
+        help: 'The path for the config file',
+      )
+      ..addOption(
         'flavour',
         abbr: 'f',
         help: 'The flavour of the configuration to be used.',
@@ -76,8 +81,9 @@ void set(List<String> args) {
       );
     final results = parser.parse(args);
     final flavour = results['flavour'] as String?;
+    final path = results['path'] as String?;
 
-    final config = _getConfig(flavour: flavour);
+    final config = _getConfig(flavour: flavour, configFile: path);
 
     _setAndroidConfigurations(config['android']);
     _setIOSConfigurations(config['ios']);
@@ -104,10 +110,25 @@ bool _configFileExists() {
   return configFile.existsSync() || pubspecFile.existsSync();
 }
 
-Map<String, dynamic> _getConfig({required String? flavour}) {
-  final yamlFile = File(_packageRenameConfigFileName).existsSync()
-      ? File(_packageRenameConfigFileName)
-      : File(_pubspecFileName);
+Map<String, dynamic> _getConfig({
+  required String? flavour,
+  String? configFile,
+}) {
+  File yamlFile;
+
+  if (configFile != null) {
+    if (File(configFile).existsSync()) {
+      _checkConfigContent(configFile);
+      yamlFile = File(configFile);
+    } else {
+      throw _PackageRenameErrors.filesNotFound;
+    }
+  } else if (File(_packageRenameConfigFileName).existsSync()) {
+    _checkConfigContent(_packageRenameConfigFileName);
+    yamlFile = File(_packageRenameConfigFileName);
+  } else {
+    yamlFile = File(_pubspecFileName);
+  }
 
   final yamlString = yamlFile.readAsStringSync();
   final parsedYaml = yaml.loadYaml(yamlString) as Map;
@@ -123,4 +144,16 @@ Map<String, dynamic> _getConfig({required String? flavour}) {
   }
 
   return Map<String, dynamic>.from(rawConfig);
+}
+
+void _checkConfigContent(String yamlFile) {
+  final fileContent = File(yamlFile).readAsStringSync();
+
+  if (fileContent.isEmpty) {
+    throw _PackageRenameErrors.filesNotFound;
+  }
+
+  if (yaml.loadYaml(fileContent) == null) {
+    throw _PackageRenameErrors.configNotFound;
+  }
 }
