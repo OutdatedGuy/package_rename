@@ -78,8 +78,20 @@ void set(List<String> args) {
         abbr: 'f',
         help: 'The flavour of the configuration to be used.',
         aliases: ['flavor'],
+      )
+      ..addFlag(
+        'help',
+        abbr: 'h',
+        negatable: false,
+        help: 'Prints out available command usages',
       );
     final results = parser.parse(args);
+
+    if (results.wasParsed('help')) {
+      print(_packageRenameCommands);
+      print(parser.usage);
+      exit(0);
+    }
     final flavour = results['flavour'] as String?;
     final path = results['path'] as String?;
 
