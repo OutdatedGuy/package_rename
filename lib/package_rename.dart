@@ -88,8 +88,9 @@ void set(List<String> args) {
     final results = parser.parse(args);
 
     if (results.wasParsed('help')) {
-      print(_packageRenameCommands);
-      print(parser.usage);
+      _logger
+        ..i(_packageRenameCommands)
+        ..i(parser.usage);
       exit(0);
     }
     final flavour = results['flavour'] as String?;
