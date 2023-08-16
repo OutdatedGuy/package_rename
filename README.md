@@ -21,7 +21,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-   package_rename: ^1.4.0
+  package_rename: ^1.4.0
 ```
 
 #### Create configuration
@@ -37,36 +37,36 @@ You can create configurations by adding `package_rename_config` key in:
 
 ```yaml
 package_rename_config:
-   android:
-      app_name: # (String) The display name of the android app
-      package_name: # (String) The package name of the android app
-      override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
-      lang: # (Optional) (String) The android development language {kotlin(default) or java}
+  android:
+    app_name: # (String) The display name of the android app
+    package_name: # (String) The package name of the android app
+    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+    lang: # (Optional) (String) The android development language {kotlin(default) or java}
 
-   ios:
-      app_name: # (String) The display name of the ios app
-      bundle_name: # (String) The bundle name of the ios app
-      package_name: # (String) The product bundle identifier of the ios app
+  ios:
+    app_name: # (String) The display name of the ios app
+    bundle_name: # (String) The bundle name of the ios app
+    package_name: # (String) The product bundle identifier of the ios app
 
-   linux:
-      app_name: # (String) The window title of the linux app
-      package_name: # (String) The application id of the linux app
-      exe_name: # (String) The executable name (binary name) of the linux app
+  linux:
+    app_name: # (String) The window title of the linux app
+    package_name: # (String) The application id of the linux app
+    exe_name: # (String) The executable name (binary name) of the linux app
 
-   macos:
-      app_name: # (String) The product name of the macos app
-      package_name: # (String) The product bundle identifier of the macos app
-      copyright_notice: # (String) The product copyright of the macos app
+  macos:
+    app_name: # (String) The product name of the macos app
+    package_name: # (String) The product bundle identifier of the macos app
+    copyright_notice: # (String) The product copyright of the macos app
 
-   web:
-      app_name: # (String) The title and display name of the web app and PWA
-      description: # (String) The description of the web app and PWA
+  web:
+    app_name: # (String) The title and display name of the web app and PWA
+    description: # (String) The description of the web app and PWA
 
-   windows:
-      app_name: # (String) The window title & software name of the windows app
-      organization: # (String) The organization name (company name) of the windows app
-      copyright_notice: # (String) The legal copyright of the windows app
-      exe_name: # (String) The executable name (binary name) of the windows app
+  windows:
+    app_name: # (String) The window title & software name of the windows app
+    organization: # (String) The organization name (company name) of the windows app
+    copyright_notice: # (String) The legal copyright of the windows app
+    exe_name: # (String) The executable name (binary name) of the windows app
 ```
 
 > For full example click [here](example/example.md#default-configuration)
@@ -87,9 +87,11 @@ if config file exists in a custom folder:
 
 ```bash
 dart run package_rename --path="path/to/package_rename_config.yaml"
+```
 
 or
 
+```bash
 dart run package_rename -p "path/to/package_rename_config.yaml"
 ```
 
@@ -108,11 +110,12 @@ And then run the following command:
 
 ```bash
 dart run package_rename --flavour=flavour_name
+```
 
 or
 
+```bash
 dart run package_rename -f flavour_name
-
 ```
 
 With custom config file location:
