@@ -29,7 +29,7 @@ dev_dependencies:
 You can create configurations by adding `package_rename_config` key in:
 
 1. Root `pubspec.yaml` file
-1. `package_rename_config.yaml` file at root of your project
+1. `package_rename_config.yaml` file at root of your project or a custom folder in the project
 
 ## Usage
 
@@ -73,10 +73,26 @@ package_rename_config:
 
 #### Running Package Rename
 
-Execute the follow command at the root of your project:
+Execute the command as per your config location:
+
+if config file exists in either pubspec.yaml or root path:
 
 ```bash
 dart run package_rename
+```
+
+OR
+
+if config file exists in a custom folder:
+
+```bash
+dart run package_rename --path="path/to/package_rename_config.yaml"
+```
+
+or
+
+```bash
+dart run package_rename -p "path/to/package_rename_config.yaml"
 ```
 
 ## Flavour Support
@@ -94,6 +110,18 @@ And then run the following command:
 
 ```bash
 dart run package_rename --flavour=flavour_name
+```
+
+or
+
+```bash
+dart run package_rename -f flavour_name
+```
+
+With custom config file location:
+
+```bash
+dart run package_rename --flavour=flavour_name --path="path/to/package_rename_config.yaml"
 ```
 
 ## And that's it! 🎉
