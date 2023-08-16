@@ -1,3 +1,7 @@
+## 1.5.0
+
+- feat: ability to use config file at different location than root of project. Thanks [@milindgoel15](https://github.com/milindgoel15) for [3605341](https://github.com/OutdatedGuy/package_rename/commit/3605341c8f558cf02265f1d67a8e525180e4a611)
+
 ## 1.4.0
 
 - chore!: updated dependencies to latest in [19a8958](https://github.com/OutdatedGuy/package_rename/commit/19a8958a8b8b7fb5ef42f2a6e12800201a13c832)
