@@ -101,7 +101,7 @@ Package Rename supports flavours. You can add flavour specific configurations by
 
 ```yaml
 package_rename_config-flavour_name:
-   # ...
+  # ...
 ```
 
 > For full example click [here](example/example.md#flavour-configuration)
