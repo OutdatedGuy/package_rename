@@ -91,15 +91,15 @@ void _setWindowsProductDetails(String appName) {
     final runnerString = runnerFile.readAsStringSync();
     final newProductDetailsRunnerString = runnerString
         .replaceAll(
-          RegExp(r'VALUE "FileDescription", "(.*)" "\0"'),
+          RegExp(r'VALUE "FileDescription", "(.*)" "\\0"'),
           'VALUE "FileDescription", "$appName" "\\0"',
         )
         .replaceAll(
-          RegExp(r'VALUE "InternalName", "(.*)" "\0"'),
+          RegExp(r'VALUE "InternalName", "(.*)" "\\0"'),
           'VALUE "InternalName", "$appName" "\\0"',
         )
         .replaceAll(
-          RegExp(r'VALUE "ProductName", "(.*)" "\0"'),
+          RegExp(r'VALUE "ProductName", "(.*)" "\\0"'),
           'VALUE "ProductName", "$appName" "\\0"',
         );
 
@@ -133,7 +133,7 @@ void _setWindowsOrganization(dynamic organization) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newOrganizationRunnerString = runnerString.replaceAll(
-      RegExp(r'VALUE "CompanyName", "(.*)" "\0"'),
+      RegExp(r'VALUE "CompanyName", "(.*)" "\\0"'),
       'VALUE "CompanyName", "$organization" "\\0"',
     );
 
@@ -166,7 +166,7 @@ void _setWindowsCopyrightNotice(dynamic notice) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newCopyrightNoticeRunnerString = runnerString.replaceAll(
-      RegExp(r'VALUE "LegalCopyright", "(.*)" "\0"'),
+      RegExp(r'VALUE "LegalCopyright", "(.*)" "\\0"'),
       'VALUE "LegalCopyright", "$notice" "\\0"',
     );
 
@@ -250,7 +250,7 @@ void _setWindowsOriginalFilename(String exeName) {
 
     final runnerString = runnerFile.readAsStringSync();
     final newOriginalFilenameRunnerString = runnerString.replaceAll(
-      RegExp(r'VALUE "OriginalFilename", "(.*?)" "\0"'),
+      RegExp(r'VALUE "OriginalFilename", "(.*?)" "\\0"'),
       'VALUE "OriginalFilename", "$exeName.exe" "\\0"',
     );
 
