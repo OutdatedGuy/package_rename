@@ -1,3 +1,7 @@
+## 1.5.1
+
+- fix(windows): `Runner.rc` file not updating at all in [ea576e2](https://github.com/OutdatedGuy/package_rename/commit/ea576e27ba1187dec087e2d631417a8b76a43550)
+
 ## 1.5.0
 
 - feat: ability to use config file at different location than root of project. Thanks [@milindgoel15](https://github.com/milindgoel15) for [3605341](https://github.com/OutdatedGuy/package_rename/commit/3605341c8f558cf02265f1d67a8e525180e4a611)
