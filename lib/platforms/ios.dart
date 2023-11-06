@@ -112,7 +112,7 @@ void _setIOSPackageName(dynamic packageName) {
         // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
         .replaceAll(
           RegExp(
-            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-]+)(?<!\.RunnerTests);',
+            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-_]+)(?<!\.RunnerTests);',
           ),
           'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
         )
@@ -126,7 +126,7 @@ void _setIOSPackageName(dynamic packageName) {
         // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
         .replaceAllMapped(
       RegExp(
-        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-]+)\.([A-Za-z0-9.-]+)";',
+        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-_]+)\.([A-Za-z0-9.-_]+)";',
       ),
       (match) {
         final extensionName = match.group(2);
