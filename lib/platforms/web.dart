@@ -55,7 +55,7 @@ void _setWebTitle(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('Web Title change failed!!!');
   } finally {
-    if (appName != null) _logger.f(_minorTaskDoneLine);
+    if (appName != null) _logger.e(_minorTaskDoneLine);
   }
 }
 
@@ -92,7 +92,7 @@ void _setPWAAppName(dynamic appName) {
       ..e('ERR Code: 255')
       ..e('PWA Name change failed!!!');
   } finally {
-    if (appName != null) _logger.f(_minorTaskDoneLine);
+    if (appName != null) _logger.e(_minorTaskDoneLine);
   }
 }
 
@@ -125,7 +125,7 @@ void _setWebDescription(dynamic description) {
       ..e('ERR Code: 255')
       ..e('Web Description change failed!!!');
   } finally {
-    if (description != null) _logger.f(_minorTaskDoneLine);
+    if (description != null) _logger.e(_minorTaskDoneLine);
   }
 }
 
@@ -161,6 +161,6 @@ void _setPWADescription(dynamic description) {
       ..e('ERR Code: 255')
       ..e('PWA Description change failed!!!');
   } finally {
-    if (description != null) _logger.f(_minorTaskDoneLine);
+    if (description != null) _logger.e(_minorTaskDoneLine);
   }
 }

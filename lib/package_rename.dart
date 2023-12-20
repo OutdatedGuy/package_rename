@@ -107,10 +107,10 @@ void set(List<String> args) {
 
     _logger.i(_successMessage);
   } on _PackageRenameException catch (e) {
-    _logger.f(e.message);
+    _logger.e(e.message);
     exit(e.code);
   } catch (e) {
-    _logger.f(e.toString());
+    _logger.e(e.toString());
     exit(255);
   } finally {
     _logger.close();
