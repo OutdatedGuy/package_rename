@@ -1,4 +1,4 @@
-part of '../package_rename.dart';
+part of '../../package_rename_plus.dart';
 
 void _setLinuxConfigurations(dynamic linuxConfig) {
   try {
@@ -11,16 +11,14 @@ void _setLinuxConfigurations(dynamic linuxConfig) {
     _setLinuxPackageName(linuxConfigMap[_packageNameKey]);
     _setLinuxExecutableName(linuxConfigMap[_executableKey]);
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Skipping Linux configuration!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Skipping Linux configuration!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Skipping Linux configuration!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Skipping Linux configuration!!!');
   } finally {
-    if (linuxConfig != null) _logger.w(_majorTaskDoneLine);
+    if (linuxConfig != null) developer.log(_majorTaskDoneLine);
   }
 }
 
@@ -47,18 +45,16 @@ void _setLinuxAppName(dynamic appName) {
 
     myAppFile.writeAsStringSync(newTitleMyAppString);
 
-    _logger.i('Linux app title set to: `$appName` (my_application.cc)');
+    developer.log('Linux app title set to: `$appName` (my_application.cc)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux App Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Linux App Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Linux App Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Linux App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.e(_minorTaskDoneLine);
+    if (appName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -80,18 +76,17 @@ void _setLinuxPackageName(dynamic packageName) {
 
     cmakeListsFile.writeAsStringSync(newAppIDCmakeListsString);
 
-    _logger.i('Linux application id set to: `$packageName` (CMakeLists.txt)');
+    developer
+        .log('Linux application id set to: `$packageName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux Application ID change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Linux Application ID change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Linux Application ID change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Linux Application ID change failed!!!');
   } finally {
-    if (packageName != null) _logger.e(_minorTaskDoneLine);
+    if (packageName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -118,17 +113,15 @@ void _setLinuxExecutableName(dynamic exeName) {
 
     cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
 
-    _logger.i('Linux binary name set to: `$exeName` (CMakeLists.txt)');
+    developer.log('Linux binary name set to: `$exeName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Linux Executable Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Linux Executable Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Linux Executable Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Linux Executable Name change failed!!!');
   } finally {
-    if (exeName != null) _logger.e(_minorTaskDoneLine);
+    if (exeName != null) developer.log(_minorTaskDoneLine);
   }
 }

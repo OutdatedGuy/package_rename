@@ -1,4 +1,4 @@
-part of 'package_rename.dart';
+part of '../package_rename_plus.dart';
 
 class _PackageRenameException implements Exception {
   const _PackageRenameException(this.message, this.code);

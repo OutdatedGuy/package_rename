@@ -1,4 +1,4 @@
-part of '../package_rename.dart';
+part of '../../package_rename_plus.dart';
 
 void _setWindowsConfigurations(dynamic windowsConfig) {
   try {
@@ -12,16 +12,14 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     _setWindowsCopyrightNotice(windowsConfigMap[_copyrightKey]);
     _setWindowsExecutableName(windowsConfigMap[_executableKey]);
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Skipping Windows configuration!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Skipping Windows configuration!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Skipping Windows configuration!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Skipping Windows configuration!!!');
   } finally {
-    if (windowsConfig != null) _logger.w(_majorTaskDoneLine);
+    if (windowsConfig != null) developer.log(_majorTaskDoneLine);
   }
 }
 
@@ -33,16 +31,14 @@ void _setWindowsAppName(dynamic appName) {
     _setWindowsAppTitle(appName);
     _setWindowsProductDetails(appName);
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows App Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows App Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows App Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows App Name change failed!!!');
   } finally {
-    if (appName != null) _logger.e(_minorTaskDoneLine);
+    if (appName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -68,16 +64,14 @@ void _setWindowsAppTitle(String appName) {
 
     mainCppFile.writeAsStringSync(newAppTitleMainCppString);
 
-    _logger.i('Windows app title set to: `$appName` (main.cpp)');
+    developer.log('Windows app title set to: `$appName` (main.cpp)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows App Title change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows App Title change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows App Title change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows App Title change failed!!!');
   }
 }
 
@@ -104,20 +98,16 @@ void _setWindowsProductDetails(String appName) {
         );
 
     runnerFile.writeAsStringSync(newProductDetailsRunnerString);
-
-    _logger
-      ..i('Windows file description set to: `$appName` (Runner.rc)')
-      ..i('Windows internal name set to: `$appName` (Runner.rc)')
-      ..i('Windows product name set to: `$appName` (Runner.rc)');
+    developer.log('Windows file description set to: `$appName` (Runner.rc)');
+    developer.log('Windows internal name set to: `$appName` (Runner.rc)');
+    developer.log('Windows product name set to: `$appName` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Product Details change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Product Details change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Product Details change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Product Details change failed!!!');
   }
 }
 
@@ -139,18 +129,16 @@ void _setWindowsOrganization(dynamic organization) {
 
     runnerFile.writeAsStringSync(newOrganizationRunnerString);
 
-    _logger.i('Windows company name set to: `$organization` (Runner.rc)');
+    developer.log('Windows company name set to: `$organization` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Organization change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Organization change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Organization change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Organization change failed!!!');
   } finally {
-    if (organization != null) _logger.e(_minorTaskDoneLine);
+    if (organization != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -172,18 +160,16 @@ void _setWindowsCopyrightNotice(dynamic notice) {
 
     runnerFile.writeAsStringSync(newCopyrightNoticeRunnerString);
 
-    _logger.i('Windows legal copyright set to: `$notice` (Runner.rc)');
+    developer.log('Windows legal copyright set to: `$notice` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Copyright Notice change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Copyright Notice change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Copyright Notice change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Copyright Notice change failed!!!');
   } finally {
-    if (notice != null) _logger.e(_minorTaskDoneLine);
+    if (notice != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -200,16 +186,14 @@ void _setWindowsExecutableName(dynamic exeName) {
     _setWindowsCMakeListsBinaryName(exeName);
     _setWindowsOriginalFilename(exeName);
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Executable Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Executable Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Executable Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Executable Name change failed!!!');
   } finally {
-    if (exeName != null) _logger.e(_minorTaskDoneLine);
+    if (exeName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -228,16 +212,14 @@ void _setWindowsCMakeListsBinaryName(String exeName) {
 
     cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
 
-    _logger.i('Windows binary name set to: `$exeName` (CMakeLists.txt)');
+    developer.log('Windows binary name set to: `$exeName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Binary Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Binary Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Binary Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Binary Name change failed!!!');
   }
 }
 
@@ -256,15 +238,14 @@ void _setWindowsOriginalFilename(String exeName) {
 
     runnerFile.writeAsStringSync(newOriginalFilenameRunnerString);
 
-    _logger.i('Windows original filename set to: `$exeName.exe` (Runner.rc)');
+    developer
+        .log('Windows original filename set to: `$exeName.exe` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Windows Original Filename change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Windows Original Filename change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Windows Original Filename change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Windows Original Filename change failed!!!');
   }
 }

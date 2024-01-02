@@ -1,6 +1,6 @@
-name: package_rename
+name: package_rename_plus
 description: A Blazingly Fast way to configure your awesome flutter project to be production ready.
-version: 1.5.2
+version: 1.0.0
 homepage: https://outdatedguy.rocks
 repository: https://github.com/OutdatedGuy/package_rename/tree/main
 
@@ -10,7 +10,6 @@ environment:
 dependencies:
   args: ^2.4.0
   html: ^0.15.0
-  logger: ^1.4.0
   yaml: ^3.1.1
 
 dev_dependencies:

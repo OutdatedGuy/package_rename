@@ -1,4 +1,4 @@
-part of '../package_rename.dart';
+part of '../../package_rename_plus.dart';
 
 void _setWebConfigurations(dynamic webConfig) {
   try {
@@ -12,16 +12,14 @@ void _setWebConfigurations(dynamic webConfig) {
     _setWebDescription(webConfigMap[_descriptionKey]);
     _setPWADescription(webConfigMap[_descriptionKey]);
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Skipping Web configuration!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Skipping Web configuration!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Skipping Web configuration!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Skipping Web configuration!!!');
   } finally {
-    if (webConfig != null) _logger.w(_majorTaskDoneLine);
+    if (webConfig != null) developer.log(_majorTaskDoneLine);
   }
 }
 
@@ -44,18 +42,16 @@ void _setWebTitle(dynamic appName) {
 
     webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
-    _logger.i('Web title set to: `$appName` (index.html)');
+    developer.log('Web title set to: `$appName` (index.html)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Web Title change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Web Title change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Web Title change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Web Title change failed!!!');
   } finally {
-    if (appName != null) _logger.e(_minorTaskDoneLine);
+    if (appName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -66,7 +62,7 @@ void _setPWAAppName(dynamic appName) {
 
     final webManifestFile = File(_webManifestFilePath);
     if (!webManifestFile.existsSync()) {
-      _logger.w('Web manifest.json not found!!!');
+      developer.log('Web manifest.json not found!!!');
       return;
     }
 
@@ -81,18 +77,16 @@ void _setPWAAppName(dynamic appName) {
     const encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
-    _logger.i('PWA name set to: `$appName` (manifest.json)');
+    developer.log('PWA name set to: `$appName` (manifest.json)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('PWA Name change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('PWA Name change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('PWA Name change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('PWA Name change failed!!!');
   } finally {
-    if (appName != null) _logger.e(_minorTaskDoneLine);
+    if (appName != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -114,18 +108,16 @@ void _setWebDescription(dynamic description) {
 
     webIndexFile.writeAsStringSync('${webIndexDocument.outerHtml}\n');
 
-    _logger.i('Web description set to: `$description` (index.html)');
+    developer.log('Web description set to: `$description` (index.html)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Web Description change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('Web Description change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Web Description change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('Web Description change failed!!!');
   } finally {
-    if (description != null) _logger.e(_minorTaskDoneLine);
+    if (description != null) developer.log(_minorTaskDoneLine);
   }
 }
 
@@ -136,7 +128,7 @@ void _setPWADescription(dynamic description) {
 
     final webManifestFile = File(_webManifestFilePath);
     if (!webManifestFile.existsSync()) {
-      _logger.w('Web manifest.json not found!!!');
+      developer.log('Web manifest.json not found!!!');
       return;
     }
 
@@ -150,17 +142,15 @@ void _setPWADescription(dynamic description) {
     const encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
-    _logger.i('PWA description set to: `$description` (manifest.json)');
+    developer.log('PWA description set to: `$description` (manifest.json)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('PWA Description change failed!!!');
+    developer.log('${e.message}ERR Code: ${e.code}');
+    developer.log('PWA Description change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('PWA Description change failed!!!');
+    developer.log(e.toString());
+    developer.log('ERR Code: 255');
+    developer.log('PWA Description change failed!!!');
   } finally {
-    if (description != null) _logger.e(_minorTaskDoneLine);
+    if (description != null) developer.log(_minorTaskDoneLine);
   }
 }
