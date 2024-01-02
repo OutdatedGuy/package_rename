@@ -2,12 +2,12 @@
 
 A Blazingly Fast way to configure your Bleeding Edge flutter project to be production ready.
 
-[![pub package][package_svg]](https://pub.dev/packages/package_rename)
+[![pub package][package_svg]](https://pub.dev/packages/package_rename_plus)
 [![GitHub][license_svg]](LICENSE)
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
-[![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/package_rename/issues)
-[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub issues][issues_svg]](https://github.com/chandrabezzo/package_rename/issues)
+[![GitHub issues closed][issues_closed_svg]](https://github.com/chandrabezzo/package_rename/issues?q=is%3Aissue+is%3Aclosed)
 
 <hr />
 
@@ -21,7 +21,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-  package_rename: ^1.5.2
+  package_rename_plus: ^1.0.0
 ```
 
 #### Create configuration
@@ -46,6 +46,7 @@ package_rename_config:
   ios:
     app_name: # (String) The display name of the ios app
     bundle_name: # (String) The bundle name of the ios app
+    override_old_package: # (String) Use this to replace the old bundle identifier with the new bundle identifier
     package_name: # (String) The product bundle identifier of the ios app
 
   linux:
@@ -78,7 +79,7 @@ Execute the command as per your config location:
 if config file exists in either pubspec.yaml or root path:
 
 ```bash
-dart run package_rename
+dart run package_rename_plus
 ```
 
 OR
@@ -86,13 +87,13 @@ OR
 if config file exists in a custom folder:
 
 ```bash
-dart run package_rename --path="path/to/package_rename_config.yaml"
+dart run package_rename_plus --path="path/to/package_rename_config.yaml"
 ```
 
 or
 
 ```bash
-dart run package_rename -p "path/to/package_rename_config.yaml"
+dart run package_rename_plus -p "path/to/package_rename_config.yaml"
 ```
 
 ## Flavour Support
@@ -109,19 +110,19 @@ package_rename_config-flavour_name:
 And then run the following command:
 
 ```bash
-dart run package_rename --flavour=flavour_name
+dart run package_rename_plus --flavour=flavour_name
 ```
 
 or
 
 ```bash
-dart run package_rename -f flavour_name
+dart run package_rename_plus -f flavour_name
 ```
 
 With custom config file location:
 
 ```bash
-dart run package_rename --flavour=flavour_name --path="path/to/package_rename_config.yaml"
+dart run package_rename_plus --flavour=flavour_name --path="path/to/package_rename_config.yaml"
 ```
 
 ## And that's it! 🎉
@@ -131,7 +132,7 @@ Now you can deploy your production ready app to change the _WORLD!_
 <!-- Badges URLs -->
 
 [package_svg]: https://img.shields.io/pub/v/package_rename.svg?color=blueviolet
-[license_svg]: https://img.shields.io/github/license/OutdatedGuy/package_rename.svg?color=purple
+[license_svg]: https://img.shields.io/github/license/chandrabezzo/package_rename.svg?color=purple
 [lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/package_rename.svg
-[issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/package_rename.svg?color=green
+[issues_svg]: https://img.shields.io/github/issues/chandrabezzo/package_rename.svg
+[issues_closed_svg]: https://img.shields.io/github/issues-closed/chandrabezzo/package_rename.svg?color=green

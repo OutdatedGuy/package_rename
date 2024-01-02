@@ -1,4 +1,6 @@
-part of '../package_rename.dart';
+// ignore_for_file: avoid_print
+
+part of '../../package_rename_plus.dart';
 
 void _setAndroidConfigurations(dynamic androidConfig) {
   try {
@@ -15,16 +17,14 @@ void _setAndroidConfigurations(dynamic androidConfig) {
       overrideOldPackage: androidConfigMap[_overrideOldPackageKey],
     );
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Skipping Android configuration!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Skipping Android configuration!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Skipping Android configuration!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Skipping Android configuration!!!');
   } finally {
-    if (androidConfig != null) _logger.w(_majorTaskDoneLine);
+    if (androidConfig != null) print(_majorTaskDoneLine);
   }
 }
 
@@ -46,18 +46,16 @@ void _setAndroidAppName(dynamic appName) {
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
 
-    _logger.i('Android label set to: `$appName` (main AndroidManifest.xml)');
+    print('Android label set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Android Label change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Android Label change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Android Label change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Android Label change failed!!!');
   } finally {
-    if (appName != null) _logger.f(_minorTaskDoneLine);
+    if (appName != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -82,16 +80,14 @@ void _setAndroidPackageName(dynamic packageName) {
       packageName: packageName,
     );
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('Android Package change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Android Package change failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('Android Package change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Android Package change failed!!!');
   } finally {
-    if (packageName != null) _logger.f(_minorTaskDoneLine);
+    if (packageName != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -102,7 +98,7 @@ void _setManifestPackageName({
   for (final androidManifestFilePath in manifestFilePaths) {
     final androidManifestFile = File(androidManifestFilePath);
     if (!androidManifestFile.existsSync()) {
-      _logger.w(
+      print(
         'AndroidManifest.xml file not found at: $androidManifestFilePath',
       );
       continue;
@@ -119,7 +115,7 @@ void _setManifestPackageName({
     // Get directory name from path
     final dirName = androidManifestFilePath.split('/').reversed.toList()[1];
 
-    _logger.i(
+    print(
       'Android package set to: `$packageName` ($dirName AndroidManifest.xml)',
     );
   }
@@ -131,7 +127,7 @@ void _setBuildGradlePackageName({
 }) {
   final buildGradleFile = File(buildGradleFilePath);
   if (!buildGradleFile.existsSync()) {
-    _logger.w(
+    print(
       'build.gradle file not found at: $buildGradleFilePath',
     );
     return;
@@ -158,7 +154,7 @@ void _setBuildGradlePackageName({
 
   buildGradleFile.writeAsStringSync(newPackageIDBuildGradleString);
 
-  _logger.i(
+  print(
     'Android applicationId set to: `$packageName` (build.gradle)',
   );
 }
@@ -278,17 +274,15 @@ void _createNewMainActivity({
       }
     }
 
-    _logger.i('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
+    print('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
   } on _PackageRenameException catch (e) {
-    _logger
-      ..e('${e.message}ERR Code: ${e.code}')
-      ..e('New MainActivity creation failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('New MainActivity creation failed!!!');
   } catch (e) {
-    _logger
-      ..w(e.toString())
-      ..e('ERR Code: 255')
-      ..e('New MainActivity creation failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('New MainActivity creation failed!!!');
   } finally {
-    if (packageName != null) _logger.f(_minorTaskDoneLine);
+    if (packageName != null) print(_minorTaskDoneLine);
   }
 }

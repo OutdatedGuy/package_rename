@@ -1,4 +1,4 @@
-part of 'package_rename.dart';
+part of '../package_rename_plus.dart';
 
 // ! File Names
 // ? Root

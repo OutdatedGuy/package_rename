@@ -12,6 +12,8 @@
 /// package_rename_config:
 ///   ...
 /// ```
+// ignore_for_file: avoid_print
+
 library package_rename;
 
 import 'dart:convert';
@@ -19,29 +21,17 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:html/parser.dart' as html;
-import 'package:logger/logger.dart';
 import 'package:yaml/yaml.dart' as yaml;
 
-part 'constants.dart';
-part 'exceptions.dart';
-part 'messages.dart';
-
-part 'platforms/android.dart';
-part 'platforms/ios.dart';
-part 'platforms/web.dart';
-part 'platforms/linux.dart';
-part 'platforms/windows.dart';
-part 'platforms/macos.dart';
-
-final _logger = Logger(
-  filter: ProductionFilter(),
-  printer: PrettyPrinter(
-    lineLength: 80,
-    methodCount: 0,
-    noBoxingByDefault: true,
-    printEmojis: false,
-  ),
-);
+part 'src/constants.dart';
+part 'src/exceptions.dart';
+part 'src/messages.dart';
+part 'src/platforms/android.dart';
+part 'src/platforms/ios.dart';
+part 'src/platforms/linux.dart';
+part 'src/platforms/macos.dart';
+part 'src/platforms/web.dart';
+part 'src/platforms/windows.dart';
 
 /// Starts setting build configurations for the flutter application according
 /// to given configuration.
@@ -62,7 +52,7 @@ final _logger = Logger(
 /// ```
 void set(List<String> args) {
   try {
-    _logger.w(_majorTaskDoneLine);
+    print(_majorTaskDoneLine);
 
     if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 
@@ -88,9 +78,8 @@ void set(List<String> args) {
     final results = parser.parse(args);
 
     if (results.wasParsed('help')) {
-      _logger
-        ..i(_packageRenameCommands)
-        ..i(parser.usage);
+      print(_packageRenameCommands);
+      print(parser.usage);
       exit(0);
     }
     final flavour = results['flavour'] as String?;
@@ -105,15 +94,13 @@ void set(List<String> args) {
     _setWebConfigurations(config['web']);
     _setWindowsConfigurations(config['windows']);
 
-    _logger.i(_successMessage);
+    print(_successMessage);
   } on _PackageRenameException catch (e) {
-    _logger.f(e.message);
+    print(e.message);
     exit(e.code);
   } catch (e) {
-    _logger.f(e.toString());
+    print(e);
     exit(255);
-  } finally {
-    _logger.close();
   }
 }
 

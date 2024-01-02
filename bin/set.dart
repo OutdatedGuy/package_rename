@@ -1,26 +1,17 @@
-// Third Part Packages
-import 'package:logger/logger.dart';
-
 // Binaries
-import 'package_rename.dart' as package_rename;
+import 'package_rename_plus.dart' as package_rename_plus;
 
 /// Command line entry point to configure package details.
 ///
 /// Execute following command to set package details:
 /// ```bash
-/// flutter pub run package_rename:set
+/// flutter pub run package_rename_plus:set
 /// ```
 void main(List<String> arguments) {
-  Logger(
-    filter: ProductionFilter(),
-    printer: PrettyPrinter(
-      lineLength: 80,
-      methodCount: 0,
-      noBoxingByDefault: true,
-      printEmojis: false,
-    ),
-  ).w(
-    'This command is deprecated and replaced with "dart run package_rename"',
+  // ignore: avoid_print
+  print(
+    'This command is deprecated and replaced with'
+    ' "dart run package_rename_plus"',
   );
-  package_rename.main(arguments);
+  package_rename_plus.main(arguments);
 }
