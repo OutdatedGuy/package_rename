@@ -78,8 +78,7 @@ void _setLinuxPackageName(dynamic packageName) {
 
     cmakeListsFile.writeAsStringSync(newAppIDCmakeListsString);
 
-    developer
-        .log('Linux application id set to: `$packageName` (CMakeLists.txt)');
+    print('Linux application id set to: `$packageName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('Linux Application ID change failed!!!');

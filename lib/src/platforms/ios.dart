@@ -136,8 +136,7 @@ void _setIOSPackageName({dynamic oldPackageName, dynamic packageName}) {
 
     iosProjectFile.writeAsStringSync(newBundleIDIOSProjectString);
 
-    developer
-        .log('iOS bundle identifier set to: `$packageName` (project.pbxproj)');
+    print('iOS bundle identifier set to: `$packageName` (project.pbxproj)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('iOS Bundle Identifier change failed!!!');

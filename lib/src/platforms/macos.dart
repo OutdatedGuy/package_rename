@@ -59,8 +59,7 @@ void _setMacOSProductName(String productName) {
 
     appInfoFile.writeAsStringSync(newProductNameAppInfoString);
 
-    developer
-        .log('MacOS product name set to: `$productName` (AppInfo.xcconfig)');
+    print('MacOS product name set to: `$productName` (AppInfo.xcconfig)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('MacOS Product Name change failed!!!');
@@ -245,8 +244,7 @@ void _setMacOSCopyright(dynamic notice) {
 
     appInfoFile.writeAsStringSync(newCopyrightAppInfoString);
 
-    developer
-        .log('MacOS product copyright set to: `$notice` (AppInfo.xcconfig)');
+    print('MacOS product copyright set to: `$notice` (AppInfo.xcconfig)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('MacOS Product Copyright change failed!!!');

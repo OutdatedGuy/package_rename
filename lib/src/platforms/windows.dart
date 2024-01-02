@@ -240,8 +240,7 @@ void _setWindowsOriginalFilename(String exeName) {
 
     runnerFile.writeAsStringSync(newOriginalFilenameRunnerString);
 
-    developer
-        .log('Windows original filename set to: `$exeName.exe` (Runner.rc)');
+    print('Windows original filename set to: `$exeName.exe` (Runner.rc)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('Windows Original Filename change failed!!!');

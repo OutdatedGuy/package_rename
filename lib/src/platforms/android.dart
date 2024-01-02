@@ -46,8 +46,7 @@ void _setAndroidAppName(dynamic appName) {
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
 
-    developer
-        .log('Android label set to: `$appName` (main AndroidManifest.xml)');
+    print('Android label set to: `$appName` (main AndroidManifest.xml)');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('Android Label change failed!!!');
@@ -275,8 +274,7 @@ void _createNewMainActivity({
       }
     }
 
-    developer
-        .log('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
+    print('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
   } on _PackageRenameException catch (e) {
     print('${e.message}ERR Code: ${e.code}');
     print('New MainActivity creation failed!!!');
