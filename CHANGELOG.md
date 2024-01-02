@@ -1,3 +1,8 @@
+## 1.5.2
+
+- refactor: use new `part of` syntax in [86e0605](https://github.com/OutdatedGuy/package_rename/commit/86e060551522abaf4581f1dddf65f6f0b6dfc59b)
+- chore: updated dependencies to latest in [ec48689](https://github.com/OutdatedGuy/package_rename/commit/ec48689324b6c63ae9d47c5ce7586f45749ac027)
+
 ## 1.5.1
 
 - fix(windows): `Runner.rc` file not updating at all in [ea576e2](https://github.com/OutdatedGuy/package_rename/commit/ea576e27ba1187dec087e2d631417a8b76a43550)

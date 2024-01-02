@@ -1,4 +1,4 @@
-part of package_rename;
+part of '../package_rename.dart';
 
 void _setIOSConfigurations(dynamic iosConfig) {
   try {
