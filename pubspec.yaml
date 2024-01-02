@@ -1,7 +1,7 @@
 name: package_rename_plus
 description: A Blazingly Fast way to configure your awesome flutter project to be production ready.
 version: 1.0.0
-homepage: www.solusibejo.com
+homepage: https://www.solusibejo.com
 repository: https://github.com/chandrabezzo/package_rename
 
 environment:
