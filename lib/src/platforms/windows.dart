@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 part of '../../package_rename_plus.dart';
 
 void _setWindowsConfigurations(dynamic windowsConfig) {
@@ -12,14 +14,14 @@ void _setWindowsConfigurations(dynamic windowsConfig) {
     _setWindowsCopyrightNotice(windowsConfigMap[_copyrightKey]);
     _setWindowsExecutableName(windowsConfigMap[_executableKey]);
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Skipping Windows configuration!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Skipping Windows configuration!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Skipping Windows configuration!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Skipping Windows configuration!!!');
   } finally {
-    if (windowsConfig != null) developer.log(_majorTaskDoneLine);
+    if (windowsConfig != null) print(_majorTaskDoneLine);
   }
 }
 
@@ -31,14 +33,14 @@ void _setWindowsAppName(dynamic appName) {
     _setWindowsAppTitle(appName);
     _setWindowsProductDetails(appName);
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows App Name change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows App Name change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows App Name change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows App Name change failed!!!');
   } finally {
-    if (appName != null) developer.log(_minorTaskDoneLine);
+    if (appName != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -64,14 +66,14 @@ void _setWindowsAppTitle(String appName) {
 
     mainCppFile.writeAsStringSync(newAppTitleMainCppString);
 
-    developer.log('Windows app title set to: `$appName` (main.cpp)');
+    print('Windows app title set to: `$appName` (main.cpp)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows App Title change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows App Title change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows App Title change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows App Title change failed!!!');
   }
 }
 
@@ -98,16 +100,16 @@ void _setWindowsProductDetails(String appName) {
         );
 
     runnerFile.writeAsStringSync(newProductDetailsRunnerString);
-    developer.log('Windows file description set to: `$appName` (Runner.rc)');
-    developer.log('Windows internal name set to: `$appName` (Runner.rc)');
-    developer.log('Windows product name set to: `$appName` (Runner.rc)');
+    print('Windows file description set to: `$appName` (Runner.rc)');
+    print('Windows internal name set to: `$appName` (Runner.rc)');
+    print('Windows product name set to: `$appName` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Product Details change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Product Details change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Product Details change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Product Details change failed!!!');
   }
 }
 
@@ -129,16 +131,16 @@ void _setWindowsOrganization(dynamic organization) {
 
     runnerFile.writeAsStringSync(newOrganizationRunnerString);
 
-    developer.log('Windows company name set to: `$organization` (Runner.rc)');
+    print('Windows company name set to: `$organization` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Organization change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Organization change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Organization change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Organization change failed!!!');
   } finally {
-    if (organization != null) developer.log(_minorTaskDoneLine);
+    if (organization != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -160,16 +162,16 @@ void _setWindowsCopyrightNotice(dynamic notice) {
 
     runnerFile.writeAsStringSync(newCopyrightNoticeRunnerString);
 
-    developer.log('Windows legal copyright set to: `$notice` (Runner.rc)');
+    print('Windows legal copyright set to: `$notice` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Copyright Notice change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Copyright Notice change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Copyright Notice change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Copyright Notice change failed!!!');
   } finally {
-    if (notice != null) developer.log(_minorTaskDoneLine);
+    if (notice != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -186,14 +188,14 @@ void _setWindowsExecutableName(dynamic exeName) {
     _setWindowsCMakeListsBinaryName(exeName);
     _setWindowsOriginalFilename(exeName);
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Executable Name change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Executable Name change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Executable Name change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Executable Name change failed!!!');
   } finally {
-    if (exeName != null) developer.log(_minorTaskDoneLine);
+    if (exeName != null) print(_minorTaskDoneLine);
   }
 }
 
@@ -212,14 +214,14 @@ void _setWindowsCMakeListsBinaryName(String exeName) {
 
     cmakeListsFile.writeAsStringSync(newBinaryNameCmakeListsString);
 
-    developer.log('Windows binary name set to: `$exeName` (CMakeLists.txt)');
+    print('Windows binary name set to: `$exeName` (CMakeLists.txt)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Binary Name change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Binary Name change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Binary Name change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Binary Name change failed!!!');
   }
 }
 
@@ -241,11 +243,11 @@ void _setWindowsOriginalFilename(String exeName) {
     developer
         .log('Windows original filename set to: `$exeName.exe` (Runner.rc)');
   } on _PackageRenameException catch (e) {
-    developer.log('${e.message}ERR Code: ${e.code}');
-    developer.log('Windows Original Filename change failed!!!');
+    print('${e.message}ERR Code: ${e.code}');
+    print('Windows Original Filename change failed!!!');
   } catch (e) {
-    developer.log(e.toString());
-    developer.log('ERR Code: 255');
-    developer.log('Windows Original Filename change failed!!!');
+    print(e);
+    print('ERR Code: 255');
+    print('Windows Original Filename change failed!!!');
   }
 }

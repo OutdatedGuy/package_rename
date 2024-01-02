@@ -12,6 +12,8 @@
 /// package_rename_config:
 ///   ...
 /// ```
+// ignore_for_file: avoid_print
+
 library package_rename;
 
 import 'dart:convert';
@@ -51,7 +53,7 @@ part 'src/platforms/windows.dart';
 /// ```
 void set(List<String> args) {
   try {
-    developer.log(_majorTaskDoneLine);
+    print(_majorTaskDoneLine);
 
     if (!_configFileExists()) throw _PackageRenameErrors.filesNotFound;
 
@@ -77,8 +79,8 @@ void set(List<String> args) {
     final results = parser.parse(args);
 
     if (results.wasParsed('help')) {
-      developer.log(_packageRenameCommands);
-      developer.log(parser.usage);
+      print(_packageRenameCommands);
+      print(parser.usage);
       exit(0);
     }
     final flavour = results['flavour'] as String?;
@@ -93,12 +95,12 @@ void set(List<String> args) {
     _setWebConfigurations(config['web']);
     _setWindowsConfigurations(config['windows']);
 
-    developer.log(_successMessage);
+    print(_successMessage);
   } on _PackageRenameException catch (e) {
-    developer.log(e.message);
+    print(e.message);
     exit(e.code);
   } catch (e) {
-    developer.log(e.toString());
+    print(e);
     exit(255);
   }
 }

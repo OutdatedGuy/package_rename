@@ -1,6 +1,3 @@
-// Third Part Packages
-import 'dart:developer' as developer;
-
 // Binaries
 import 'package_rename_plus.dart' as package_rename_plus;
 
@@ -11,7 +8,8 @@ import 'package_rename_plus.dart' as package_rename_plus;
 /// flutter pub run package_rename_plus:set
 /// ```
 void main(List<String> arguments) {
-  developer.log(
+  // ignore: avoid_print
+  print(
     'This command is deprecated and replaced with'
     ' "dart run package_rename_plus"',
   );
