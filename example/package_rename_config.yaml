@@ -3,7 +3,7 @@ package_rename_config:
   android:
     app_name: Package Rename Demo
     package_name: rocks.outdatedguy.packagerenamedemo
-    override_old_package: com.example.example
+    override_old_package: com.example.package_rename_example
 
   ios:
     app_name: Package Rename Demo
@@ -12,7 +12,7 @@ package_rename_config:
 
   web:
     app_name: Package Rename Demo
-    description: Package to change project configurations.
+    description: CLI tool to rename package configurations in Flutter project.
 
   linux:
     app_name: Package Rename Demo

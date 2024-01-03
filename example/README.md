@@ -1,6 +1,6 @@
-# example
+# package_rename_example
 
-A new Flutter project.
+Demonstrates how to use the package_rename cli.
 
 ## Getting Started
 
