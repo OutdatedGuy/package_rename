@@ -163,6 +163,6 @@ Now you can deploy your production ready app to change the _WORLD!_
 <!-- Links -->
 
 [package]: https://pub.dev/packages/package_rename
-[repository]: https://github.com/OutdatedGuy/cached_video_player_plus
+[repository]: https://github.com/OutdatedGuy/package_rename
 [issues]: https://github.com/OutdatedGuy/package_rename/issues
 [issues_closed]: https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed
