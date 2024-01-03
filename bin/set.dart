@@ -8,8 +8,11 @@ import 'package_rename.dart' as package_rename;
 ///
 /// Execute following command to set package details:
 /// ```bash
-/// flutter pub run package_rename:set
+/// dart run package_rename:set
 /// ```
+@Deprecated(
+  'This command is deprecated and replaced with "dart run package_rename"',
+)
 void main(List<String> arguments) {
   Logger(
     filter: ProductionFilter(),
