@@ -11,13 +11,13 @@
 # (the recommended set includes the core lints).
 # The core lints are also what is used by pub.dev for scoring packages.
 
-include: package:very_good_analysis/analysis_options.yaml
+include: package:lints/recommended.yaml
 
 # Uncomment the following section to specify additional rules.
 
-linter:
-  rules:
-    use_string_in_part_of_directives: false
+# linter:
+#   rules:
+#     - camel_case_types
 
 # analyzer:
 #   exclude:
