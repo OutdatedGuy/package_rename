@@ -1,8 +1,7 @@
-# Package Rename
+# Package Rename Plus
 
 A Blazingly Fast way to configure your Bleeding Edge flutter project to be production ready.
 
-[![pub package][package_svg]](https://pub.dev/packages/package_rename_plus)
 [![GitHub][license_svg]](LICENSE)
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
@@ -21,7 +20,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-  package_rename_plus: ^1.0.0
+  package_rename_plus: ^1.0.1
 ```
 
 #### Create configuration

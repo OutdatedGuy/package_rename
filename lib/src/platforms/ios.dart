@@ -111,17 +111,11 @@ void _setIOSPackageName({dynamic oldPackageName, dynamic packageName}) {
         // Replaces old bundle id from
         // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
         .replaceAll(
-          RegExp(
-            'PRODUCT_BUNDLE_IDENTIFIER = $oldPackageName(?<!\\.RunnerTests);',
-          ),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
-        )
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
-        .replaceAll(
-          RegExp('PRODUCT_BUNDLE_IDENTIFIER = $oldPackageName.RunnerTests;'),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
-        )
+      RegExp(
+        'PRODUCT_BUNDLE_IDENTIFIER = $oldPackageName(?<!\\.RunnerTests);',
+      ),
+      'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
+    )
         // Removes old bundle id from
         // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
         .replaceAllMapped(
@@ -130,7 +124,12 @@ void _setIOSPackageName({dynamic oldPackageName, dynamic packageName}) {
       ),
       (match) {
         final extensionName = match.group(1);
-        return 'PRODUCT_BUNDLE_IDENTIFIER = $packageName.$extensionName;';
+        final isContains = packageName.contains(extensionName.toString());
+        if (isContains) {
+          return 'PRODUCT_BUNDLE_IDENTIFIER = $packageName;';
+        } else {
+          return 'PRODUCT_BUNDLE_IDENTIFIER = $packageName.$extensionName;';
+        }
       },
     );
 
