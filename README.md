@@ -2,12 +2,11 @@
 
 A Blazingly Fast way to configure your Bleeding Edge flutter project to be production ready.
 
-[![pub package][package_svg]](https://pub.dev/packages/package_rename)
+[![pub package][package_svg]][package]
 [![GitHub][license_svg]](LICENSE)
-[![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
-[![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/package_rename/issues)
-[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub issues][issues_svg]][issues]
+[![GitHub issues closed][issues_closed_svg]][issues_closed]
 
 <hr />
 
@@ -124,14 +123,46 @@ With custom config file location:
 dart run package_rename --flavour=flavour_name --path="path/to/package_rename_config.yaml"
 ```
 
+## Known Issues
+
+### iOS and macOS issues with `PRODUCT_BUNDLE_IDENTIFIER`:
+
+The `PRODUCT_BUNDLE_IDENTIFIER`'s in **ios/Runner.xcodeproj/project.pbxproj** and **macos/Runner.xcodeproj/project.pbxproj** have different values for different targets. Like, in my case:
+
+**DEFAULT**
+
+- `rocks.outdatedguy.packageRenameExample`
+- `rocks.outdatedguy.packageRenameExample.RunnerTests`
+
+**EXTENSIONS**
+
+- `rocks.outdatedguy.packageRenameExample.Share-Extension`
+- `rocks.outdatedguy.packageRenameExample.NotificationServiceExtension`
+- blah blah blah...
+
+Hence, to properly change the `PRODUCT_BUNDLE_IDENTIFIER` without removing the **Extension** name, make sure all `PRODUCT_BUNDLE_IDENTIFIER`'s except the **DEFAULT** ones are enclosed in double quotes (`""`).
+
+```diff
+- PRODUCT_BUNDLE_IDENTIFIER = rocks.outdatedguy.packageRenameExample.Share-Extension;
++ PRODUCT_BUNDLE_IDENTIFIER = "rocks.outdatedguy.packageRenameExample.Share-Extension";
+```
+
 ## And that's it! 🎉
 
 Now you can deploy your production ready app to change the _WORLD!_
+
+### If you liked the package, then please give it a [Like 👍🏼][package] and [Star ⭐][repository]
 
 <!-- Badges URLs -->
 
 [package_svg]: https://img.shields.io/pub/v/package_rename.svg?color=blueviolet
 [license_svg]: https://img.shields.io/github/license/OutdatedGuy/package_rename.svg?color=purple
-[lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/package_rename.svg
 [issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/package_rename.svg?color=green
+
+<!-- Links -->
+
+[package]: https://pub.dev/packages/package_rename
+[repository]: https://github.com/OutdatedGuy/cached_video_player_plus
+[issues]: https://github.com/OutdatedGuy/package_rename/issues
+[issues_closed]: https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed
