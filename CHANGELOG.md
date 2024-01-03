@@ -1,3 +1,9 @@
+## 1.5.3
+
+- fix(ios): `PRODUCT_BUNDLE_IDENTIFIER` not updating if it contains underscore (`_`). Thanks [@imranspahic](https://github.com/imranspahic) for [d8d8395](https://github.com/OutdatedGuy/package_rename/commit/d8d83950b5456d806d8b6e807bd2c2bddc490b3a)
+- refactor: updated project template and documentations in [daf18d3](https://github.com/OutdatedGuy/package_rename/commit/daf18d3c7a7814a016ef61a835233cd4834519c8)
+- fix(macos): `PRODUCT_BUNDLE_IDENTIFIER` not updating if it contains underscore (`_`) for extension targets in [8dfe5ac](https://github.com/OutdatedGuy/package_rename/commit/8dfe5ac8771d508de43a880eb88b08d030ff80c4)
+
 ## 1.5.2
 
 - refactor: use new `part of` syntax in [86e0605](https://github.com/OutdatedGuy/package_rename/commit/86e060551522abaf4581f1dddf65f6f0b6dfc59b)
