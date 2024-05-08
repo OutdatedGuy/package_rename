@@ -42,6 +42,12 @@ const _invalidAppNameMessage = '''
 ╚═══════════════════════════════════════════╝
 ''';
 
+const _invalidShortAppNameMessage = '''
+╔═════════════════════════════════════════════════════════════╗
+║   short_app_name (Short App Name) must be a String.   ║
+╚═════════════════════════════════════════════════════════════╝
+''';
+
 const _androidMainManifestNotFoundMessage = '''
 ╔═══════════════════════════════════════════════════════════════╗
 ║   AndroidManifest.xml not found in `android/app/src/main/`.   ║

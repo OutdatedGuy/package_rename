@@ -58,7 +58,8 @@ package_rename_config:
     copyright_notice: # (String) The product copyright of the macos app
 
   web:
-    app_name: # (String) The title and display name of the web app and PWA
+    app_name: # (String) The title of the web app and PWA
+    short_app_name: # (String) The short display name of the PWA (Optional, defaults to app_name if not set)
     description: # (String) The description of the web app and PWA
 
   windows:

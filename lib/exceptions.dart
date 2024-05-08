@@ -180,4 +180,9 @@ class _PackageRenameErrors {
     _macOSProjectFileNotFoundMessage,
     33,
   );
+
+  static const invalidShortAppName = _PackageRenameException(
+    _invalidShortAppNameMessage,
+    34,
+  );
 }

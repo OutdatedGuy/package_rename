@@ -8,7 +8,10 @@ void _setWebConfigurations(dynamic webConfig) {
     final webConfigMap = Map<String, dynamic>.from(webConfig);
 
     _setWebTitle(webConfigMap[_appNameKey]);
-    _setPWAAppName(webConfigMap[_appNameKey]);
+    _setPWAAppName(
+      webConfigMap[_appNameKey],
+      webConfigMap[_shortAppNameKey],
+    );
     _setWebDescription(webConfigMap[_descriptionKey]);
     _setPWADescription(webConfigMap[_descriptionKey]);
   } on _PackageRenameException catch (e) {
@@ -59,10 +62,11 @@ void _setWebTitle(dynamic appName) {
   }
 }
 
-void _setPWAAppName(dynamic appName) {
+void _setPWAAppName(dynamic appName, dynamic shortAppName) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
+    final actualShortAppName = shortAppName is String ? shortAppName : appName;
 
     final webManifestFile = File(_webManifestFilePath);
     if (!webManifestFile.existsSync()) {
@@ -76,21 +80,22 @@ void _setPWAAppName(dynamic appName) {
     ) as Map<String, dynamic>;
 
     webManifestJson['name'] = appName;
-    webManifestJson['short_name'] = appName;
+    webManifestJson['short_name'] = actualShortAppName;
 
     const encoder = JsonEncoder.withIndent('    ');
     webManifestFile.writeAsStringSync('${encoder.convert(webManifestJson)}\n');
 
     _logger.i('PWA name set to: `$appName` (manifest.json)');
+    _logger.i('PWA short name set to: `$actualShortAppName` (manifest.json)');
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
-      ..e('PWA Name change failed!!!');
+      ..e('PWA Name/Short Name change failed!!!');
   } catch (e) {
     _logger
       ..w(e.toString())
       ..e('ERR Code: 255')
-      ..e('PWA Name change failed!!!');
+      ..e('PWA Name/Short Name change failed!!!');
   } finally {
     if (appName != null) _logger.f(_minorTaskDoneLine);
   }
