@@ -1,3 +1,8 @@
+## 1.6.0
+
+- feat(web): Ability to set PWA `short_name` separately. Thanks [@albemala](https://github.com/albemala) for [448f65f](https://github.com/OutdatedGuy/package_rename/commit/448f65f8f154194a391e3ad4d2808f6af31cdcb8)
+- chore: updated dependencies to latest in [6016aae](https://github.com/OutdatedGuy/package_rename/commit/6016aaedabdb4cc4f6d9572c5b3b04fcb3766cea)
+
 ## 1.5.3
 
 - fix(ios): `PRODUCT_BUNDLE_IDENTIFIER` not updating if it contains underscore (`_`). Thanks [@imranspahic](https://github.com/imranspahic) for [d8d8395](https://github.com/OutdatedGuy/package_rename/commit/d8d83950b5456d806d8b6e807bd2c2bddc490b3a)
