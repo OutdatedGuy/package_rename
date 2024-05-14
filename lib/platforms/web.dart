@@ -66,6 +66,10 @@ void _setPWAAppName(dynamic appName, dynamic shortAppName) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
+
+    if (shortAppName != null && shortAppName is! String) {
+      throw _PackageRenameErrors.invalidShortAppName;
+    }
     final actualShortAppName = shortAppName is String ? shortAppName : appName;
 
     final webManifestFile = File(_webManifestFilePath);
