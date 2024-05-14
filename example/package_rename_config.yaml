@@ -12,6 +12,7 @@ package_rename_config:
 
   web:
     app_name: Package Rename Demo
+    short_app_name: Package Rename
     description: CLI tool to rename package configurations in Flutter project.
 
   linux:

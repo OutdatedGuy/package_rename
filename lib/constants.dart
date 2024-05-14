@@ -36,6 +36,7 @@ const _projectFileName = 'project.pbxproj';
 // ! Keys
 const _configKey = 'package_rename_config';
 const _appNameKey = 'app_name';
+const _shortAppNameKey = 'short_app_name';
 const _packageNameKey = 'package_name';
 const _bundleNameKey = 'bundle_name';
 const _descriptionKey = 'description';
