@@ -1,3 +1,8 @@
+## 1.7.0
+
+- feat(android): Added support for Flutter 3.22 template in [b566af2](https://github.com/OutdatedGuy/package_rename/commit/b566af2b86b267757917556b61720c64405e5fad)
+- chore: update example app to Flutter template 3.22 in [151d217](https://github.com/OutdatedGuy/package_rename/commit/151d217ef954ecbba1b740e34d9611d67c08ae25)
+
 ## 1.6.0
 
 - feat(web): Ability to set PWA `short_name` separately. Thanks [@albemala](https://github.com/albemala) for [448f65f](https://github.com/OutdatedGuy/package_rename/commit/448f65f8f154194a391e3ad4d2808f6af31cdcb8)
