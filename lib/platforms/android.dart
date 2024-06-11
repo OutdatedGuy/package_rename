@@ -140,20 +140,12 @@ void _setBuildGradlePackageName({
   final buildGradleString = buildGradleFile.readAsStringSync();
   final newPackageIDBuildGradleString = buildGradleString
       .replaceAll(
-        RegExp('applicationId "(.*?)"'),
-        'applicationId "$packageName"',
+        RegExp('applicationId\\s*=?\\s*["\'].*?["\']'),
+        'applicationId = "$packageName"',
       )
       .replaceAll(
-        RegExp("applicationId '(.*?)'"),
-        'applicationId "$packageName"',
-      )
-      .replaceAll(
-        RegExp('namespace "(.*?)"'),
-        'namespace "$packageName"',
-      )
-      .replaceAll(
-        RegExp("namespace '(.*?)'"),
-        'namespace "$packageName"',
+        RegExp('namespace\\s*=?\\s*["\'].*?["\']'),
+        'namespace = "$packageName"',
       );
 
   buildGradleFile.writeAsStringSync(newPackageIDBuildGradleString);
