@@ -1,3 +1,8 @@
+## 1.7.1
+
+- refactor: lowered sdk constraints to support dart 2.12 and above in [71f839f](https://github.com/OutdatedGuy/package_rename/commit/71f839fade56b753c61a14b6251e679ae188614a)
+- chore: updated dependencies to latest in [f352077](https://github.com/OutdatedGuy/package_rename/commit/f3520778985bb083972d15d985d12e87e785db50)
+
 ## 1.7.0
 
 - feat(android): Added support for Flutter 3.22 template in [b566af2](https://github.com/OutdatedGuy/package_rename/commit/b566af2b86b267757917556b61720c64405e5fad)
