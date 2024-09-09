@@ -155,6 +155,41 @@ void _setBuildGradlePackageName({
   );
 }
 
+void _createNewActivity({
+  required dynamic lang,
+  required dynamic packageName,
+  required dynamic overrideOldPackage,
+  required dynamic fileExtension,
+}) {
+  final packageDirs = packageName.replaceAll('.', '/');
+  final langDir = '$_androidMainDirPath/$lang';
+
+  final mainActivityFile = File(
+    '$langDir/$packageDirs/MainActivity.$fileExtension',
+  )..createSync(recursive: true);
+
+  var fileContent = lang == 'kotlin'
+      ? _androidKotlinMainActivityTemplate
+      : _androidJavaMainActivityTemplate;
+
+  late String newPackageName;
+  if (lang == 'kotlin') {
+    newPackageName = packageName.split('.').map((element) {
+      if (element == 'in') return '`in`';
+      return element;
+    }).join('.');
+  } else {
+    newPackageName = packageName;
+  }
+
+  fileContent = fileContent.replaceAll(
+    RegExp('{{packageName}}'),
+    newPackageName,
+  );
+
+  mainActivityFile.writeAsStringSync(fileContent);
+}
+
 void _createNewMainActivity({
   required dynamic lang,
   required dynamic packageName,
@@ -180,33 +215,12 @@ void _createNewMainActivity({
     }
 
     if (overrideOldPackage == null) {
-      final packageDirs = packageName.replaceAll('.', '/');
-      final langDir = '$_androidMainDirPath/$lang';
-
-      final mainActivityFile = File(
-        '$langDir/$packageDirs/MainActivity.$fileExtension',
-      )..createSync(recursive: true);
-
-      var fileContent = lang == 'kotlin'
-          ? _androidKotlinMainActivityTemplate
-          : _androidJavaMainActivityTemplate;
-
-      late String newPackageName;
-      if (lang == 'kotlin') {
-        newPackageName = packageName.split('.').map((element) {
-          if (element == 'in') return '`in`';
-          return element;
-        }).join('.');
-      } else {
-        newPackageName = packageName;
-      }
-
-      fileContent = fileContent.replaceAll(
-        RegExp('{{packageName}}'),
-        newPackageName,
+      _createNewActivity(
+        lang: lang,
+        packageName: packageName,
+        overrideOldPackage: overrideOldPackage,
+        fileExtension: fileExtension,
       );
-
-      mainActivityFile.writeAsStringSync(fileContent);
     } else {
       if (overrideOldPackage is! String) {
         throw _PackageRenameErrors.invalidPackageName;
@@ -215,58 +229,65 @@ void _createNewMainActivity({
       // Rename(move) all files from old package directory structure
       // to new package directory structure
       final oldPackageDirs = overrideOldPackage.replaceAll('.', '/');
-      final newPackageDirs = packageName.replaceAll('.', '/');
       final langDir = '$_androidMainDirPath/$lang';
 
       final oldMainActivityDir = Directory('$langDir/$oldPackageDirs');
       if (!oldMainActivityDir.existsSync()) {
-        throw _PackageRenameErrors.androidOldDirectoryNotFound;
-      }
-
-      // Loop through all files in old package directory and move them
-      // to new package directory
-      final oldDirContents = oldMainActivityDir.listSync();
-      final newMainActivityDir = Directory('$langDir/$newPackageDirs')
-        ..createSync(recursive: true);
-      for (final element in oldDirContents) {
-        element.renameSync(
-          '$langDir/$newPackageDirs/'
-          '${element.path.split(Platform.pathSeparator).last}',
+        _logger.i(_PackageRenameErrors.androidOldDirectoryNotFound.message);
+        _createNewActivity(
+          lang: lang,
+          packageName: packageName,
+          overrideOldPackage: overrideOldPackage,
+          fileExtension: fileExtension,
         );
-      }
-
-      // Delete empty old package directory from child to parent
-      // To avoid deleteing newly created package directory if it's name
-      // is a substring of old package name
-      // e.g. com.example and com.example2
-      var oldPackageDir = oldMainActivityDir;
-      while (oldPackageDir.listSync().isEmpty) {
-        oldPackageDir.deleteSync();
-        oldPackageDir = oldPackageDir.parent;
-      }
-
-      // Change occurences of old package name to new package name
-      // in all files in new package directory
-      final newMainActivityDirFiles =
-          newMainActivityDir.listSync(recursive: true).whereType<File>();
-
-      late String newPackageName;
-      if (lang == 'kotlin') {
-        newPackageName = packageName.split('.').map((element) {
-          if (element == 'in') return '`in`';
-          return element;
-        }).join('.');
       } else {
-        newPackageName = packageName;
-      }
+        final newPackageDirs = packageName.replaceAll('.', '/');
 
-      for (final file in newMainActivityDirFiles) {
-        var fileContent = file.readAsStringSync();
-        fileContent = fileContent.replaceAll(
-          RegExp(overrideOldPackage),
-          newPackageName,
-        );
-        file.writeAsStringSync(fileContent);
+        // Loop through all files in old package directory and move them
+        // to new package directory
+        final oldDirContents = oldMainActivityDir.listSync();
+        final newMainActivityDir = Directory('$langDir/$newPackageDirs')
+          ..createSync(recursive: true);
+        for (final element in oldDirContents) {
+          element.renameSync(
+            '$langDir/$newPackageDirs/'
+            '${element.path.split(Platform.pathSeparator).last}',
+          );
+        }
+
+        // Delete empty old package directory from child to parent
+        // To avoid deleteing newly created package directory if it's name
+        // is a substring of old package name
+        // e.g. com.example and com.example2
+        var oldPackageDir = oldMainActivityDir;
+        while (oldPackageDir.listSync().isEmpty) {
+          oldPackageDir.deleteSync();
+          oldPackageDir = oldPackageDir.parent;
+        }
+
+        // Change occurences of old package name to new package name
+        // in all files in new package directory
+        final newMainActivityDirFiles =
+            newMainActivityDir.listSync(recursive: true).whereType<File>();
+
+        late String newPackageName;
+        if (lang == 'kotlin') {
+          newPackageName = packageName.split('.').map((element) {
+            if (element == 'in') return '`in`';
+            return element;
+          }).join('.');
+        } else {
+          newPackageName = packageName;
+        }
+
+        for (final file in newMainActivityDirFiles) {
+          var fileContent = file.readAsStringSync();
+          fileContent = fileContent.replaceAll(
+            RegExp(overrideOldPackage),
+            newPackageName,
+          );
+          file.writeAsStringSync(fileContent);
+        }
       }
     }
 
