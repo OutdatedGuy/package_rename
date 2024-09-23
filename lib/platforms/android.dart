@@ -41,7 +41,7 @@ void _setAndroidAppName(dynamic appName) {
     final androidManifestString = androidManifestFile.readAsStringSync();
     final newLabelAndroidManifestString = androidManifestString.replaceAll(
       RegExp('android:label="(.*)"'),
-      'android:label=@string/app_name',
+      'android:label="@string/app_name"',
     );
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
