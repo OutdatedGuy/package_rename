@@ -37,7 +37,7 @@ void _setIOSDisplayName(dynamic appName) {
     final iosInfoPlistString = iosInfoPlistFile.readAsStringSync();
     final newDisplayNameIOSInfoPlistString = iosInfoPlistString.replaceAll(
       RegExp(r'<key>CFBundleDisplayName</key>\s*<string>(.*?)</string>'),
-      '<key>CFBundleDisplayName</key>\n\t<string>$appName</string>',
+      r'<key>CFBundleDisplayName</key>\n\t<string>$(APP_DISPLAY_NAME)</string>',
     );
 
     iosInfoPlistFile.writeAsStringSync(newDisplayNameIOSInfoPlistString);
