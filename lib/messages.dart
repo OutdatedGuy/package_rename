@@ -115,9 +115,9 @@ const _linuxCMakeListsNotFoundMessage = '''
 ''';
 
 const _linuxMyApplicationNotFoundMessage = '''
-╔══════════════════════════════════════════════╗
-║   my_application.cc not found in `linux/`.   ║
-╚══════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════╗
+║   my_application.cc not found in `linux/` and `linux/runner/`.   ║
+╚══════════════════════════════════════════════════════════════════╝
 ''';
 
 const _invalidWindowsConfigMessage = '''

@@ -30,22 +30,43 @@ void _setLinuxAppName(dynamic appName) {
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
     final myAppFile = File(_linuxMyApplicationFilePath);
-    if (!myAppFile.existsSync()) {
+    final runnerMyAppFile = File(_linuxRunnerMyApplicationFilePath);
+
+    final doesMyAppFileExist = myAppFile.existsSync();
+    final doesRunnerMyAppFileExist = runnerMyAppFile.existsSync();
+
+    if (!doesMyAppFileExist && !doesRunnerMyAppFileExist) {
       throw _PackageRenameErrors.linuxMyApplicationNotFound;
     }
 
-    final myAppString = myAppFile.readAsStringSync();
-    final newTitleMyAppString = myAppString
-        .replaceAll(
-          RegExp(r'gtk_header_bar_set_title\(header_bar, "(.*)"\);'),
-          'gtk_header_bar_set_title(header_bar, "$appName");',
-        )
-        .replaceAll(
-          RegExp(r'gtk_window_set_title\(window, "(.*)"\);'),
-          'gtk_window_set_title(window, "$appName");',
-        );
+    if (doesMyAppFileExist) {
+      final myAppString = myAppFile.readAsStringSync();
+      final newTitleMyAppString = myAppString
+          .replaceAll(
+            RegExp(r'gtk_header_bar_set_title\(header_bar, "(.*)"\);'),
+            'gtk_header_bar_set_title(header_bar, "$appName");',
+          )
+          .replaceAll(
+            RegExp(r'gtk_window_set_title\(window, "(.*)"\);'),
+            'gtk_window_set_title(window, "$appName");',
+          );
 
-    myAppFile.writeAsStringSync(newTitleMyAppString);
+      myAppFile.writeAsStringSync(newTitleMyAppString);
+    }
+    if (doesRunnerMyAppFileExist) {
+      final runnerMyAppString = runnerMyAppFile.readAsStringSync();
+      final newTitleRunnerMyAppString = runnerMyAppString
+          .replaceAll(
+            RegExp(r'gtk_header_bar_set_title\(header_bar, "(.*)"\);'),
+            'gtk_header_bar_set_title(header_bar, "$appName");',
+          )
+          .replaceAll(
+            RegExp(r'gtk_window_set_title\(window, "(.*)"\);'),
+            'gtk_window_set_title(window, "$appName");',
+          );
+
+      runnerMyAppFile.writeAsStringSync(newTitleRunnerMyAppString);
+    }
 
     _logger.i('Linux app title set to: `$appName` (my_application.cc)');
   } on _PackageRenameException catch (e) {
