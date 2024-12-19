@@ -1,3 +1,9 @@
+## 1.8.0
+
+- feat(linux): Added support for Flutter 3.27 template in [434e774](https://github.com/OutdatedGuy/package_rename/commit/434e774da0dd7746e8251ba6987a8a8e01f99bb1)
+- chore: update example app to Flutter template 3.27 in [9f67bb3](https://github.com/OutdatedGuy/package_rename/commit/9f67bb3a835e63b02e4dec452a27dba1e752c2cb)
+- docs: updated changed fields and files list in [19c20d5](https://github.com/OutdatedGuy/package_rename/commit/19c20d536e9c26a7e9bdbb8822cc5bfd2ba30546)
+
 ## 1.7.1
 
 - refactor: lowered sdk constraints to support dart 2.12 and above in [71f839f](https://github.com/OutdatedGuy/package_rename/commit/71f839fade56b753c61a14b6251e679ae188614a)
