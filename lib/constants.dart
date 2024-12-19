@@ -62,6 +62,7 @@ const _webDirPath = 'web';
 
 // ? Linux
 const _linuxDirPath = 'linux';
+const _linuxRunnerDirPath = '$_linuxDirPath/runner';
 
 // ? Windows
 const _windowsDirPath = 'windows';
@@ -101,6 +102,8 @@ const _webManifestFilePath = '$_webDirPath/$_manifestJsonFileName';
 // ? Linux
 const _linuxCMakeListsFilePath = '$_linuxDirPath/$_cMakeListsFileName';
 const _linuxMyApplicationFilePath = '$_linuxDirPath/$_myApplicationFileName';
+const _linuxRunnerMyApplicationFilePath =
+    '$_linuxRunnerDirPath/$_myApplicationFileName';
 
 // ? Windows
 const _windowsCMakeListsFilePath = '$_windowsDirPath/$_cMakeListsFileName';
