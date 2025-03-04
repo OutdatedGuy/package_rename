@@ -8,6 +8,7 @@ const _pubspecFileName = 'pubspec.yaml';
 // ? Android
 const _androidManifestFileName = 'AndroidManifest.xml';
 const _buildGradleFileName = 'build.gradle';
+const _kotlinBuildGradleFileName = 'build.gradle.kts';
 
 // ? iOS
 const _infoPlistFileName = 'Info.plist';
@@ -90,6 +91,8 @@ const _androidProfileManifestFilePath =
     '$_androidSrcDirPath/$_androidProfileDirName/$_androidManifestFileName';
 const _androidAppLevelBuildGradleFilePath =
     '$_androidAppDirPath/$_buildGradleFileName';
+const _androidAppLevelKotlinBuildGradleFilePath =
+    '$_androidAppDirPath/$_kotlinBuildGradleFileName';
 
 // ? iOS
 const _iosInfoPlistFilePath = '$_iosRunnerDirPath/$_infoPlistFileName';
@@ -127,7 +130,7 @@ package {{packageName}}
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity()
+class MainActivity : FlutterActivity()
 ''';
 
 const _androidJavaMainActivityTemplate = '''
