@@ -1,3 +1,8 @@
+## 1.9.0
+
+- feat(android): Added support for Flutter 3.29 template in [4cc8e82](https://github.com/OutdatedGuy/package_rename/commit/4cc8e821f829ae0de107f5c6b77321bebdde182c)
+- chore: update example app to Flutter template 3.29 in [17975db](https://github.com/OutdatedGuy/package_rename/commit/17975db890e988135e406c18c052f5cd9981f820)
+
 ## 1.8.0
 
 - feat(linux): Added support for Flutter 3.27 template in [434e774](https://github.com/OutdatedGuy/package_rename/commit/434e774da0dd7746e8251ba6987a8a8e01f99bb1)
