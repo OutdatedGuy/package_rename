@@ -10,6 +10,8 @@
 
 - `android/app/build.gradle` > android > defaultConfig > applicationId ✅
 - `android/app/build.gradle` > android > namespace ✅
+- `android/app/build.gradle.kts` > android > defaultConfig > applicationId ✅
+- `android/app/build.gradle.kts` > android > namespace ✅
 - `android/app/src/debug/AndroidManifest.xml` > manifest > package ✅
 - `android/app/src/main/AndroidManifest.xml` > manifest > package ✅
 - `android/app/src/profile/AndroidManifest.xml` > manifest > package ✅

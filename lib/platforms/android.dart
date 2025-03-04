@@ -79,6 +79,7 @@ void _setAndroidPackageName(dynamic packageName) {
 
     _setBuildGradlePackageName(
       buildGradleFilePath: _androidAppLevelBuildGradleFilePath,
+      kotlinBuildGradleFilePath: _androidAppLevelKotlinBuildGradleFilePath,
       packageName: packageName,
     );
   } on _PackageRenameException catch (e) {
@@ -127,17 +128,23 @@ void _setManifestPackageName({
 
 void _setBuildGradlePackageName({
   required String buildGradleFilePath,
+  required String kotlinBuildGradleFilePath,
   required String packageName,
 }) {
-  final buildGradleFile = File(buildGradleFilePath);
-  if (!buildGradleFile.existsSync()) {
+  final gradleFile = _getAvailableGradleFile(
+    buildGradleFilePath: buildGradleFilePath,
+    kotlinBuildGradleFilePath: kotlinBuildGradleFilePath,
+  );
+
+  if (gradleFile == null) {
     _logger.w(
-      'build.gradle file not found at: $buildGradleFilePath',
+      'build.gradle or build.gradle.kts file not found at: '
+      '$buildGradleFilePath or $kotlinBuildGradleFilePath',
     );
     return;
   }
 
-  final buildGradleString = buildGradleFile.readAsStringSync();
+  final buildGradleString = gradleFile.readAsStringSync();
   final newPackageIDBuildGradleString = buildGradleString
       .replaceAll(
         RegExp('applicationId\\s*=?\\s*["\'].*?["\']'),
@@ -148,11 +155,28 @@ void _setBuildGradlePackageName({
         'namespace = "$packageName"',
       );
 
-  buildGradleFile.writeAsStringSync(newPackageIDBuildGradleString);
+  gradleFile.writeAsStringSync(newPackageIDBuildGradleString);
 
   _logger.i(
     'Android applicationId set to: `$packageName` (build.gradle)',
   );
+}
+
+File? _getAvailableGradleFile({
+  required String buildGradleFilePath,
+  required String kotlinBuildGradleFilePath,
+}) {
+  final buildGradleFile = File(kotlinBuildGradleFilePath);
+  if (buildGradleFile.existsSync()) {
+    return buildGradleFile;
+  }
+
+  final kotlinBuildGradleFile = File(kotlinBuildGradleFilePath);
+  if (kotlinBuildGradleFile.existsSync()) {
+    return kotlinBuildGradleFile;
+  }
+
+  return null;
 }
 
 void _createNewMainActivity({
