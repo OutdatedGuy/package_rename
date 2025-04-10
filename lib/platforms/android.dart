@@ -166,7 +166,7 @@ File? _getAvailableGradleFile({
   required String buildGradleFilePath,
   required String kotlinBuildGradleFilePath,
 }) {
-  final buildGradleFile = File(kotlinBuildGradleFilePath);
+  final buildGradleFile = File(buildGradleFilePath);
   if (buildGradleFile.existsSync()) {
     return buildGradleFile;
   }
