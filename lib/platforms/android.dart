@@ -166,14 +166,14 @@ File? _getAvailableGradleFile({
   required String buildGradleFilePath,
   required String kotlinBuildGradleFilePath,
 }) {
-  final buildGradleFile = File(buildGradleFilePath);
-  if (buildGradleFile.existsSync()) {
-    return buildGradleFile;
-  }
-
   final kotlinBuildGradleFile = File(kotlinBuildGradleFilePath);
   if (kotlinBuildGradleFile.existsSync()) {
     return kotlinBuildGradleFile;
+  }
+
+  final buildGradleFile = File(buildGradleFilePath);
+  if (buildGradleFile.existsSync()) {
+    return buildGradleFile;
   }
 
   return null;
