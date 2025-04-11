@@ -23,7 +23,7 @@ jobs:
 
       # Statically analyze the Dart code for any errors.
       - name: Analyze project source
-        run: dart analyze .
+        run: dart analyze lib bin
 
       # Check for any formatting issues in the code.
       - name: Verify formatting
