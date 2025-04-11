@@ -20,7 +20,7 @@ For more info see [list of changed fields](CHANGED_FIELDS.md)
 
 ```yaml
 dev_dependencies:
-  package_rename: ^1.9.0
+  package_rename: ^1.10.0
 ```
 
 #### Create configuration
