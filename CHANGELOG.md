@@ -1,3 +1,9 @@
+## 1.10.0
+
+- feat(android): prefer Kotlin DSL (`.gradle.kts`) over Groovy DSL (`.gradle`) when available in [09409d6](https://github.com/OutdatedGuy/package_rename/commit/09409d61081ad9ee6a382e975e953e4281e52ccf)
+- fix(android): correctly verify `build.gradle` file, resolving issues in projects using the Groovy DSL (.gradle) in [0ca8d35](https://github.com/OutdatedGuy/package_rename/commit/0ca8d35797193d4b5dff66fb2f2ce3bc2eb20c85)
+- chore: updated dependencies to latest in [1caa584](https://github.com/OutdatedGuy/package_rename/commit/1caa5840cc89cdd4529f5a0e3d2f79ec18297ae0)
+
 ## 1.9.0
 
 - feat(android): Added support for Flutter 3.29 template in [4cc8e82](https://github.com/OutdatedGuy/package_rename/commit/4cc8e821f829ae0de107f5c6b77321bebdde182c)
