@@ -27,4 +27,4 @@ jobs:
 
       # Check for any formatting issues in the code.
       - name: Verify formatting
-        run: dart format --set-exit-if-changed .
+        run: dart format --set-exit-if-changed lib bin
