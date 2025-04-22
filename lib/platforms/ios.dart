@@ -107,34 +107,100 @@ void _setIOSPackageName(dynamic packageName) {
     }
 
     final iosProjectString = iosProjectFile.readAsStringSync();
-    final newBundleIDIOSProjectString = iosProjectString
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
-        .replaceAll(
-          RegExp(
-            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-_]+)(?<!\.RunnerTests);',
-          ),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
-        )
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
-        .replaceAll(
-          RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?).RunnerTests;'),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
-        )
-        // Removes old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
-        .replaceAllMapped(
-      RegExp(
-        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-_]+)\.([A-Za-z0-9.-_]+)";',
-      ),
-      (match) {
-        final extensionName = match.group(2);
-        return 'PRODUCT_BUNDLE_IDENTIFIER = "$packageName.$extensionName";';
-      },
+
+    // Extract all bundle identifiers, accounting for both quoted and unquoted formats
+    final bundleIdRegex = RegExp(
+      r'PRODUCT_BUNDLE_IDENTIFIER = "?([^";]+)"?;',
+      multiLine: true,
     );
 
-    iosProjectFile.writeAsStringSync(newBundleIDIOSProjectString);
+    final bundleIdentifierMatches = bundleIdRegex
+        .allMatches(iosProjectString)
+        .map((m) => m.group(1)!)
+        .toList();
+
+    if (bundleIdentifierMatches.isEmpty) {
+      throw Exception('No bundle identifiers found in project file');
+    }
+
+    // Find all unique base identifiers (without extensions)
+    // We'll consider identifiers that are substrings of others as potential base identifiers
+    final baseIdentifierCandidates = <String>[];
+
+    for (final identifier in bundleIdentifierMatches) {
+      bool isBaseForOthers = false;
+      for (final other in bundleIdentifierMatches) {
+        if (identifier != other && other.startsWith(identifier)) {
+          isBaseForOthers = true;
+          break;
+        }
+      }
+
+      if (isBaseForOthers) {
+        baseIdentifierCandidates.add(identifier);
+      }
+    }
+
+    // If we couldn't find any base identifiers, use the shortest one as fallback
+    String baseIdentifier;
+    if (baseIdentifierCandidates.isEmpty) {
+      // If there are no base candidates, it means all identifiers are unique
+      // Or there's only one identifier. Use the shortest as the base.
+      baseIdentifier = bundleIdentifierMatches
+          .reduce((a, b) => a.length <= b.length ? a : b);
+    } else {
+      // Use the shortest base candidate
+      baseIdentifier = baseIdentifierCandidates
+          .reduce((a, b) => a.length <= b.length ? a : b);
+    }
+
+    // Create a map of all identifiers to their new values
+    final identifierReplacements = <String, String>{};
+
+    for (final identifier in bundleIdentifierMatches) {
+      if (identifier == baseIdentifier) {
+        identifierReplacements[identifier] = packageName;
+      } else if (identifier.startsWith(baseIdentifier)) {
+        // This is an extension
+        final extension = identifier.substring(baseIdentifier.length);
+        identifierReplacements[identifier] = '$packageName$extension';
+      } else {
+        // This is an unrelated identifier, skip it
+        _logger.w('Skipping unrelated identifier: $identifier');
+      }
+    }
+
+    // Apply all replacements to the project file
+    var newIosProjectString = iosProjectString;
+
+    identifierReplacements.forEach((oldId, newId) {
+      // Replace unquoted format
+      newIosProjectString = newIosProjectString.replaceAll(
+        'PRODUCT_BUNDLE_IDENTIFIER = $oldId;',
+        'PRODUCT_BUNDLE_IDENTIFIER = $newId;',
+      );
+
+      // Replace quoted format
+      newIosProjectString = newIosProjectString.replaceAll(
+        'PRODUCT_BUNDLE_IDENTIFIER = "$oldId";',
+        'PRODUCT_BUNDLE_IDENTIFIER = "$newId";',
+      );
+    });
+
+    // Special case for RunnerTests which might not be caught by the pattern above
+    if (identifierReplacements.containsKey(baseIdentifier)) {
+      newIosProjectString = newIosProjectString.replaceAll(
+        RegExp('PRODUCT_BUNDLE_IDENTIFIER = "$baseIdentifier\\.RunnerTests";'),
+        'PRODUCT_BUNDLE_IDENTIFIER = "$packageName.RunnerTests";',
+      );
+
+      newIosProjectString = newIosProjectString.replaceAll(
+        RegExp('PRODUCT_BUNDLE_IDENTIFIER = $baseIdentifier\\.RunnerTests;'),
+        'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
+      );
+    }
+
+    iosProjectFile.writeAsStringSync(newIosProjectString);
 
     _logger.i('iOS bundle identifier set to: `$packageName` (project.pbxproj)');
   } on _PackageRenameException catch (e) {
