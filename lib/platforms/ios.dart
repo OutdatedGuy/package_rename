@@ -6,10 +6,11 @@ void _setIOSConfigurations(dynamic iosConfig) {
     if (iosConfig is! Map) throw _PackageRenameErrors.invalidIOSConfig;
 
     final iosConfigMap = Map<String, dynamic>.from(iosConfig);
+    final customDirPath = iosConfigMap[_customDirPath];
 
-    _setIOSDisplayName(iosConfigMap[_appNameKey]);
-    _setIOSBundleName(iosConfigMap[_bundleNameKey]);
-    _setIOSPackageName(iosConfigMap[_packageNameKey]);
+    _setIOSDisplayName(iosConfigMap[_appNameKey], customDirPath: customDirPath);
+    _setIOSBundleName(iosConfigMap[_bundleNameKey], customDirPath: customDirPath);
+    _setIOSPackageName(iosConfigMap[_packageNameKey], customDirPath: customDirPath);
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -24,12 +25,15 @@ void _setIOSConfigurations(dynamic iosConfig) {
   }
 }
 
-void _setIOSDisplayName(dynamic appName) {
+void _setIOSDisplayName(dynamic appName, {String? customDirPath}) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    final iosInfoPlistFile = File(_iosInfoPlistFilePath);
+    final iosInfoPlistFilePath = (customDirPath is String && customDirPath.isNotEmpty)
+        ? _iosInfoPlistFilePath.replaceFirst(_iosDirPath, customDirPath)
+        : _iosInfoPlistFilePath;
+    final iosInfoPlistFile = File(iosInfoPlistFilePath);
     if (!iosInfoPlistFile.existsSync()) {
       throw _PackageRenameErrors.iosInfoPlistNotFound;
     }
@@ -57,7 +61,7 @@ void _setIOSDisplayName(dynamic appName) {
   }
 }
 
-void _setIOSBundleName(dynamic bundleName) {
+void _setIOSBundleName(dynamic bundleName, {String? customDirPath}) {
   try {
     if (bundleName == null) return;
     if (bundleName is! String) throw _PackageRenameErrors.invalidBundleName;
@@ -68,7 +72,10 @@ void _setIOSBundleName(dynamic bundleName) {
       );
     }
 
-    final iosInfoPlistFile = File(_iosInfoPlistFilePath);
+    final iosInfoPlistFilePath = (customDirPath is String && customDirPath.isNotEmpty)
+        ? _iosInfoPlistFilePath.replaceFirst(_iosDirPath, customDirPath)
+        : _iosInfoPlistFilePath;
+    final iosInfoPlistFile = File(iosInfoPlistFilePath);
     if (!iosInfoPlistFile.existsSync()) {
       throw _PackageRenameErrors.iosInfoPlistNotFound;
     }
@@ -96,12 +103,15 @@ void _setIOSBundleName(dynamic bundleName) {
   }
 }
 
-void _setIOSPackageName(dynamic packageName) {
+void _setIOSPackageName(dynamic packageName, {String? customDirPath}) {
   try {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
 
-    final iosProjectFile = File(_iosProjectFilePath);
+    final iosProjectFilePath = (customDirPath is String && customDirPath.isNotEmpty)
+        ? _iosProjectFilePath.replaceFirst(_iosDirPath, customDirPath)
+        : _iosProjectFilePath;
+    final iosProjectFile = File(iosProjectFilePath);
     if (!iosProjectFile.existsSync()) {
       throw _PackageRenameErrors.iosProjectFileNotFound;
     }

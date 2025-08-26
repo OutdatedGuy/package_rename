@@ -28,12 +28,18 @@ void _setAndroidConfigurations(dynamic androidConfig) {
   }
 }
 
-void _setAndroidAppName(dynamic appName) {
+void _setAndroidAppName(dynamic appName, String? customDirPath) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    final androidManifestFile = File(_androidMainManifestFilePath);
+    final androidMainManifestFilePath =
+        (customDirPath is String && customDirPath.isNotEmpty)
+            ? _androidMainManifestFilePath.replaceAll(
+                _androidAppDirPath, customDirPath)
+            : _androidMainManifestFilePath;
+
+    final androidManifestFile = File(androidMainManifestFilePath);
     if (!androidManifestFile.existsSync()) {
       throw _PackageRenameErrors.androidMainManifestNotFound;
     }
@@ -61,15 +67,24 @@ void _setAndroidAppName(dynamic appName) {
   }
 }
 
-void _setAndroidPackageName(dynamic packageName) {
+void _setAndroidPackageName(dynamic packageName, String? customDirPath) {
   try {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
 
     final androidManifestFilePaths = [
-      _androidMainManifestFilePath,
-      _androidDebugManifestFilePath,
-      _androidProfileManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidMainManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidMainManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidDebugManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidDebugManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidProfileManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidProfileManifestFilePath,
     ];
 
     _setManifestPackageName(
@@ -78,8 +93,15 @@ void _setAndroidPackageName(dynamic packageName) {
     );
 
     _setBuildGradlePackageName(
-      buildGradleFilePath: _androidAppLevelBuildGradleFilePath,
-      kotlinBuildGradleFilePath: _androidAppLevelKotlinBuildGradleFilePath,
+      buildGradleFilePath: (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidAppLevelBuildGradleFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidAppLevelBuildGradleFilePath,
+      kotlinBuildGradleFilePath:
+          (customDirPath is String && customDirPath.isNotEmpty)
+              ? _androidAppLevelKotlinBuildGradleFilePath.replaceAll(
+                  _androidAppDirPath, customDirPath)
+              : _androidAppLevelKotlinBuildGradleFilePath,
       packageName: packageName,
     );
   } on _PackageRenameException catch (e) {
@@ -183,6 +205,7 @@ void _createNewMainActivity({
   required dynamic lang,
   required dynamic packageName,
   required dynamic overrideOldPackage,
+  String? customDirPath,
 }) {
   try {
     if (packageName == null) return;
@@ -205,7 +228,10 @@ void _createNewMainActivity({
 
     if (overrideOldPackage == null) {
       final packageDirs = packageName.replaceAll('.', '/');
-      final langDir = '$_androidMainDirPath/$lang';
+      final dirPath = (customDirPath is String && customDirPath.isNotEmpty)
+          ? '${_androidMainDirPath.replaceAll(_androidAppDirPath, customDirPath)}/$lang'
+          : '$_androidMainDirPath/$lang';
+      final langDir = dirPath;
 
       final mainActivityFile = File(
         '$langDir/$packageDirs/MainActivity.$fileExtension',
