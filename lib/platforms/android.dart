@@ -2,17 +2,21 @@ part of '../package_rename.dart';
 
 void _setAndroidConfigurations(dynamic androidConfig) {
   try {
+    _logger.i('Custom dir path: $androidConfig');
     if (androidConfig == null) return;
     if (androidConfig is! Map) throw _PackageRenameErrors.invalidAndroidConfig;
 
     final androidConfigMap = Map<String, dynamic>.from(androidConfig);
 
-    _setAndroidAppName(androidConfigMap[_appNameKey]);
-    _setAndroidPackageName(androidConfigMap[_packageNameKey]);
+    _setAndroidAppName(
+        androidConfigMap[_appNameKey], androidConfigMap[_customDirPath]);
+    _setAndroidPackageName(
+        androidConfigMap[_packageNameKey], androidConfigMap[_customDirPath]);
     _createNewMainActivity(
       lang: androidConfigMap[_languageKey],
       packageName: androidConfigMap[_packageNameKey],
       overrideOldPackage: androidConfigMap[_overrideOldPackageKey],
+      customDirPath: androidConfigMap[_customDirPath],
     );
   } on _PackageRenameException catch (e) {
     _logger
