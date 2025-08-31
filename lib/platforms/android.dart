@@ -2,7 +2,6 @@ part of '../package_rename.dart';
 
 void _setAndroidConfigurations(dynamic androidConfig) {
   try {
-    _logger.i('Custom dir path: $androidConfig');
     if (androidConfig == null) return;
     if (androidConfig is! Map) throw _PackageRenameErrors.invalidAndroidConfig;
 
