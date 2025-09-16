@@ -129,9 +129,9 @@ final _majorTaskDoneLine = '━' * _outputLength;
 const _androidKotlinMainActivityTemplate = '''
 package {{packageName}}
 
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity : FlutterActivity()
+class MainActivity : FlutterFragmentActivity()
 ''';
 
 const _androidJavaMainActivityTemplate = '''
