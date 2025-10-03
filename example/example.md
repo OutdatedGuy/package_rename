@@ -5,12 +5,13 @@ package_rename_config:
   android:
     app_name: Package Rename Demo
     package_name: rocks.outdatedguy.packagerenamedemo
-    override_old_package: com.example.example
+    override_old_package: com.example.package_rename_example
     lang: kotlin
 
   ios:
     app_name: Package Rename Demo
     bundle_name: renamedemo
+    override_old_package: com.example.packageRenameExample
     package_name: rocks.outdatedguy.packagerenamedemo
 
   web:
