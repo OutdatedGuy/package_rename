@@ -45,6 +45,7 @@ package_rename_config:
   ios:
     app_name: # (String) The display name of the ios app
     bundle_name: # (String) The bundle name of the ios app
+    override_old_package: # (String) Use this to replace the old bundle identifier with the new bundle identifier
     package_name: # (String) The product bundle identifier of the ios app
 
   linux:

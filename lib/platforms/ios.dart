@@ -9,7 +9,10 @@ void _setIOSConfigurations(dynamic iosConfig) {
 
     _setIOSDisplayName(iosConfigMap[_appNameKey]);
     _setIOSBundleName(iosConfigMap[_bundleNameKey]);
-    _setIOSPackageName(iosConfigMap[_packageNameKey]);
+    _setIOSPackageName(
+      oldPackageName: iosConfigMap[_overrideOldPackageKey],
+      packageName: iosConfigMap[_packageNameKey],
+    );
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
@@ -96,7 +99,10 @@ void _setIOSBundleName(dynamic bundleName) {
   }
 }
 
-void _setIOSPackageName(dynamic packageName) {
+void _setIOSPackageName({
+  dynamic oldPackageName,
+  dynamic packageName,
+}) {
   try {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
@@ -111,26 +117,25 @@ void _setIOSPackageName(dynamic packageName) {
         // Replaces old bundle id from
         // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
         .replaceAll(
-          RegExp(
-            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-_]+)(?<!\.RunnerTests);',
-          ),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
-        )
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
-        .replaceAll(
-          RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?).RunnerTests;'),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
-        )
+      RegExp(
+        'PRODUCT_BUNDLE_IDENTIFIER = $oldPackageName(?<!\\.RunnerTests);',
+      ),
+      'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
+    )
         // Removes old bundle id from
         // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
         .replaceAllMapped(
       RegExp(
-        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-_]+)\.([A-Za-z0-9.-_]+)";',
+        'PRODUCT_BUNDLE_IDENTIFIER = $oldPackageName\\.([A-Za-z0-9.-_]+);',
       ),
       (match) {
-        final extensionName = match.group(2);
-        return 'PRODUCT_BUNDLE_IDENTIFIER = "$packageName.$extensionName";';
+        final extensionName = match.group(1);
+        final isContains = packageName.contains(extensionName.toString());
+        if (isContains) {
+          return 'PRODUCT_BUNDLE_IDENTIFIER = $packageName;';
+        } else {
+          return 'PRODUCT_BUNDLE_IDENTIFIER = $packageName.$extensionName;';
+        }
       },
     );
 
