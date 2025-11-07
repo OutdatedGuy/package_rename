@@ -276,7 +276,10 @@ void _createNewMainActivity({
       // to new package directory structure
       final oldPackageDirs = overrideOldPackage.replaceAll('.', '/');
       final newPackageDirs = packageName.replaceAll('.', '/');
-      final langDir = '$_androidMainDirPath/$lang';
+      final dirPath = (customDirPath is String && customDirPath.isNotEmpty)
+          ? '${_androidMainDirPath.replaceAll(_androidAppDirPath, customDirPath)}/$lang'
+          : '$_androidMainDirPath/$lang';
+      final langDir = dirPath;
 
       final oldMainActivityDir = Directory('$langDir/$oldPackageDirs');
       if (!oldMainActivityDir.existsSync()) {
