@@ -8,7 +8,7 @@ void _setAndroidConfigurations(dynamic androidConfig) {
     final androidConfigMap = Map<String, dynamic>.from(androidConfig);
 
     _setAndroidAppName(
-        androidConfigMap[_appNameKey], androidConfigMap[_customDirPath]);
+        androidConfigMap[_appNameKey], androidConfigMap[_customDirPath], androidConfigMap[_host]);
     _setAndroidPackageName(
         androidConfigMap[_packageNameKey], androidConfigMap[_customDirPath]);
     _createNewMainActivity(
@@ -31,7 +31,7 @@ void _setAndroidConfigurations(dynamic androidConfig) {
   }
 }
 
-void _setAndroidAppName(dynamic appName, String? customDirPath) {
+void _setAndroidAppName(dynamic appName, String? customDirPath, dynamic host) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
@@ -48,10 +48,16 @@ void _setAndroidAppName(dynamic appName, String? customDirPath) {
     }
 
     final androidManifestString = androidManifestFile.readAsStringSync();
-    final newLabelAndroidManifestString = androidManifestString.replaceAll(
+    String newLabelAndroidManifestString = androidManifestString.replaceAll(
       RegExp('android:label="(.*)"'),
       'android:label="$appName"',
     );
+    if (host is String && host.isNotEmpty) {
+      newLabelAndroidManifestString = newLabelAndroidManifestString.replaceAll(
+        RegExp('android:host="(.*)"'),
+        'android:host="$appName"',
+      );
+    }
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
 

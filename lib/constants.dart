@@ -47,6 +47,7 @@ const _languageKey = 'lang';
 const _executableKey = 'exe_name';
 const _overrideOldPackageKey = 'override_old_package';
 const _customDirPath = 'custom_dir_path';
+const _host = 'host';
 
 // ! Directory Paths
 // ? Android
