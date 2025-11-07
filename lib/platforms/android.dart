@@ -55,8 +55,9 @@ void _setAndroidAppName(dynamic appName, String? customDirPath, dynamic host) {
     if (host is String && host.isNotEmpty) {
       newLabelAndroidManifestString = newLabelAndroidManifestString.replaceAll(
         RegExp('android:host="(.*)"'),
-        'android:host="$appName"',
+        'android:host="$host"',
       );
+      _logger.i('Android Host set to: `$host` (main AndroidManifest.xml)');
     }
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
