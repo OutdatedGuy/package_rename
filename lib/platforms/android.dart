@@ -333,7 +333,20 @@ void _createNewMainActivity({
       }
     }
 
-    _logger.i('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
+    if (overrideOldPackage == null) {
+      _logger.i(
+        'New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created at: '
+        '${(customDirPath is String && customDirPath.isNotEmpty) ? customDirPath : _androidAppDirPath}/'
+        'src/main/$lang/${packageName.replaceAll('.', '/')}',
+      );
+    } else {
+      _logger.i(
+        'MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} moved from package: '
+        '`$overrideOldPackage` to `$packageName` at: '
+        '${(customDirPath is String && customDirPath.isNotEmpty) ? customDirPath : _androidAppDirPath}/'
+        'src/main/$lang/${packageName.replaceAll('.', '/')}',
+      );
+    }
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
