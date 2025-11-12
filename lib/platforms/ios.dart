@@ -125,17 +125,12 @@ void _setIOSPackageName(dynamic packageName) {
     // Find the base identifier by counting extensions
     String? baseIdentifier;
 
-    // Build a map of identifier to extension count in a single pass
+    // Build a map of identifier to extension count
     final extensionCountMap = <String, int>{};
     for (final identifier in bundleIdentifierMatches) {
-      extensionCountMap[identifier] = 0;
-    }
-    for (final other in bundleIdentifierMatches) {
-      for (final identifier in bundleIdentifierMatches) {
-        if (identifier != other && other.startsWith('$identifier.')) {
-          extensionCountMap[identifier] = extensionCountMap[identifier]! + 1;
-        }
-      }
+      extensionCountMap[identifier] = bundleIdentifierMatches
+          .where((other) => other != identifier && other.startsWith('$identifier.'))
+          .length;
     }
     baseIdentifier = extensionCountMap.entries
         .reduce((a, b) => a.value >= b.value ? a : b)
