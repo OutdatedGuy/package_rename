@@ -137,7 +137,7 @@ void _setIOSPackageName(dynamic packageName) {
         .key;
 
     // Replace all occurrences
-    final newIosProjectString = iosProjectString.replaceAllMapped(
+    final newBundleIDIOSProjectString = iosProjectString.replaceAllMapped(
       RegExp(
         'PRODUCT_BUNDLE_IDENTIFIER = ("?)${RegExp.escape(baseIdentifier)}(\\.[A-Za-z0-9.-]+)?("?);',
       ),
@@ -149,7 +149,7 @@ void _setIOSPackageName(dynamic packageName) {
       },
     );
 
-    iosProjectFile.writeAsStringSync(newIosProjectString);
+    iosProjectFile.writeAsStringSync(newBundleIDIOSProjectString);
 
     _logger.i('iOS bundle identifier set to: `$packageName` (project.pbxproj)');
   } on _PackageRenameException catch (e) {
