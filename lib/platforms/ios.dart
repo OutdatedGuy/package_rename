@@ -107,30 +107,45 @@ void _setIOSPackageName(dynamic packageName) {
     }
 
     final iosProjectString = iosProjectFile.readAsStringSync();
-    final newBundleIDIOSProjectString = iosProjectString
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}};`
-        .replaceAll(
-          RegExp(
-            r'PRODUCT_BUNDLE_IDENTIFIER = ([A-Za-z0-9.-_]+)(?<!\.RunnerTests);',
-          ),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName;',
-        )
-        // Replaces old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = {{BUNDLE_ID}}.RunnerTests;`
-        .replaceAll(
-          RegExp('PRODUCT_BUNDLE_IDENTIFIER = (.*?).RunnerTests;'),
-          'PRODUCT_BUNDLE_IDENTIFIER = $packageName.RunnerTests;',
-        )
-        // Removes old bundle id from
-        // `PRODUCT_BUNDLE_IDENTIFIER = "{{BUNDLE_ID}}.{{EXTENSION_NAME}}";`
-        .replaceAllMapped(
+
+    // Extract all bundle identifiers, using only allowed characters
+    final bundleIdRegex = RegExp(
+      r'PRODUCT_BUNDLE_IDENTIFIER = "?([A-Za-z0-9.-]+)"?;',
+    );
+
+    final bundleIdentifierMatches = bundleIdRegex
+        .allMatches(iosProjectString)
+        .map((m) => m.group(1)!)
+        .toSet();
+
+    if (bundleIdentifierMatches.isEmpty) {
+      throw _PackageRenameErrors.baseIdentifierNotFound;
+    }
+
+    // Find the base identifier by counting extensions
+    String? baseIdentifier;
+
+    // Build a map of identifier to extension count
+    final extensionCountMap = <String, int>{};
+    for (final identifier in bundleIdentifierMatches) {
+      extensionCountMap[identifier] = bundleIdentifierMatches.where((other) {
+        return other != identifier && other.startsWith('$identifier.');
+      }).length;
+    }
+    baseIdentifier = extensionCountMap.entries
+        .reduce((a, b) => a.value >= b.value ? a : b)
+        .key;
+
+    // Replace all occurrences
+    final newBundleIDIOSProjectString = iosProjectString.replaceAllMapped(
       RegExp(
-        r'PRODUCT_BUNDLE_IDENTIFIER = "([A-Za-z0-9.-_]+)\.([A-Za-z0-9.-_]+)";',
+        'PRODUCT_BUNDLE_IDENTIFIER = ("?)${RegExp.escape(baseIdentifier)}(\\.[A-Za-z0-9.-]+)?("?);',
       ),
       (match) {
-        final extensionName = match.group(2);
-        return 'PRODUCT_BUNDLE_IDENTIFIER = "$packageName.$extensionName";';
+        final quote = match.group(1) ?? match.group(3) ?? '';
+        final extension = match.group(2) ?? '';
+
+        return 'PRODUCT_BUNDLE_IDENTIFIER = $quote$packageName$extension$quote;';
       },
     );
 
