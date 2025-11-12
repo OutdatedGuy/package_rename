@@ -110,7 +110,7 @@ void _setIOSPackageName(dynamic packageName) {
 
     // Extract all bundle identifiers, using only allowed characters
     final bundleIdRegex = RegExp(
-      r'PRODUCT_BUNDLE_IDENTIFIER = "?([A-Za-z0-9._-]+)"?;',
+      r'PRODUCT_BUNDLE_IDENTIFIER = "?([A-Za-z0-9.-]+)"?;',
     );
 
     final bundleIdentifierMatches = bundleIdRegex
@@ -119,15 +119,11 @@ void _setIOSPackageName(dynamic packageName) {
         .toSet();
 
     if (bundleIdentifierMatches.isEmpty) {
-      throw _PackageRenameException(
-        'No bundle identifiers found in project file',
-        254,
-      );
+      throw _PackageRenameErrors.baseIdentifierNotFound;
     }
 
     // Find the base identifier by counting extensions
     String? baseIdentifier;
-    int maxExtensions = 0;
 
     // Build a map of identifier to extension count in a single pass
     final extensionCountMap = <String, int>{};
@@ -137,23 +133,19 @@ void _setIOSPackageName(dynamic packageName) {
     for (final other in bundleIdentifierMatches) {
       for (final identifier in bundleIdentifierMatches) {
         if (identifier != other && other.startsWith('$identifier.')) {
-          extensionCountMap[identifier] = (extensionCountMap[identifier] ?? 0) + 1;
+          extensionCountMap[identifier] = extensionCountMap[identifier]! + 1;
         }
       }
     }
     baseIdentifier = extensionCountMap.entries
         .reduce((a, b) => a.value >= b.value ? a : b)
         .key;
-    maxExtensions = extensionCountMap[baseIdentifier] ?? 0;
-
-    // If no base identifier found, use the shortest unique identifier
-    baseIdentifier ??=
-        bundleIdentifierMatches.reduce((a, b) => a.length <= b.length ? a : b);
 
     // Replace all occurrences
     final newIosProjectString = iosProjectString.replaceAllMapped(
       RegExp(
-          'PRODUCT_BUNDLE_IDENTIFIER = ("?)${RegExp.escape(baseIdentifier)}(\\.[A-Za-z0-9._-]+)?("?);'),
+        'PRODUCT_BUNDLE_IDENTIFIER = ("?)${RegExp.escape(baseIdentifier)}(\\.[A-Za-z0-9.-]+)?("?);',
+      ),
       (match) {
         final openQuote = match.group(1) ?? '';
         final extension = match.group(2) ?? '';

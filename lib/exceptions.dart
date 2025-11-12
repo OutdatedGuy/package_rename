@@ -185,4 +185,9 @@ class _PackageRenameErrors {
     _invalidShortAppNameMessage,
     34,
   );
+
+  static const baseIdentifierNotFound = _PackageRenameException(
+    _baseIdentifierNotFoundMessage,
+    35,
+  );
 }

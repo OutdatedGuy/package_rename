@@ -209,3 +209,9 @@ const _macOSProjectFileNotFoundMessage = '''
 ║   project.pbxproj not found in `macos/Runner.xcodeproj/`.   ║
 ╚═════════════════════════════════════════════════════════════╝
 ''';
+
+const _baseIdentifierNotFoundMessage = '''
+╔════════════════════════════════════════════════════╗
+║   No bundle identifiers found in project file!!!   ║
+╚════════════════════════════════════════════════════╝
+''';
