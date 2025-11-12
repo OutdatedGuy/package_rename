@@ -119,29 +119,32 @@ void _setIOSPackageName(dynamic packageName) {
         .toSet();
 
     if (bundleIdentifierMatches.isEmpty) {
-      throw Exception('No bundle identifiers found in project file');
+      throw _PackageRenameException(
+        'No bundle identifiers found in project file',
+        254,
+      );
     }
 
     // Find the base identifier by counting extensions
     String? baseIdentifier;
     int maxExtensions = 0;
 
+    // Build a map of identifier to extension count in a single pass
+    final extensionCountMap = <String, int>{};
     for (final identifier in bundleIdentifierMatches) {
-      int extensionCount = 0;
-
-      for (final other in bundleIdentifierMatches) {
-        // Check if 'other' extends 'identifier' with a dot separator
+      extensionCountMap[identifier] = 0;
+    }
+    for (final other in bundleIdentifierMatches) {
+      for (final identifier in bundleIdentifierMatches) {
         if (identifier != other && other.startsWith('$identifier.')) {
-          extensionCount++;
+          extensionCountMap[identifier] = (extensionCountMap[identifier] ?? 0) + 1;
         }
       }
-
-      // Use the identifier that has the most extensions
-      if (extensionCount > maxExtensions) {
-        maxExtensions = extensionCount;
-        baseIdentifier = identifier;
-      }
     }
+    baseIdentifier = extensionCountMap.entries
+        .reduce((a, b) => a.value >= b.value ? a : b)
+        .key;
+    maxExtensions = extensionCountMap[baseIdentifier] ?? 0;
 
     // If no base identifier found, use the shortest unique identifier
     baseIdentifier ??=
