@@ -128,9 +128,9 @@ void _setIOSPackageName(dynamic packageName) {
     // Build a map of identifier to extension count
     final extensionCountMap = <String, int>{};
     for (final identifier in bundleIdentifierMatches) {
-      extensionCountMap[identifier] = bundleIdentifierMatches
-          .where((other) => other != identifier && other.startsWith('$identifier.'))
-          .length;
+      extensionCountMap[identifier] = bundleIdentifierMatches.where((other) {
+        return other != identifier && other.startsWith('$identifier.');
+      }).length;
     }
     baseIdentifier = extensionCountMap.entries
         .reduce((a, b) => a.value >= b.value ? a : b)
@@ -142,11 +142,10 @@ void _setIOSPackageName(dynamic packageName) {
         'PRODUCT_BUNDLE_IDENTIFIER = ("?)${RegExp.escape(baseIdentifier)}(\\.[A-Za-z0-9.-]+)?("?);',
       ),
       (match) {
-        final openQuote = match.group(1) ?? '';
+        final quote = match.group(1) ?? match.group(3) ?? '';
         final extension = match.group(2) ?? '';
-        final closeQuote = match.group(3) ?? '';
 
-        return 'PRODUCT_BUNDLE_IDENTIFIER = $openQuote$packageName$extension$closeQuote;';
+        return 'PRODUCT_BUNDLE_IDENTIFIER = $quote$packageName$extension$quote;';
       },
     );
 

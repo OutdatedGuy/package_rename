@@ -211,8 +211,8 @@ const _macOSProjectFileNotFoundMessage = '''
 ''';
 
 const _baseIdentifierNotFoundMessage = '''
-╔════════════════════════════════════════════════════════════════════════════════════╗
-║   No bundle identifiers found in `ios/Runner.xcodeproj/project.pbxproj`!!!        ║
-║   The file may be corrupted or in an unexpected format.                           ║
-╚════════════════════════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════════╗
+║   No bundle identifiers found in `ios/Runner.xcodeproj/project.pbxproj`!!!   ║
+║   The file may be corrupted or in an unexpected format.                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 ''';
