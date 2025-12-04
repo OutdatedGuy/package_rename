@@ -46,6 +46,8 @@ const _copyrightKey = 'copyright_notice';
 const _languageKey = 'lang';
 const _executableKey = 'exe_name';
 const _overrideOldPackageKey = 'override_old_package';
+const _customDirPath = 'custom_dir_path';
+const _host = 'host';
 
 // ! Directory Paths
 // ? Android
@@ -128,9 +130,9 @@ final _majorTaskDoneLine = '━' * _outputLength;
 const _androidKotlinMainActivityTemplate = '''
 package {{packageName}}
 
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity : FlutterActivity()
+class MainActivity : FlutterFragmentActivity()
 ''';
 
 const _androidJavaMainActivityTemplate = '''

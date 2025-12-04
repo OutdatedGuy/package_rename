@@ -7,12 +7,15 @@ void _setAndroidConfigurations(dynamic androidConfig) {
 
     final androidConfigMap = Map<String, dynamic>.from(androidConfig);
 
-    _setAndroidAppName(androidConfigMap[_appNameKey]);
-    _setAndroidPackageName(androidConfigMap[_packageNameKey]);
+    _setAndroidAppName(
+        androidConfigMap[_appNameKey], androidConfigMap[_customDirPath], androidConfigMap[_host]);
+    _setAndroidPackageName(
+        androidConfigMap[_packageNameKey], androidConfigMap[_customDirPath]);
     _createNewMainActivity(
       lang: androidConfigMap[_languageKey],
       packageName: androidConfigMap[_packageNameKey],
       overrideOldPackage: androidConfigMap[_overrideOldPackageKey],
+      customDirPath: androidConfigMap[_customDirPath],
     );
   } on _PackageRenameException catch (e) {
     _logger
@@ -28,21 +31,34 @@ void _setAndroidConfigurations(dynamic androidConfig) {
   }
 }
 
-void _setAndroidAppName(dynamic appName) {
+void _setAndroidAppName(dynamic appName, String? customDirPath, dynamic host) {
   try {
     if (appName == null) return;
     if (appName is! String) throw _PackageRenameErrors.invalidAppName;
 
-    final androidManifestFile = File(_androidMainManifestFilePath);
+    final androidMainManifestFilePath =
+        (customDirPath is String && customDirPath.isNotEmpty)
+            ? _androidMainManifestFilePath.replaceAll(
+                _androidAppDirPath, customDirPath)
+            : _androidMainManifestFilePath;
+
+    final androidManifestFile = File(androidMainManifestFilePath);
     if (!androidManifestFile.existsSync()) {
       throw _PackageRenameErrors.androidMainManifestNotFound;
     }
 
     final androidManifestString = androidManifestFile.readAsStringSync();
-    final newLabelAndroidManifestString = androidManifestString.replaceAll(
+    String newLabelAndroidManifestString = androidManifestString.replaceAll(
       RegExp('android:label="(.*)"'),
       'android:label="$appName"',
     );
+    if (host is String && host.isNotEmpty) {
+      newLabelAndroidManifestString = newLabelAndroidManifestString.replaceAll(
+        RegExp('android:host="(.*)"'),
+        'android:host="$host"',
+      );
+      _logger.i('Android Host set to: `$host` (main AndroidManifest.xml)');
+    }
 
     androidManifestFile.writeAsStringSync(newLabelAndroidManifestString);
 
@@ -61,15 +77,24 @@ void _setAndroidAppName(dynamic appName) {
   }
 }
 
-void _setAndroidPackageName(dynamic packageName) {
+void _setAndroidPackageName(dynamic packageName, String? customDirPath) {
   try {
     if (packageName == null) return;
     if (packageName is! String) throw _PackageRenameErrors.invalidPackageName;
 
     final androidManifestFilePaths = [
-      _androidMainManifestFilePath,
-      _androidDebugManifestFilePath,
-      _androidProfileManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidMainManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidMainManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidDebugManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidDebugManifestFilePath,
+      (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidProfileManifestFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidProfileManifestFilePath,
     ];
 
     _setManifestPackageName(
@@ -78,8 +103,15 @@ void _setAndroidPackageName(dynamic packageName) {
     );
 
     _setBuildGradlePackageName(
-      buildGradleFilePath: _androidAppLevelBuildGradleFilePath,
-      kotlinBuildGradleFilePath: _androidAppLevelKotlinBuildGradleFilePath,
+      buildGradleFilePath: (customDirPath is String && customDirPath.isNotEmpty)
+          ? _androidAppLevelBuildGradleFilePath.replaceAll(
+              _androidAppDirPath, customDirPath)
+          : _androidAppLevelBuildGradleFilePath,
+      kotlinBuildGradleFilePath:
+          (customDirPath is String && customDirPath.isNotEmpty)
+              ? _androidAppLevelKotlinBuildGradleFilePath.replaceAll(
+                  _androidAppDirPath, customDirPath)
+              : _androidAppLevelKotlinBuildGradleFilePath,
       packageName: packageName,
     );
   } on _PackageRenameException catch (e) {
@@ -183,6 +215,7 @@ void _createNewMainActivity({
   required dynamic lang,
   required dynamic packageName,
   required dynamic overrideOldPackage,
+  String? customDirPath,
 }) {
   try {
     if (packageName == null) return;
@@ -205,7 +238,10 @@ void _createNewMainActivity({
 
     if (overrideOldPackage == null) {
       final packageDirs = packageName.replaceAll('.', '/');
-      final langDir = '$_androidMainDirPath/$lang';
+      final dirPath = (customDirPath is String && customDirPath.isNotEmpty)
+          ? '${_androidMainDirPath.replaceAll(_androidAppDirPath, customDirPath)}/$lang'
+          : '$_androidMainDirPath/$lang';
+      final langDir = dirPath;
 
       final mainActivityFile = File(
         '$langDir/$packageDirs/MainActivity.$fileExtension',
@@ -240,7 +276,10 @@ void _createNewMainActivity({
       // to new package directory structure
       final oldPackageDirs = overrideOldPackage.replaceAll('.', '/');
       final newPackageDirs = packageName.replaceAll('.', '/');
-      final langDir = '$_androidMainDirPath/$lang';
+      final dirPath = (customDirPath is String && customDirPath.isNotEmpty)
+          ? '${_androidMainDirPath.replaceAll(_androidAppDirPath, customDirPath)}/$lang'
+          : '$_androidMainDirPath/$lang';
+      final langDir = dirPath;
 
       final oldMainActivityDir = Directory('$langDir/$oldPackageDirs');
       if (!oldMainActivityDir.existsSync()) {
@@ -294,7 +333,20 @@ void _createNewMainActivity({
       }
     }
 
-    _logger.i('New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created');
+    if (overrideOldPackage == null) {
+      _logger.i(
+        'New MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} created at: '
+        '${(customDirPath is String && customDirPath.isNotEmpty) ? customDirPath : _androidAppDirPath}/'
+        'src/main/$lang/${packageName.replaceAll('.', '/')}',
+      );
+    } else {
+      _logger.i(
+        'MainActivity.${lang == 'kotlin' ? 'kt' : 'java'} moved from package: '
+        '`$overrideOldPackage` to `$packageName` at: '
+        '${(customDirPath is String && customDirPath.isNotEmpty) ? customDirPath : _androidAppDirPath}/'
+        'src/main/$lang/${packageName.replaceAll('.', '/')}',
+      );
+    }
   } on _PackageRenameException catch (e) {
     _logger
       ..e('${e.message}ERR Code: ${e.code}')
