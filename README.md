@@ -35,7 +35,7 @@ Add `package_rename` to your `pubspec.yaml` under `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
-  package_rename: ^1.10.0
+  package_rename: ^1.10.1
 ```
 
 ### 2. Create Configuration

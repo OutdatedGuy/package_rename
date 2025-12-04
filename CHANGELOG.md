@@ -1,3 +1,9 @@
+## 1.10.1
+
+- fix(ios): bundle identifier detection and replacement in [b7b5406](https://github.com/OutdatedGuy/package_rename/commit/b7b5406b3a6fb218080815f8995f85a57a654fd6)
+- docs: update README for improved clarity and structure in [739531b](https://github.com/OutdatedGuy/package_rename/commit/739531b8863be22187aca470c5fc42baffb70edc)
+- chore: updated dependencies to latest in [5b7f55d](https://github.com/OutdatedGuy/package_rename/commit/5b7f55d9c45b9ba3ff8eaef9e53af7a539c9e0eb)
+
 ## 1.10.0
 
 - feat(android): prefer Kotlin DSL (`.gradle.kts`) over Groovy DSL (`.gradle`) when available in [09409d6](https://github.com/OutdatedGuy/package_rename/commit/09409d61081ad9ee6a382e975e953e4281e52ccf)
