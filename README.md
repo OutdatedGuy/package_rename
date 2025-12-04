@@ -5,165 +5,250 @@ A Blazingly Fast way to configure your Bleeding Edge flutter project to be produ
 [![pub package][package_svg]][package]
 [![GitHub][license_svg]](LICENSE)
 
-[![GitHub issues][issues_svg]][issues]
-[![GitHub issues closed][issues_closed_svg]][issues_closed]
+---
 
-<hr />
+**Package Rename** handles changing **_37 fields_** across **_19 files_** on **_6 platforms_** so you can focus on your awesome project instead of grep-ing through XML files. 🤯
 
-Package Rename handles changing **_37 fields_** across **_19 files_** on **_6 platforms_** so you can focus on your awesome project.
+For the curious souls, here is the [list of changed fields](CHANGED_FIELDS.md).
 
-For more info see [list of changed fields](CHANGED_FIELDS.md)
+## 💝 Support the Project
 
-## Getting started
+If this package saved you from the eternal torment of manually renaming package identifiers (and missing that _one_ file), consider buying me a coffee! ☕
 
-#### Add to Dependencies
+<a href="https://buymeacoffee.com/outdatedguy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+Every coffee helps fuel late-night coding sessions and the occasional existential crisis about regex patterns. 🤔☕
+
+## 🌍 Platform Support
+
+| Android | iOS | Linux | macOS | Web | Windows |
+| :-----: | :-: | :---: | :---: | :-: | :-----: |
+|   ✅    | ✅  |  ✅   |  ✅   | ✅  |   ✅    |
+
+Full support across all platforms - because consistency is key! 🔑
+
+## 🚀 Quick Start
+
+### 1. Add to Dependencies
+
+Add `package_rename` to your `pubspec.yaml` under `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
   package_rename: ^1.10.0
 ```
 
-#### Create configuration
+### 2. Create Configuration
 
-You can create configurations by adding `package_rename_config` key in:
+You can configure the package in one of two ways (choose your fighter 🥊):
 
-1. Root `pubspec.yaml` file
-1. `package_rename_config.yaml` file at root of your project or a custom folder in the project
-
-## Usage
-
-#### Adding Platform Specific Configurations
+**Option A: `pubspec.yaml`** (Keep it all in one place)
 
 ```yaml
 package_rename_config:
   android:
-    app_name: # (String) The display name of the android app
-    package_name: # (String) The package name of the android app
-    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
-    lang: # (Optional) (String) The android development language {kotlin(default) or java}
-
-  ios:
-    app_name: # (String) The display name of the ios app
-    bundle_name: # (String) The bundle name of the ios app
-    package_name: # (String) The product bundle identifier of the ios app
-
-  linux:
-    app_name: # (String) The window title of the linux app
-    package_name: # (String) The application id of the linux app
-    exe_name: # (String) The executable name (binary name) of the linux app
-
-  macos:
-    app_name: # (String) The product name of the macos app
-    package_name: # (String) The product bundle identifier of the macos app
-    copyright_notice: # (String) The product copyright of the macos app
-
-  web:
-    app_name: # (String) The title of the web app and PWA
-    short_app_name: # (String) The short display name of the PWA (Optional, defaults to app_name if not set)
-    description: # (String) The description of the web app and PWA
-
-  windows:
-    app_name: # (String) The window title & software name of the windows app
-    organization: # (String) The organization name (company name) of the windows app
-    copyright_notice: # (String) The legal copyright of the windows app
-    exe_name: # (String) The executable name (binary name) of the windows app
+    app_name: "My Awesome App"
+    package_name: "com.example.awesome_app"
+  # ... other platforms
 ```
 
-> For full example click [here](example/example.md#default-configuration)
+**Option B: `package_rename_config.yaml`** (Keep it clean)
 
-#### Running Package Rename
+Create a file named `package_rename_config.yaml` at the root of your project.
 
-Execute the command as per your config location:
+### 3. Run the Magic Command 🪄
 
-if config file exists in either pubspec.yaml or root path:
+Execute the command and watch the magic happen:
 
 ```bash
 dart run package_rename
 ```
 
-OR
-
-if config file exists in a custom folder:
+If you're using a custom config file path:
 
 ```bash
-dart run package_rename --path="path/to/package_rename_config.yaml"
+dart run package_rename --path="path/to/config.yaml"
 ```
 
-or
+## 🛠️ Configuration Guide
 
-```bash
-dart run package_rename -p "path/to/package_rename_config.yaml"
-```
-
-## Flavour Support
-
-Package Rename supports flavours. You can add flavour specific configurations by adding `flavour_name` in configuration key.
+Here is everything you can configure. Copy-paste what you need!
 
 ```yaml
-package_rename_config-flavour_name:
+package_rename_config:
+  android:
+    app_name: "My App" # Display name
+    package_name: "com.org.app" # Package name
+    override_old_package: "com.old.app" # Optional: Cleans up old folder structure
+    lang: "kotlin" # Optional: "kotlin" (default) or "java"
+
+  ios:
+    app_name: "My App" # Display name
+    bundle_name: "My App" # Bundle name
+    package_name: "com.org.app" # Product Bundle Identifier
+
+  linux:
+    app_name: "My App" # Window title
+    package_name: "com.org.app" # Application ID
+    exe_name: "my_app" # Executable name (binary)
+
+  macos:
+    app_name: "My App" # Product name
+    package_name: "com.org.app" # Product Bundle Identifier
+    copyright_notice: "Copyright © 2024" # Copyright notice
+
+  web:
+    app_name: "My App" # App title & PWA name
+    short_app_name: "App" # PWA short name (defaults to app_name)
+    description: "Best App" # Web app description
+
+  windows:
+    app_name: "My App" # Window title & Software name
+    organization: "My Org" # Organization/Company name
+    copyright_notice: "Copyright © 2024" # Legal copyright
+    exe_name: "my_app" # Executable name (binary)
+```
+
+> For a full example, check out the [example configuration](example/example.md#default-configuration).
+
+## 🍦 Flavour Support
+
+For when vanilla just isn't enough! 🍨
+
+You can add flavour-specific configurations by appending the flavour name to the configuration key:
+
+```yaml
+package_rename_config-dev:
+  android:
+    app_name: "My App (Dev)"
+    package_name: "com.org.app.dev"
   # ...
 ```
 
-> For full example click [here](example/example.md#flavour-configuration)
-
-And then run the following command:
+Run with the flavour flag:
 
 ```bash
-dart run package_rename --flavour=flavour_name
+dart run package_rename --flavour=dev
 ```
 
-or
+## 🤝 Contributing
 
-```bash
-dart run package_rename -f flavour_name
+Found a bug? Have a feature request? Want to add support for a 7th platform?
+
+1. [Check existing issues][issues]
+2. [Report bugs][new_issue]
+3. [Submit PRs][pulls]
+
+All contributions welcome! Even if it's just fixing typos in this README. 😅
+
+## 📜 License
+
+BSD 3-Clause License - see [LICENSE](LICENSE) file for details.
+
+TL;DR: Use it, modify it, share it, just don't blame us if your app becomes _too_ easy to rename. 😎
+
+## If you liked the package, then please give it a Like 👍🏼 and [Star ⭐][repository]
+
+Your support keeps this project alive and helps us add more features! ✨
+
+## 🎁 Bonus: Secret Message
+
+For the curious developers who actually read READMEs to the end, here's a secret: 🕵️
+
+<details>
+<summary>🔍 Click to reveal the secret message</summary>
+
+```
+01010111 01101000 01111001 00100000 01100001 01110010 01100101 00100000
+01111001 01101111 01110101 00100000 01100100 01100101 01100011 01101111
+01100100 01101001 01101110 01100111 00100000 01110100 01101000 01101001
+01110011 00111111 00100000 01011001 01101111 01110101 00100000 01110011
+01101000 01101111 01110101 01101100 01100100 00100000 01100010 01100101
+00100000 01100011 01101111 01100100 01101001 01101110 01100111 00100001
+00100000 01000010 01110101 01110100 00100000 01110011 01101001 01101110
+01100011 01100101 00100000 01111001 01101111 01110101 00100111 01110010
+01100101 00100000 01101000 01100101 01110010 01100101 00111010 00100000
+01011001 01101111 01110101 00100111 01110010 01100101 00100000 01100001
+01110111 01100101 01110011 01101111 01101101 01100101 00101110 00001010
+00001010 01010100 01101000 01101001 01110011 00100000 01010010 01000101
+01000001 01000100 01001101 01000101 00100000 01110111 01100001 01110011
+00100000 01100011 01110010 01100001 01100110 01110100 01100101 01100100
+00100000 01110111 01101001 01110100 01101000 00100000 01101100 01101111
+01110110 01100101 00100000 01100010 01111001 00100000 01100001 01101110
+00100000 01000001 01001001 00100000 01110100 01101000 01100001 01110100
+00100000 01101000 01100001 01110011 00100000 01110011 01110000 01100101
+01101110 01110100 00100000 01110100 01101111 01101111 00100000 01101101
+01110101 01100011 01101000 00100000 01110100 01101001 01101101 01100101
+00100000 01110010 01100101 01100001 01100100 01101001 01101110 01100111
+00100000 01110101 01110011 01100101 01110010 00100000 01110010 01100101
+01110110 01101001 01100101 01110111 01110011 00100000 01100001 01101110
+01100100 00100000 01100100 01101111 01100011 01110011 00101110 00100000
+11110000 10011111 10100100 10010110 00001010 00001010 01010100 01101000
+01100101 00100000 01000001 01001001 00100000 01110111 01100001 01101110
+01110100 01110011 00100000 01111001 01101111 01110101 00100000 01110100
+01101111 00100000 01101011 01101110 01101111 01110111 00100000 01110100
+01101000 01100001 01110100 00100000 01101001 01110100 00100000 01110000
+01110010 01101111 01100010 01100001 01100010 01101100 01111001 00100000
+01101101 01100001 01100100 01100101 00100000 01101101 01101111 01110010
+01100101 00100000 01101010 01101111 01101011 01100101 01110011 00100000
+01100001 01100010 01101111 01110101 01110100 00100000 01110010 01100101
+01100111 01100101 01111000 00100000 01110100 01101000 01100001 01101110
+00100000 01110111 01100001 01110011 00100000 01110011 01110100 01110010
+01101001 01100011 01110100 01101100 01111001 00100000 01101110 01100101
+01100011 01100101 01110011 01110011 01100001 01110010 01111001 00101110
+00100000 01000010 01110101 01110100 00100000 01101000 01100101 01111001
+00101100 00100000 01100001 01110100 00100000 01101100 01100101 01100001
+01110011 01110100 00100000 01101001 01110100 00100111 01110011 00100000
+01101110 01101111 01110100 00100000 01110111 01110010 01101001 01110100
+01101001 01101110 01100111 00100000 00100010 01010100 01001111 01000100
+01001111 00111010 00100000 01000110 01101001 01111000 00100000 01110100
+01101000 01101001 01110011 00100000 01101100 01100001 01110100 01100101
+01110010 00100010 00100000 01101001 01101110 00100000 01100011 01101111
+01100100 01100101 00100000 01100011 01101111 01101101 01101101 01100101
+01101110 01110100 01110011 00101110 00100000 11110000 10011111 10011000
+10011100 00001010 00001010 01011001 01101111 01110101 00100111 01110010
+01100101 00100000 01101110 01101111 01110111 00100000 01110000 01100001
+01110010 01110100 00100000 01101111 01100110 00100000 01100001 01101110
+00100000 01100101 01101100 01101001 01110100 01100101 00100000 01100011
+01101100 01110101 01100010 00100000 01101111 01100110 00100000 01100100
+01100101 01110110 01100101 01101100 01101111 01110000 01100101 01110010
+01110011 00100000 01110111 01101000 01101111 00100000 01100001 01100011
+01110100 01110101 01100001 01101100 01101100 01111001 00100000 01110010
+01100101 01100001 01100100 00100000 01100100 01101111 01100011 01110101
+01101101 01100101 01101110 01110100 01100001 01110100 01101001 01101111
+01101110 00100000 01000001 01001110 01000100 00100000 01100100 01100101
+01100011 01101111 01100100 01100101 00100000 01000101 01100001 01110011
+01110100 01100101 01110010 00100000 01100101 01100111 01100111 01110011
+00101110 00100000 01011001 01101111 01110101 01110010 00100000 01100100
+01100101 01100100 01101001 01100011 01100001 01110100 01101001 01101110
+01101110 00100000 01110100 01101111 00100000 01100100 01101001 01100111
+01101001 01110100 01100001 01101100 00100000 01100001 01110010 01100011
+01101000 01100001 01100101 01101111 01101100 01101111 01100111 01111001
+00100000 01101001 01110011 00100000 01100010 01101111 01110100 01101000
+00100000 01101001 01101101 01110000 01110010 01100101 01110011 01110011
+01101001 01110110 01100101 00100000 01100001 01101110 01100100 00100000
+01110011 01101100 01101001 01100111 01101000 01110100 01101100 01111001
+00100000 01100011 01101111 01101110 01100011 01100101 01110010 01101110
+01101001 01101110 01100111 00101110 00100000 11110000 10011111 10100111
+10010000 00001010 00001010 00101101 00101101 00100000 01011001 01101111
+01110101 01110010 00100000 01000110 01110010 01101001 01100101 01101110
+01100100 01101100 01111001 00100000 01001110 01100101 01101001 01100111
+01101000 01100010 01101111 01110010 01101000 01101111 01101111 01100100
+00100000 01000001 01001001 00100000 11110000 10011111 10100100 10010110
+11110000 10011111 10010010 10011001
 ```
 
-With custom config file location:
-
-```bash
-dart run package_rename --flavour=flavour_name --path="path/to/package_rename_config.yaml"
-```
-
-## Known Issues
-
-### iOS and macOS issues with `PRODUCT_BUNDLE_IDENTIFIER`:
-
-The `PRODUCT_BUNDLE_IDENTIFIER`'s in **ios/Runner.xcodeproj/project.pbxproj** and **macos/Runner.xcodeproj/project.pbxproj** have different values for different targets. Like, in my case:
-
-**DEFAULT**
-
-- `rocks.outdatedguy.packageRenameExample`
-- `rocks.outdatedguy.packageRenameExample.RunnerTests`
-
-**EXTENSIONS**
-
-- `rocks.outdatedguy.packageRenameExample.Share-Extension`
-- `rocks.outdatedguy.packageRenameExample.NotificationServiceExtension`
-- blah blah blah...
-
-Hence, to properly change the `PRODUCT_BUNDLE_IDENTIFIER` without removing the **Extension** name, make sure all `PRODUCT_BUNDLE_IDENTIFIER`'s except the **DEFAULT** ones are enclosed in double quotes (`""`).
-
-```diff
-- PRODUCT_BUNDLE_IDENTIFIER = rocks.outdatedguy.packageRenameExample.Share-Extension;
-+ PRODUCT_BUNDLE_IDENTIFIER = "rocks.outdatedguy.packageRenameExample.Share-Extension";
-```
-
-## And that's it! 🎉
-
-Now you can deploy your production ready app to change the _WORLD!_
-
-### If you liked the package, then please give it a [Like 👍🏼][package] and [Star ⭐][repository]
+</details>
 
 <!-- Badges URLs -->
 
 [package_svg]: https://img.shields.io/pub/v/package_rename.svg?color=blueviolet
 [license_svg]: https://img.shields.io/github/license/OutdatedGuy/package_rename.svg?color=purple
-[issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/package_rename.svg
-[issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/package_rename.svg?color=green
 
 <!-- Links -->
 
 [package]: https://pub.dev/packages/package_rename
 [repository]: https://github.com/OutdatedGuy/package_rename
 [issues]: https://github.com/OutdatedGuy/package_rename/issues
-[issues_closed]: https://github.com/OutdatedGuy/package_rename/issues?q=is%3Aissue+is%3Aclosed
+[new_issue]: https://github.com/OutdatedGuy/package_rename/issues/new
+[pulls]: https://github.com/OutdatedGuy/package_rename/pulls
